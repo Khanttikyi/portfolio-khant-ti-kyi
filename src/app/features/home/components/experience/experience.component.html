@@ -1,0 +1,358 @@
+<section
+  class="experience-section section"
+  id="experience"
+>
+  <div class="container">
+
+    <!-- =====================================================
+         SECTION HEADER
+         ===================================================== -->
+
+    <div class="section-heading experience-heading">
+
+      <span class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        Experience
+      </span>
+
+      <h2>
+        My professional
+        <span class="gradient-text">
+          journey.
+        </span>
+      </h2>
+
+      <p class="section-intro">
+        A timeline of my professional experience,
+        responsibilities, and the technologies I've
+        worked with throughout my career.
+      </p>
+
+    </div>
+
+
+    <!-- =====================================================
+         LOADING
+         ===================================================== -->
+
+    @if (loading) {
+
+      <div class="experience-loading">
+
+        <div class="loading-line"></div>
+
+        <div class="experience-skeleton">
+          <div class="skeleton-dot"></div>
+
+          <div class="skeleton-card">
+            <div class="skeleton-small"></div>
+            <div class="skeleton-title"></div>
+            <div class="skeleton-company"></div>
+            <div class="skeleton-text"></div>
+            <div class="skeleton-text short"></div>
+          </div>
+        </div>
+
+        <div class="experience-skeleton second">
+          <div class="skeleton-dot"></div>
+
+          <div class="skeleton-card">
+            <div class="skeleton-small"></div>
+            <div class="skeleton-title"></div>
+            <div class="skeleton-company"></div>
+            <div class="skeleton-text"></div>
+          </div>
+        </div>
+
+      </div>
+
+    }
+
+
+    <!-- =====================================================
+         ERROR
+         ===================================================== -->
+
+    @else if (error) {
+
+      <div class="experience-empty">
+
+        <div class="empty-icon">
+          <i class="pi pi-exclamation-circle"></i>
+        </div>
+
+        <div>
+          <strong>
+            Unable to load experience
+          </strong>
+
+          <p>
+            Please try again later.
+          </p>
+        </div>
+
+      </div>
+
+    }
+
+
+    <!-- =====================================================
+         EXPERIENCE TIMELINE
+         ===================================================== -->
+
+    @else if (experiences.length > 0) {
+
+      <div class="experience-timeline">
+
+        <!-- Animated timeline -->
+        <div class="timeline-track"></div>
+
+
+        @for (
+          experience of experiences;
+          track experience.id
+        ) {
+
+          <article
+            class="experience-item"
+            [class.current]="experience.is_current"
+            [style.--item-delay]="($index * 140) + 'ms'"
+          >
+
+            <!-- =================================================
+                 TIMELINE POINT
+                 ================================================= -->
+
+            <div class="timeline-node">
+
+              <span class="node-core"></span>
+
+              @if (experience.is_current) {
+                <span class="node-pulse"></span>
+              }
+
+            </div>
+
+
+            <!-- =================================================
+                 CONTENT CARD
+                 ================================================= -->
+
+            <div class="experience-card">
+
+              <!-- Top row -->
+
+              <div class="experience-card-top">
+
+                <span class="experience-period">
+                  <i class="pi pi-calendar"></i>
+
+                  {{ getPeriod(experience) }}
+                </span>
+
+
+                @if (experience.is_current) {
+
+                  <span class="current-badge">
+                    <span></span>
+                    Current Position
+                  </span>
+
+                }
+
+              </div>
+
+
+              <!-- Role -->
+
+              <div class="experience-role">
+
+                <h3>
+                  {{ experience.role }}
+                </h3>
+
+                <div class="company-info">
+
+                  @if (experience.company_logo_url) {
+
+                    <img
+                      [src]="experience.company_logo_url"
+                      [alt]="experience.company + ' logo'"
+                      class="company-logo"
+                    />
+
+                  } @else {
+
+                    <div class="company-logo company-logo-placeholder">
+                      <i class="pi pi-building"></i>
+                    </div>
+
+                  }
+
+
+                  <div class="company-details">
+
+                    @if (experience.company_url) {
+
+                      <a
+                        [href]="experience.company_url"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="company-name"
+                      >
+                        {{ experience.company }}
+
+                        <i class="pi pi-external-link"></i>
+                      </a>
+
+                    } @else {
+
+                      <span class="company-name">
+                        {{ experience.company }}
+                      </span>
+
+                    }
+
+
+                    @if (
+                      experience.employment_type ||
+                      experience.location
+                    ) {
+
+                      <div class="company-meta">
+
+                        @if (experience.employment_type) {
+                          <span>
+                            {{ experience.employment_type }}
+                          </span>
+                        }
+
+                        @if (
+                          experience.employment_type &&
+                          experience.location
+                        ) {
+                          <span class="meta-separator">
+                            •
+                          </span>
+                        }
+
+                        @if (experience.location) {
+                          <span>
+                            {{ experience.location }}
+                          </span>
+                        }
+
+                      </div>
+
+                    }
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- Divider -->
+
+              <div class="experience-divider"></div>
+
+
+              <!-- Description -->
+
+              @if (experience.description) {
+
+                <div class="experience-description">
+
+                  @for (
+                    paragraph of getDescriptionParagraphs(
+                      experience.description
+                    );
+                    track $index
+                  ) {
+
+                    <p>
+                      {{ paragraph }}
+                    </p>
+
+                  }
+
+                </div>
+
+              }
+
+
+              <!-- Technologies -->
+
+              @if (
+                experience.technologies?.length
+              ) {
+
+                <div class="technology-section">
+
+                  <span class="technology-label">
+                    Technologies
+                  </span>
+
+                  <div class="technology-tags">
+
+                    @for (
+                      technology of experience.technologies;
+                      track technology
+                    ) {
+
+                      <span class="technology-tag">
+
+                        <span class="tag-dot"></span>
+
+                        {{ technology }}
+
+                      </span>
+
+                    }
+
+                  </div>
+
+                </div>
+
+              }
+
+            </div>
+
+          </article>
+
+        }
+
+      </div>
+
+    }
+
+
+    <!-- =====================================================
+         EMPTY
+         ===================================================== -->
+
+    @else {
+
+      <div class="experience-empty">
+
+        <div class="empty-icon">
+          <i class="pi pi-briefcase"></i>
+        </div>
+
+        <div>
+          <strong>
+            No experience available
+          </strong>
+
+          <p>
+            Professional experience will appear here.
+          </p>
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+</section>

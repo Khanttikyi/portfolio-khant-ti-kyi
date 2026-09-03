@@ -1,0 +1,129 @@
+<section
+  class="education-section section"
+  id="education"
+>
+  <div class="container">
+
+    <!-- Section Heading -->
+    <div class="section-heading">
+      <span class="eyebrow">Education</span>
+
+      <h2>
+        My academic
+        <span class="gradient-text">background.</span>
+      </h2>
+    </div>
+
+
+    <!-- Loading -->
+    @if (loading) {
+
+      <div class="empty-state">
+        <i class="pi pi-spin pi-spinner"></i>
+
+        <p>Loading education...</p>
+      </div>
+
+    }
+
+    <!-- Error -->
+    @else if (error) {
+
+      <div class="empty-state">
+        <i class="pi pi-exclamation-circle"></i>
+
+        <p>Unable to load education.</p>
+      </div>
+
+    }
+
+    <!-- Education List -->
+    @else if (education.length > 0) {
+
+      <div class="education-grid">
+
+        @for (
+          item of education;
+          track item.id;
+          let i = $index
+        ) {
+
+          <article class="education-card">
+
+            <!-- Icon -->
+            <div class="education-icon">
+              <i class="pi pi-graduation-cap"></i>
+            </div>
+
+
+            <!-- Content -->
+            <div class="education-content">
+
+              <!-- Period -->
+              <span class="education-period">
+
+                {{ item.start_date | date:'yyyy' }}
+
+                @if (item.end_date) {
+                  - {{ item.end_date | date:'yyyy' }}
+                }
+
+              </span>
+
+
+              <!-- Degree -->
+              @if (item.degree) {
+                <h3>
+                  {{ item.degree }}
+                </h3>
+              }
+
+
+              <!-- Field of Study -->
+              @if (item.field_of_study) {
+                <h4>
+                  {{ item.field_of_study }}
+                </h4>
+              }
+
+
+              <!-- Institution -->
+              <strong>
+                {{ item.institution }}
+              </strong>
+
+
+              <!-- Description -->
+              @if (item.description) {
+
+                <p>
+                  {{ item.description }}
+                </p>
+
+              }
+
+            </div>
+
+          </article>
+
+        }
+
+      </div>
+
+    }
+
+    <!-- Empty -->
+    @else {
+
+      <div class="empty-state">
+        <i class="pi pi-info-circle"></i>
+
+        <p>
+          No education information available.
+        </p>
+      </div>
+
+    }
+
+  </div>
+</section>

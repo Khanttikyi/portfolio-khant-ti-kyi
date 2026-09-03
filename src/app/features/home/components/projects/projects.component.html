@@ -1,0 +1,260 @@
+<section
+  class="projects-section section"
+  id="projects"
+>
+  <div class="container">
+
+    <!-- =====================================================
+         SECTION HEADER
+         ===================================================== -->
+
+    <div class="section-heading">
+      <span class="eyebrow">Projects</span>
+
+      <h2>
+        Things I've
+        <span class="gradient-text">built.</span>
+      </h2>
+    </div>
+
+
+    <!-- =====================================================
+         LOADING STATE
+         ===================================================== -->
+
+    @if (loading) {
+
+      <div class="empty-state">
+        <i class="pi pi-spin pi-spinner"></i>
+
+        <p>
+          Loading projects...
+        </p>
+      </div>
+
+
+    <!-- =====================================================
+         ERROR STATE
+         ===================================================== -->
+
+    } @else if (error) {
+
+      <div class="empty-state">
+        <i class="pi pi-exclamation-circle"></i>
+
+        <p>
+          Unable to load projects.
+        </p>
+      </div>
+
+
+    <!-- =====================================================
+         PROJECTS
+         ===================================================== -->
+
+    } @else if (projects.length > 0) {
+
+      <div class="projects-grid">
+
+        @for (
+          project of projects;
+          track project.id;
+          let i = $index
+        ) {
+
+          <article class="project-card">
+
+            <!-- =================================================
+                 PROJECT IMAGE
+                 ================================================= -->
+
+            <div class="project-image">
+
+              @if (project.image_url) {
+
+                <img
+                  class="project-image-photo"
+                  [src]="project.image_url"
+                  [alt]="project.title"
+                  loading="lazy"
+                />
+
+                <div class="project-image-overlay"></div>
+
+              } @else {
+
+                <div class="project-icon">
+                  <i [class]="getProjectIcon(project)"></i>
+                </div>
+
+              }
+
+              <span class="project-number">
+                {{ formatProjectNumber(i) }}
+              </span>
+
+            </div>
+
+
+            <!-- =================================================
+                 PROJECT CONTENT
+                 ================================================= -->
+
+            <div class="project-content">
+
+              <!-- Category -->
+
+              @if (project.category) {
+
+                <span class="project-category">
+                  {{ project.category }}
+                </span>
+
+              }
+
+
+              <!-- Title -->
+
+              <h3>
+                {{ project.title }}
+              </h3>
+
+
+              <!-- Description -->
+
+              @if (
+                project.description ||
+                project.short_description
+              ) {
+
+                <div class="project-description">
+
+                  @for (
+                    sentence of getDescriptionLines(project);
+                    track $index
+                  ) {
+
+                    <p>
+                      {{ sentence }}
+                    </p>
+
+                  }
+
+                </div>
+
+              }
+
+
+              <!-- Technologies -->
+
+              @if (project.technologies?.length) {
+
+                <div class="technology-tags">
+
+                  @for (
+                    technology of project.technologies;
+                    track technology
+                  ) {
+
+                    <span>
+                      {{ technology }}
+                    </span>
+
+                  }
+
+                </div>
+
+              }
+
+
+              <!-- Project Links -->
+
+              @if (
+                project.github_url ||
+                project.project_url
+              ) {
+
+                <div class="project-links">
+
+                  @if (project.github_url) {
+
+                    <a
+                      [href]="project.github_url"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="View GitHub repository"
+                    >
+                      <i class="pi pi-github"></i>
+                      <span>GitHub</span>
+                    </a>
+
+                  }
+
+
+                  @if (project.project_url) {
+
+                    <a
+                      [href]="project.project_url"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="View live project"
+                    >
+                      <i class="pi pi-external-link"></i>
+                      <span>Live Demo</span>
+                    </a>
+
+                  }
+
+                </div>
+
+              }
+
+            </div>
+
+          </article>
+
+        }
+
+      </div>
+
+
+    <!-- =====================================================
+         EMPTY STATE
+         ===================================================== -->
+
+    } @else {
+
+      <div class="empty-state">
+        <i class="pi pi-info-circle"></i>
+
+        <p>
+          No projects available.
+        </p>
+      </div>
+
+    }
+
+
+    <!-- =====================================================
+         FOOTER CTA
+         ===================================================== -->
+
+    <div class="projects-footer">
+
+      <p>
+        Want to know more about my work?
+      </p>
+
+      <button
+        type="button"
+        class="outline-button"
+        (click)="onNavigate('contact')"
+      >
+        <span>Get in touch</span>
+        <i class="pi pi-arrow-right"></i>
+      </button>
+
+    </div>
+
+  </div>
+</section>

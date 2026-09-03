@@ -1,0 +1,505 @@
+<section class="hero" id="home">
+
+  <!-- Background -->
+  <div class="hero-background">
+    <div class="hero-grid"></div>
+    <div class="hero-glow hero-glow-one"></div>
+    <div class="hero-glow hero-glow-two"></div>
+  </div>
+
+
+  <div class="hero-container">
+
+    <!-- =====================================================
+           LEFT CONTENT
+           ===================================================== -->
+    <div class="hero-content">
+
+      @if (loading) {
+
+      <div class="profile-loading">
+        <i class="pi pi-spin pi-spinner"></i>
+        <span>Loading profile...</span>
+      </div>
+
+      }
+
+
+      @if (!loading && error) {
+
+      <div class="profile-error">
+
+        <div class="error-icon">
+          <i class="pi pi-exclamation-triangle"></i>
+        </div>
+
+        <div>
+          <strong>Unable to load profile</strong>
+          <span>Please try again.</span>
+        </div>
+
+        <button type="button" (click)="onRetry()">
+          Retry
+        </button>
+
+      </div>
+
+      }
+
+
+      @if (!loading && !error && profile) {
+
+      <!-- Availability -->
+      @if (profile.available_for_work) {
+
+      <div class="availability">
+
+        <span class="availability-dot"></span>
+
+        <span>Available for opportunities</span>
+
+      </div>
+
+      }
+
+
+      <!-- Eyebrow -->
+      <div class="hero-eyebrow">
+
+        <span class="eyebrow-line"></span>
+
+        <span>
+          {{ profile.short_title || profile.title }}
+        </span>
+
+      </div>
+
+
+      <!-- Main Heading -->
+      <h1 class="hero-title">
+
+        <span class="hero-title-small">
+          Hi, I'm
+        </span>
+
+        <span class="hero-name">
+          {{ profile.name }}
+        </span>
+
+        <span class="hero-role">
+          {{ profile.tagline }}
+        </span>
+
+      </h1>
+
+
+      <!-- Description -->
+      <p class="hero-description">
+        {{ profile.bio }}
+      </p>
+
+
+      <!-- Actions -->
+      <div class="hero-actions">
+
+        <p-button label="View Selected Work" icon="pi pi-arrow-down" iconPos="right" styleClass="primary-button"
+          (onClick)="onNavigate('projects')">
+        </p-button>
+
+
+        <button type="button" class="text-button" (click)="onNavigate('contact')">
+
+          <span>Let's talk</span>
+
+          <i class="pi pi-arrow-up-right"></i>
+
+        </button>
+
+      </div>
+
+
+      <!-- Stats -->
+      <div class="hero-stats">
+
+        @for (data of profile.experiences; track data.label) {
+
+        <div class="stat">
+
+          <strong>
+            {{ data.value }}
+          </strong>
+
+          <span>
+            {{ data.label }}
+          </span>
+
+        </div>
+
+        }
+
+      </div>
+
+      }
+
+    </div>
+
+
+    <!-- =====================================================
+           RIGHT CODE / DEVELOPER AREA
+           ===================================================== -->
+    <div class="hero-visual">
+
+      <div class="developer-card">
+
+        <!-- Card top -->
+        <div class="developer-card-header">
+
+          <div class="window-controls">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+          </div>
+
+          <div class="file-name">
+
+            <i class="pi pi-code"></i>
+
+            <span>
+              {{profile?.name}}.ts
+            </span>
+
+          </div>
+
+          <span class="file-status">
+            TS
+          </span>
+
+        </div>
+
+
+        <!-- Code editor -->
+        <div class="code-editor">
+
+          <!-- Line 01 -->
+          <div class="code-line">
+
+            <span class="line-number">
+              01
+            </span>
+
+            <span class="code-keyword">
+              const
+            </span>
+
+            <span class="code-variable">
+              developer
+            </span>
+
+            <span class="code-symbol">
+              =
+            </span>
+
+            <span class="code-bracket">
+              &#123;
+            </span>
+
+          </div>
+
+
+          <!-- Line 02 -->
+          <div class="code-line">
+
+            <span class="line-number">
+              02
+            </span>
+
+            <span class="code-property">
+              name:
+            </span>
+
+            <span class="code-string">
+              '{{ profile?.name || 'Developer' }}'
+            </span>
+
+            <span class="code-symbol">
+              ,
+            </span>
+
+          </div>
+
+
+          <!-- Line 03 -->
+          <div class="code-line">
+
+            <span class="line-number">
+              03
+            </span>
+
+            <span class="code-property">
+              role:
+            </span>
+
+            <span class="code-string">
+              '{{ profile?.title || 'Senior Frontend Developer' }}'
+            </span>
+
+            <span class="code-symbol">
+              ,
+            </span>
+
+          </div>
+
+
+          <!-- Line 04 -->
+          <div class="code-line">
+
+            <span class="line-number">
+              04
+            </span>
+
+            <span class="code-property">
+              experience:
+            </span>
+            @if (profile?.experiences?.[0]; as experience) {
+            <span class="code-number">
+              {{experience.value}} Years
+            </span>
+            }
+
+
+            <span class="code-symbol">
+              ,
+            </span>
+
+          </div>
+
+
+          <!-- Line 05 -->
+          <div class="code-line">
+
+            <span class="line-number">
+              05
+            </span>
+
+            <span class="code-property">
+              angular:
+            </span>
+            @if (profile?.experiences?.[1]; as experience) {
+            <span class="code-number">
+              {{experience.value}} Years
+            </span>
+            }
+
+
+            <span class="code-symbol">
+              ,
+            </span>
+
+          </div>
+
+
+          <!-- Line 06 -->
+          <div class="code-line">
+
+            <span class="line-number">
+              06
+            </span>
+
+            <span class="code-property">
+              focus:
+            </span>
+
+            <span class="code-string">
+              'Web & Mobile Applications'
+            </span>
+
+            <span class="code-symbol">
+              ,
+            </span>
+
+          </div>
+
+
+          <!-- Line 07 -->
+          <div class="code-line">
+
+            <span class="line-number">
+              07
+            </span>
+
+            <span class="code-property">
+              stack:
+            </span>
+
+            <span class="code-bracket">
+              [
+            </span>
+
+          </div>
+
+
+          <!-- Line 08 -->
+          <div class="code-line nested">
+
+            <span class="line-number">
+              08
+            </span>
+
+            <span class="code-string">
+              'Angular'
+            </span>
+
+            <span class="code-symbol">
+              ,
+            </span>
+
+          </div>
+
+
+          <!-- Line 09 -->
+          <div class="code-line nested">
+
+            <span class="line-number">
+              09
+            </span>
+
+            <span class="code-string">
+              'Ionic'
+            </span>
+
+            <span class="code-symbol">
+              ,
+            </span>
+
+          </div>
+
+
+          <!-- Line 10 -->
+          <div class="code-line nested">
+
+            <span class="line-number">
+              10
+            </span>
+
+            <span class="code-string">
+              'TypeScript'
+            </span>
+
+          </div>
+          <div class="code-line nested">
+
+            <span class="line-number">
+              11
+            </span>
+
+            <span class="code-string">
+              'Flutter'
+            </span>
+
+          </div>
+
+
+          <!-- Line 11 -->
+          <div class="code-line">
+
+            <span class="line-number">
+              12
+            </span>
+
+            <span class="code-bracket">
+              ]
+            </span>
+
+          </div>
+
+
+          <!-- Line 12 -->
+          <div class="code-line">
+
+            <span class="line-number">
+              13
+            </span>
+
+            <span class="code-bracket">
+              &#125;
+            </span>
+
+          </div>
+
+
+          <!-- Cursor -->
+          <div class="code-cursor"></div>
+
+        </div>
+
+
+        <!-- Technology footer -->
+        <div class="developer-card-footer">
+
+          <div class="technology">
+
+            <span class="technology-icon angular">
+              A
+            </span>
+
+            <div>
+              <strong>Angular</strong>
+              <span>6+ years</span>
+            </div>
+
+          </div>
+
+
+          <div class="technology">
+
+            <span class="technology-icon mobile">
+              <i class="pi pi-mobile"></i>
+            </span>
+
+            <div>
+              <strong>Mobile (Ionic/Capacitor)</strong>
+              <span>5 + years</span>
+            </div>
+
+          </div>
+
+
+          <div class="technology">
+
+            <span class="technology-icon mobile">
+              <i class="pi pi-mobile"></i>
+            </span>
+
+            <div>
+              <strong>Flutter</strong>
+              <span>2 + years</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+         BOTTOM SCROLL
+         ===================================================== -->
+  <button class="scroll-indicator" type="button" aria-label="Scroll to about section" (click)="onNavigate('about')">
+
+    <span>
+      Scroll to explore
+    </span>
+
+    <i class="pi pi-arrow-down"></i>
+
+  </button>
+
+</section>

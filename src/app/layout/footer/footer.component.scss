@@ -1,0 +1,665 @@
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+  position: relative;
+
+  overflow: hidden;
+
+  padding: 80px 24px 24px;
+
+  background: var(--footer-bg, #f8fafc);
+
+  border-top: 1px solid var(--border-color, #e2e8f0);
+
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   BACKGROUND GLOW
+   ========================================================= */
+
+.footer-glow {
+  position: absolute;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  filter: blur(90px);
+
+  z-index: -1;
+}
+
+.footer-glow-one {
+  width: 320px;
+  height: 320px;
+
+  top: -220px;
+  left: 10%;
+
+  background: rgba(99, 102, 241, 0.08);
+
+  animation: footerGlowOne 10s ease-in-out infinite;
+}
+
+.footer-glow-two {
+  width: 280px;
+  height: 280px;
+
+  right: -150px;
+  bottom: -200px;
+
+  background: rgba(6, 182, 212, 0.07);
+
+  animation: footerGlowTwo 12s ease-in-out infinite;
+}
+
+@keyframes footerGlowOne {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(40px, 25px, 0);
+  }
+}
+
+@keyframes footerGlowTwo {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(-35px, -25px, 0);
+  }
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.footer-container {
+  position: relative;
+
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(300px, 2fr)
+    minmax(150px, 1fr)
+    minmax(230px, 1.2fr);
+
+  gap: 70px;
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.footer-brand {
+  max-width: 430px;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+
+  margin-bottom: 20px;
+
+  color: var(--text-primary, #111827);
+
+  font-size: 1.65rem;
+  font-weight: 800;
+
+  letter-spacing: -0.05em;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.footer-logo:hover {
+  transform: translateY(-2px);
+
+  opacity: 0.85;
+}
+
+.logo-bracket {
+  color: var(--accent, #6366f1);
+
+  transition:
+    transform 0.25s ease;
+}
+
+.footer-logo:hover .logo-bracket:first-child {
+  transform: translateX(-3px);
+}
+
+.footer-logo:hover .logo-bracket:last-child {
+  transform: translateX(3px);
+}
+
+
+/* =========================================================
+   BRAND DESCRIPTION
+   ========================================================= */
+
+.footer-brand p {
+  max-width: 400px;
+
+  margin: 0;
+
+  color: var(--text-muted, #64748b);
+
+  font-size: 0.9rem;
+
+  line-height: 1.8;
+}
+
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+.footer-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 24px;
+
+  color: var(--text-primary, #1e293b);
+
+  font-size: 0.82rem;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition:
+    color 0.25s ease,
+    gap 0.25s ease;
+}
+
+.footer-cta i {
+  color: var(--accent, #6366f1);
+
+  font-size: 0.75rem;
+
+  transition: transform 0.25s ease;
+}
+
+.footer-cta:hover {
+  color: var(--accent, #6366f1);
+
+  gap: 12px;
+}
+
+.footer-cta:hover i {
+  transform: translate(2px, -2px);
+}
+
+
+/* =========================================================
+   HEADINGS
+   ========================================================= */
+
+.footer-heading {
+  display: block;
+
+  margin-bottom: 20px;
+
+  color: var(--text-primary, #1e293b);
+
+  font-size: 0.7rem;
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.footer-links {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.footer-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 150px;
+
+  padding: 7px 0;
+
+  color: var(--text-muted, #64748b);
+
+  font-size: 0.83rem;
+
+  text-decoration: none;
+
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.footer-links a i {
+  font-size: 0.6rem;
+
+  opacity: 0;
+
+  transform: translate(-5px, 5px);
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.footer-links a:hover {
+  color: var(--accent, #6366f1);
+
+  transform: translateX(4px);
+}
+
+.footer-links a:hover i {
+  opacity: 1;
+
+  transform: translate(0, 0);
+}
+
+
+/* =========================================================
+   CONNECT
+   ========================================================= */
+
+.footer-connect p {
+  max-width: 250px;
+
+  margin: 0 0 18px;
+
+  color: var(--text-muted, #64748b);
+
+  font-size: 0.82rem;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   SOCIAL
+   ========================================================= */
+
+.footer-social {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+
+  width: 210px;
+
+  padding: 10px 12px;
+
+  border: 1px solid var(--border-color, #e2e8f0);
+
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.55);
+
+  color: var(--text-secondary, #475569);
+
+  font-size: 0.78rem;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.social-link > i:first-child {
+  margin-right: 10px;
+
+  color: var(--accent, #6366f1);
+
+  font-size: 0.95rem;
+}
+
+.social-arrow {
+  margin-left: auto;
+
+  font-size: 0.6rem !important;
+
+  opacity: 0.35;
+
+  transition: transform 0.25s ease;
+}
+
+.social-link:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(99, 102, 241, 0.25);
+
+  background: #ffffff;
+
+  color: var(--accent, #6366f1);
+
+  box-shadow:
+    0 8px 25px rgba(15, 23, 42, 0.07);
+}
+
+.social-link:hover .social-arrow {
+  transform: translate(2px, -2px);
+
+  opacity: 1;
+}
+
+
+/* =========================================================
+   BOTTOM
+   ========================================================= */
+
+.footer-bottom {
+  max-width: 1200px;
+
+  margin: 64px auto 0;
+}
+
+.footer-line {
+  width: 100%;
+  height: 1px;
+
+  background: var(--border-color, #e2e8f0);
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+
+/* Animated line */
+
+.footer-line::after {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: -20%;
+
+  width: 20%;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent, #6366f1),
+    transparent
+  );
+
+  animation: footerLine 7s linear infinite;
+}
+
+@keyframes footerLine {
+  0% {
+    left: -20%;
+  }
+
+  100% {
+    left: 120%;
+  }
+}
+
+
+/* =========================================================
+   BOTTOM CONTENT
+   ========================================================= */
+
+.footer-bottom-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-top: 20px;
+
+  color: var(--text-muted, #94a3b8);
+
+  font-size: 0.72rem;
+}
+
+
+/* =========================================================
+   TECH
+   ========================================================= */
+
+.footer-built {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.footer-tech {
+  color: var(--text-secondary, #64748b);
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   BACK TO TOP
+   ========================================================= */
+
+.back-to-top {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--border-color, #e2e8f0);
+
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  color: var(--text-secondary, #475569);
+
+  text-decoration: none;
+
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.back-to-top i {
+  font-size: 0.7rem;
+
+  transition: transform 0.25s ease;
+}
+
+.back-to-top:hover {
+  transform: translateY(-3px);
+
+  color: var(--accent, #6366f1);
+
+  border-color: rgba(99, 102, 241, 0.3);
+
+  box-shadow:
+    0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+.back-to-top:hover i {
+  transform: translateY(-3px);
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .footer-container {
+    grid-template-columns: 1.5fr 1fr;
+
+    gap: 50px;
+  }
+
+  .footer-connect {
+    grid-column: 1 / -1;
+  }
+
+  .footer-social {
+    flex-direction: row;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 60px 20px 20px;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+
+    gap: 38px;
+  }
+
+  .footer-brand {
+    max-width: 100%;
+  }
+
+  .footer-brand p {
+    max-width: 500px;
+  }
+
+  .footer-navigation {
+    padding-top: 4px;
+  }
+
+  .footer-links a {
+    width: 100%;
+  }
+
+  .footer-connect {
+    grid-column: auto;
+  }
+
+  .footer-social {
+    flex-direction: column;
+  }
+
+  .social-link {
+    width: 100%;
+  }
+
+  .footer-bottom {
+    margin-top: 45px;
+  }
+
+  .footer-bottom-content {
+    display: grid;
+
+    grid-template-columns: 1fr auto;
+
+    gap: 12px;
+  }
+
+  .footer-built {
+    grid-column: 1 / -1;
+
+    order: 2;
+  }
+
+  .back-to-top {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+  .footer {
+    padding-top: 50px;
+  }
+
+  .footer-logo {
+    font-size: 1.45rem;
+  }
+
+  .footer-brand p {
+    font-size: 0.84rem;
+  }
+
+  .footer-bottom-content {
+    font-size: 0.68rem;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-glow-one,
+  .footer-glow-two,
+  .footer-line::after {
+    animation: none;
+  }
+
+  .footer-logo,
+  .footer-cta,
+  .footer-links a,
+  .social-link,
+  .back-to-top {
+    transition: none;
+  }
+}
+

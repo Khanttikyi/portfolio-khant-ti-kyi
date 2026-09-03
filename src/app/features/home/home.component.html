@@ -1,0 +1,46 @@
+<div class="home">
+
+    <app-hero
+      [profile]="profile"
+      [loading]="loading"
+      [error]="error"
+      (retry)="retryLoad()"
+      (navigate)="scrollTo($event)"
+    />
+  
+    <app-about
+      [profile]="profile" 
+      (navigate)="scrollTo($event)"
+    />
+  
+    <app-skills
+      [skills]="skills"
+      [loading]="loading"
+      [error]="error"
+    />
+      <app-education
+      [education]="education"
+      [loading]="loading"
+      [error]="error"
+    />
+  
+    <app-experience
+      [experiences]="experiences"
+      [loading]="loading"
+      [error]="error"
+    />
+  
+    <app-projects
+      [projects]="projects"
+      [loading]="loading"
+      [error]="error"
+      (navigate)="scrollTo($event)"
+    />
+  
+  
+  
+    <app-contact
+      [profile]="profile"
+    />
+  
+  </div>

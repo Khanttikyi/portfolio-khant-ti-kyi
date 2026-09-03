@@ -1,0 +1,309 @@
+<section class="about-section section" id="about">
+  <div class="container">
+
+    <!-- =====================================================
+         SECTION HEADING
+         ===================================================== -->
+
+    <div class="section-heading">
+
+      <span class="eyebrow">
+        About Me
+      </span>
+
+      <h2>
+        Get to know
+        <span class="gradient-text">
+          {{ profile?.name }}
+        </span>
+      </h2>
+
+    </div>
+
+
+    <!-- =====================================================
+         ABOUT GRID
+         ===================================================== -->
+
+    <div class="about-grid">
+
+      <!-- ===================================================
+           PROFILE VISUAL
+           =================================================== -->
+
+      <div class="about-visual">
+
+        <!-- Animated background circles -->
+        <div class="profile-orbit orbit-one"></div>
+        <div class="profile-orbit orbit-two"></div>
+
+        <div class="profile-image-wrapper">
+
+          <!-- Glow -->
+          <div class="profile-image-glow"></div>
+
+          <!-- Image -->
+          <div class="profile-image-card">
+
+            @if (profile?.profile_image_url) {
+
+            <img [src]="profile?.profile_image_url" [alt]="profile?.name || 'Profile photo'" class="profile-image" />
+
+            }
+
+            @if (profile?.available_for_work) {
+
+            <div class="profile-status">
+
+              <span></span>
+
+              Available for opportunities
+
+            </div>
+
+            }
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             EXPERIENCE FLOATING CARD
+             ================================================= -->
+
+        @if (profile?.experiences?.[0]; as experience) {
+        <div class="about-floating-card experience-card">
+
+          <span class="floating-number">
+            {{ experience.value }}
+          </span>
+
+          <div>
+            <strong>
+              {{ experience.label }}
+            </strong>
+
+            <small>
+              Experience
+            </small>
+          </div>
+
+        </div>
+        }
+
+
+        <!-- =================================================
+             ROLE FLOATING CARD
+             ================================================= -->
+
+        <!-- <div class="about-floating-card developer-card">
+
+          <div class="floating-icon">
+            <i class="pi pi-code"></i>
+          </div>
+
+          <div>
+
+            <strong>
+              {{ profile?.short_title || profile?.title }}
+            </strong>
+
+            <small>
+              Developer
+            </small>
+
+          </div>
+
+        </div> -->
+
+      </div>
+
+
+      <!-- ===================================================
+           ABOUT CONTENT
+           =================================================== -->
+
+      <div class="about-content">
+
+        @if (profile) {
+
+        <div class="about-label">
+
+          <span></span>
+
+          A little about me
+
+        </div>
+
+
+        <!-- Main Bio -->
+
+        @if (profile.bio) {
+
+        <p class="about-intro">
+          {{ profile.bio }}
+        </p>
+
+        }
+
+
+        <!-- Tagline -->
+
+        @if (profile.tagline) {
+
+        <p class="about-description">
+          {{ profile.tagline }}
+        </p>
+
+        }
+
+
+        <!-- Professional Role -->
+
+        @if (profile.title) {
+
+        <p class="about-description">
+
+          Currently working as a
+
+          <strong class="about-role">
+            {{ profile.title }}
+          </strong>,
+
+          focused on building modern,
+          scalable, and user-friendly
+          digital experiences.
+
+        </p>
+
+        }
+
+        }
+
+
+        <!-- =================================================
+             PROFILE INFORMATION
+             ================================================= -->
+
+        <div class="about-highlights">
+
+          <!-- Email -->
+
+          @if (profile?.email) {
+
+          <a class="highlight-item" [href]="'mailto:' + profile?.email">
+
+            <div class="highlight-icon">
+
+              <i class="pi pi-envelope"></i>
+
+            </div>
+
+            <div class="highlight-content">
+
+              <strong>
+                Email
+              </strong>
+
+              <span>
+                {{ profile?.email }}
+              </span>
+
+            </div>
+
+            <i class="pi pi-arrow-up-right highlight-arrow"></i>
+
+          </a>
+
+          }
+
+
+          <!-- LinkedIn -->
+
+          @if (profile?.linkedin_url) {
+
+          <a class="highlight-item" [href]="profile?.linkedin_url" target="_blank" rel="noopener noreferrer">
+
+            <div class="highlight-icon linkedin-icon">
+
+              <i class="pi pi-link"></i>
+
+            </div>
+
+            <div class="highlight-content">
+
+              <strong>
+                LinkedIn
+              </strong>
+
+              <span>
+                Connect with me
+              </span>
+
+            </div>
+
+            <i class="pi pi-arrow-up-right highlight-arrow"></i>
+
+          </a>
+
+          }
+
+
+          <!-- GitHub -->
+
+          @if (profile?.github_url) {
+
+          <a class="highlight-item" [href]="" target="_blank" rel="noopener noreferrer">
+
+            <div class="highlight-icon github-icon">
+
+              <i class="pi pi-github"></i>
+
+            </div>
+
+            <div class="highlight-content">
+
+              <strong>
+                GitHub
+              </strong>
+
+              <span>
+                View my projects
+              </span>
+
+            </div>
+
+            <i class="pi pi-arrow-up-right highlight-arrow"></i>
+
+          </a>
+
+          }
+
+        </div>
+
+
+        <!-- =================================================
+             CONTACT CTA
+             ================================================= -->
+
+        <button type="button" class="about-link" (click)="onNavigate('contact')">
+
+          <span>
+            Let's work together
+          </span>
+
+          <span class="about-link-icon">
+
+            <i class="pi pi-arrow-up-right"></i>
+
+          </span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>

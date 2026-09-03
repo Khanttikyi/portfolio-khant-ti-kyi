@@ -1,0 +1,132 @@
+<section
+  class="contact-section section"
+  id="contact"
+>
+  <div class="container">
+
+    <div class="contact-card">
+
+      <!-- =====================================================
+           BACKGROUND DECORATION
+           ===================================================== -->
+      <div
+        class="contact-decoration"
+        aria-hidden="true"
+      >
+        <div class="orb orb-one"></div>
+        <div class="orb orb-two"></div>
+      </div>
+
+
+      <!-- =====================================================
+           CONTACT CONTENT
+           ===================================================== -->
+      <div class="contact-content">
+
+        <span class="eyebrow">
+          Get In Touch
+        </span>
+
+
+        <h2>
+          Let's build something
+          <span class="gradient-text">
+            great together.
+          </span>
+        </h2>
+
+
+        <p>
+          Have a project in mind or looking for a
+          frontend developer? I'd love to hear from you.
+        </p>
+
+
+        <!-- =====================================================
+             CONTACT ACTIONS
+             ===================================================== -->
+        @if (profile) {
+
+          <div class="contact-actions">
+
+            <!-- Email -->
+            @if (profile.email) {
+              <a
+                class="contact-button"
+                [href]="'mailto:' + profile.email"
+                aria-label="Send me an email"
+              >
+                <i
+                  class="pi pi-envelope"
+                  aria-hidden="true"
+                ></i>
+
+                <span>
+                  Email Me
+                </span>
+              </a>
+            }
+
+
+            <!-- LinkedIn -->
+            @if (profile.linkedin_url) {
+              <a
+                class="contact-button"
+                [href]="profile.linkedin_url"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open my LinkedIn profile"
+              >
+                <i
+                  class="pi pi-linkedin"
+                  aria-hidden="true"
+                ></i>
+
+                <span>
+                  LinkedIn
+                </span>
+              </a>
+            }
+
+
+            <!-- GitHub -->
+            @if (profile.github_url) {
+              <a
+                class="contact-button"
+                [href]="profile.github_url"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open my GitHub profile"
+              >
+                <i
+                  class="pi pi-github"
+                  aria-hidden="true"
+                ></i>
+
+                <span>
+                  GitHub
+                </span>
+              </a>
+            }
+
+          </div>
+
+        }
+
+      </div>
+
+
+      <!-- =====================================================
+           DECORATIVE SEND ICON
+           ===================================================== -->
+      <div
+        class="contact-send-icon"
+        aria-hidden="true"
+      >
+        <i class="pi pi-send"></i>
+      </div>
+
+    </div>
+
+  </div>
+</section>

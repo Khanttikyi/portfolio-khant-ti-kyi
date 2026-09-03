@@ -1,0 +1,1052 @@
+:host {
+  display: block;
+}
+
+
+/* =========================================================
+   ABOUT SECTION
+   ========================================================= */
+
+.about-section {
+  position: relative;
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   MAIN GRID
+   ========================================================= */
+
+.about-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(380px, 0.85fr) minmax(0, 1.15fr);
+
+  align-items: center;
+
+  gap: 90px;
+}
+
+
+/* =========================================================
+   PROFILE VISUAL
+   ========================================================= */
+
+.about-visual {
+  position: relative;
+
+  min-height: 500px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* =========================================================
+   IMAGE WRAPPER
+   ========================================================= */
+
+.profile-image-wrapper {
+  position: relative;
+
+  width: 390px;
+  height: 440px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   IMAGE GLOW
+   ========================================================= */
+
+.profile-image-glow {
+  position: absolute;
+
+  width: 340px;
+  height: 340px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(circle,
+      rgba(99, 102, 241, 0.3) 0%,
+      rgba(56, 189, 248, 0.12) 35%,
+      transparent 70%);
+
+  filter: blur(30px);
+
+  animation:
+    profile-glow 5s ease-in-out infinite;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   PROFILE IMAGE CARD
+   ========================================================= */
+
+.profile-image-card {
+  position: relative;
+
+  width: 320px;
+  height: 380px;
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 22px;
+
+  background:
+    linear-gradient(145deg,
+      rgba(255, 255, 255, 0.07),
+      rgba(255, 255, 255, 0.015));
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.3),
+    inset 0 1px rgba(255, 255, 255, 0.05);
+
+  backdrop-filter: blur(20px);
+
+  transform:
+    perspective(1000px) rotateY(4deg);
+
+  transition:
+    transform 500ms ease,
+    box-shadow 500ms ease;
+}
+
+
+/* =========================================================
+   IMAGE HOVER
+   ========================================================= */
+
+.profile-image-card:hover {
+  transform:
+    perspective(1000px) rotateY(0deg) translateY(-6px);
+
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.4),
+    0 0 60px rgba(99, 102, 241, 0.1);
+}
+
+
+/* =========================================================
+   PROFILE IMAGE
+   ========================================================= */
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  filter: saturate(0.92);
+
+  transition:
+    transform 700ms ease,
+    filter 500ms ease;
+}
+
+
+.profile-image-card:hover .profile-image {
+  transform: scale(1.045);
+
+  filter: saturate(1);
+}
+
+
+/* =========================================================
+   IMAGE OVERLAY
+   ========================================================= */
+
+.profile-image-card::after {
+  content: '';
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(to top,
+      rgba(7, 10, 20, 0.82) 0%,
+      rgba(7, 10, 20, 0.15) 42%,
+      transparent 70%);
+}
+
+
+/* =========================================================
+   AVAILABILITY STATUS
+   ========================================================= */
+
+.profile-status {
+  position: absolute;
+  z-index: 4;
+  left: 20px;
+  bottom: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid rgb(255 255 255);
+  border-radius: 999px;
+  background: rgb(0 0 0);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 600;
+  backdrop-filter: blur(14px);
+}
+
+
+.profile-status span {
+  width: 6px;
+  height: 6px;
+
+  flex: 0 0 auto;
+
+  border-radius: 50%;
+
+  background: #22c55e;
+
+  box-shadow:
+    0 0 0 4px rgba(34, 197, 94, 0.1),
+    0 0 12px rgba(34, 197, 94, 0.45);
+
+  animation:
+    status-pulse 2.5s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   ORBIT
+   ========================================================= */
+
+.profile-orbit {
+  position: absolute;
+
+  border:
+    1px solid rgba(99, 102, 241, 0.14);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+
+.orbit-one {
+  width: 430px;
+  height: 430px;
+
+  animation:
+    orbit-rotate 20s linear infinite;
+}
+
+
+.orbit-two {
+  width: 485px;
+  height: 485px;
+
+  border-color:
+    rgba(56, 189, 248, 0.07);
+
+  animation:
+    orbit-rotate-reverse 28s linear infinite;
+}
+
+
+/* Orbit dots */
+
+.profile-orbit::before,
+.profile-orbit::after {
+  content: '';
+
+  position: absolute;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background:
+    var(--accent);
+
+  box-shadow:
+    0 0 16px rgba(99, 102, 241, 0.65);
+}
+
+
+.profile-orbit::before {
+  top: 12%;
+  right: 5%;
+}
+
+
+.profile-orbit::after {
+  left: 5%;
+  bottom: 12%;
+
+  width: 5px;
+  height: 5px;
+
+  background:
+    #38bdf8;
+
+  box-shadow:
+    0 0 14px rgba(56, 189, 248, 0.6);
+}
+
+
+/* =========================================================
+   FLOATING CARDS
+   ========================================================= */
+
+.about-floating-card {
+  position: absolute;
+
+  z-index: 5;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 11px 14px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.09);
+
+  border-radius: 11px;
+
+  background:
+    rgba(255, 255, 255, 0.86);
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.25);
+
+  backdrop-filter: blur(16px);
+
+  white-space: nowrap;
+}
+
+
+/* Experience */
+
+.experience-card {
+  top: 55px;
+  right: -10px;
+
+  animation:
+    floating-one 4s ease-in-out infinite;
+}
+
+
+/* Developer */
+
+.developer-card {
+  left: -15px;
+  bottom: 70px;
+
+  animation:
+    floating-two 4.5s ease-in-out infinite;
+}
+
+
+/* Number */
+
+.floating-number {
+  color:
+    var(--accent);
+
+  font-family:
+    'SFMono-Regular',
+    Consolas,
+    monospace;
+
+  font-size: 22px;
+
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+
+/* Floating content */
+
+.about-floating-card>div:not(.floating-icon) {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+
+.about-floating-card strong {
+  max-width: 150px;
+
+  overflow: hidden;
+
+  color:
+    var(--text-primary);
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+
+.about-floating-card small {
+  margin-top: 3px;
+
+  color:
+    var(--text-muted);
+
+  font-size: 9px;
+}
+
+
+/* Floating icon */
+
+.floating-icon {
+  width: 30px;
+  height: 30px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 7px;
+
+  background:
+    rgba(99, 102, 241, 0.1);
+
+  color:
+    var(--accent);
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.about-content {
+  max-width: 680px;
+}
+
+
+.about-label {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 18px;
+
+  color:
+    var(--accent);
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+}
+
+
+.about-label span {
+  width: 26px;
+  height: 1px;
+
+  background:
+    var(--accent);
+
+  opacity: 0.8;
+}
+
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+
+.about-content p {
+  margin: 0 0 18px;
+
+  color:
+    var(--text-secondary);
+
+  font-size: 14px;
+
+  line-height: 1.8;
+}
+
+
+.about-intro {
+  color:
+    var(--text-primary) !important;
+
+  font-size: 19px !important;
+
+  line-height: 1.65 !important;
+
+  font-weight: 500;
+
+  letter-spacing: -0.015em;
+}
+
+
+.about-description {
+  max-width: 650px;
+}
+
+
+.about-role {
+  color:
+    var(--text-primary);
+
+  font-weight: 650;
+}
+
+
+/* =========================================================
+   HIGHLIGHTS
+   ========================================================= */
+
+.about-highlights {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 10px;
+
+  margin-top: 30px;
+}
+
+
+.highlight-item {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  min-width: 0;
+
+  padding: 13px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 10px;
+
+  background:
+    rgba(255, 255, 255, 0.02);
+
+  color: inherit;
+
+  text-decoration: none;
+
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    background 200ms ease;
+}
+
+
+.highlight-item:hover {
+  transform:
+    translateY(-3px);
+
+  border-color:
+    rgba(99, 102, 241, 0.25);
+
+  background:
+    rgba(99, 102, 241, 0.045);
+}
+
+
+/* Highlight icon */
+
+.highlight-icon {
+  flex: 0 0 auto;
+
+  width: 32px;
+  height: 32px;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 7px;
+
+  background:
+    rgba(99, 102, 241, 0.1);
+
+  color:
+    var(--accent);
+
+  font-size: 12px;
+}
+
+
+.linkedin-icon {
+  background:
+    rgba(56, 189, 248, 0.08);
+
+  color:
+    #38bdf8;
+}
+
+
+.github-icon {
+  background:
+    rgba(168, 85, 247, 0.08);
+
+  color:
+    #c084fc;
+}
+
+
+/* Highlight content */
+
+.highlight-content {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+
+.highlight-content strong {
+  color:
+    var(--text-primary);
+
+  font-size: 10px;
+
+  font-weight: 650;
+}
+
+
+.highlight-content span {
+  max-width: 130px;
+
+  margin-top: 3px;
+
+  overflow: hidden;
+
+  color:
+    var(--text-muted);
+
+  font-size: 9px;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+
+/* Arrow */
+
+.highlight-arrow {
+  margin-left: auto;
+
+  color:
+    var(--text-muted);
+
+  font-size: 9px;
+
+  transition:
+    transform 200ms ease,
+    color 200ms ease;
+}
+
+
+.highlight-item:hover .highlight-arrow {
+  color:
+    var(--accent);
+
+  transform:
+    translate(2px, -2px);
+}
+
+
+/* =========================================================
+   CONTACT LINK
+   ========================================================= */
+
+.about-link {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 30px;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color:
+    var(--text-primary);
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    color 200ms ease,
+    gap 200ms ease;
+}
+
+
+.about-link-icon {
+  width: 28px;
+  height: 28px;
+
+  display: grid;
+
+  place-items: center;
+
+  border:
+    1px solid var(--border-color);
+
+  border-radius: 50%;
+
+  color:
+    var(--text-secondary);
+
+  transition:
+    transform 200ms ease,
+    background 200ms ease,
+    color 200ms ease,
+    border-color 200ms ease;
+}
+
+
+.about-link-icon i {
+  font-size: 9px;
+}
+
+
+.about-link:hover {
+  gap: 16px;
+
+  color:
+    var(--accent);
+}
+
+
+.about-link:hover .about-link-icon {
+  transform:
+    translate(2px, -2px);
+
+  border-color:
+    rgba(99, 102, 241, 0.35);
+
+  background:
+    rgba(99, 102, 241, 0.08);
+
+  color:
+    var(--accent);
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes profile-glow {
+
+  0%,
+  100% {
+    transform: scale(0.95);
+
+    opacity: 0.65;
+  }
+
+  50% {
+    transform: scale(1.08);
+
+    opacity: 1;
+  }
+}
+
+
+@keyframes status-pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(0.8);
+
+    opacity: 0.65;
+  }
+}
+
+
+@keyframes orbit-rotate {
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+@keyframes orbit-rotate-reverse {
+
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+
+@keyframes floating-one {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+
+@keyframes floating-two {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(7px);
+  }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .about-grid {
+    grid-template-columns: 1fr;
+
+    gap: 65px;
+  }
+
+  .about-visual {
+    min-height: 470px;
+  }
+
+  .about-content {
+    max-width: 760px;
+  }
+
+  .about-highlights {
+    max-width: 760px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .about-grid {
+    gap: 45px;
+  }
+
+  .about-visual {
+    min-height: 390px;
+  }
+
+  .profile-image-wrapper {
+    width: 300px;
+    height: 350px;
+  }
+
+  .profile-image-card {
+    width: 250px;
+    height: 310px;
+
+    border-radius: 18px;
+
+    transform: none;
+  }
+
+  .profile-image-card:hover {
+    transform:
+      translateY(-4px);
+  }
+
+  .profile-orbit.orbit-one {
+    width: 320px;
+    height: 320px;
+  }
+
+  .profile-orbit.orbit-two {
+    width: 360px;
+    height: 360px;
+  }
+
+  .experience-card {
+    top: 20px;
+    right: 0;
+  }
+
+  .developer-card {
+    left: 0;
+    bottom: 20px;
+  }
+
+  .about-intro {
+    font-size: 17px !important;
+
+    line-height: 1.65 !important;
+  }
+
+  .about-content p {
+    font-size: 13px;
+
+    line-height: 1.75;
+  }
+
+  .about-highlights {
+    grid-template-columns: 1fr;
+
+    gap: 8px;
+  }
+
+  .highlight-item {
+    padding: 12px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 450px) {
+
+  .about-visual {
+    min-height: 350px;
+  }
+
+  .profile-image-wrapper {
+    width: 270px;
+    height: 320px;
+  }
+
+  .profile-image-card {
+    width: 225px;
+    height: 285px;
+  }
+
+  .profile-orbit.orbit-one {
+    width: 290px;
+    height: 290px;
+  }
+
+  .profile-orbit.orbit-two {
+    width: 320px;
+    height: 320px;
+  }
+
+  .experience-card {
+    right: -5px;
+    top: 15px;
+  }
+
+  .developer-card {
+    left: -5px;
+    bottom: 10px;
+  }
+
+  .about-floating-card {
+    padding: 9px 11px;
+  }
+
+  .floating-number {
+    font-size: 19px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .profile-image-glow,
+  .profile-status span,
+  .profile-orbit,
+  .about-floating-card {
+    animation: none !important;
+  }
+
+  .profile-image-card,
+  .profile-image,
+  .highlight-item,
+  .about-link,
+  .about-link-icon {
+    transition: none !important;
+  }
+
+}

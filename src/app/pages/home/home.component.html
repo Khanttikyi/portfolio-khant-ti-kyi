@@ -1,0 +1,1265 @@
+<div class="home">
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+    <section
+      class="hero section"
+      id="home">
+  
+      <div class="hero-background">
+  
+        <div class="hero-grid"></div>
+  
+        <div class="hero-glow hero-glow-one"></div>
+  
+        <div class="hero-glow hero-glow-two"></div>
+  
+      </div>
+  
+  
+      <div class="container hero-container">
+  
+        <!-- =================================================
+             HERO CONTENT
+             ================================================= -->
+        <div class="hero-content">
+  
+          <!-- Loading -->
+          @if (loading) {
+  
+            <div class="profile-loading">
+  
+              <i class="pi pi-spin pi-spinner"></i>
+  
+              <span>
+                Loading profile...
+              </span>
+  
+            </div>
+  
+          }
+  
+  
+          <!-- Error -->
+          @if (!loading && error) {
+  
+            <div class="profile-error">
+  
+              <i class="pi pi-exclamation-triangle"></i>
+  
+              <span>
+                Unable to load profile.
+              </span>
+  
+              <button
+                type="button"
+                (click)="loadProfile()">
+  
+                Retry
+  
+              </button>
+  
+            </div>
+  
+          }
+  
+  
+          <!-- Profile -->
+          @if (!loading && !error && profile) {
+  
+            <!-- Availability -->
+            @if (profile.available_for_work) {
+  
+              <div class="availability">
+  
+                <span class="availability-dot"></span>
+  
+                Available for opportunities
+  
+              </div>
+  
+            }
+  
+  
+            <!-- Eyebrow -->
+            <p class="eyebrow">
+  
+              {{ profile.short_title || profile.title }}
+  
+            </p>
+  
+  
+            <!-- Name -->
+            <h1>
+  
+              Hi, I'm
+  
+              <span class="gradient-text">
+  
+                {{ profile.name }}
+  
+              </span>
+  
+            </h1>
+  
+  
+            <!-- Tagline -->
+            <h2>
+  
+              {{ profile.tagline }}
+  
+            </h2>
+  
+  
+            <!-- Description -->
+            <p class="hero-description">
+  
+              {{ profile.bio }}
+  
+            </p>
+  
+  
+            <!-- Actions -->
+            <div class="hero-actions">
+  
+              <p-button
+                label="View My Work"
+                icon="pi pi-arrow-down"
+                iconPos="right"
+                styleClass="primary-button"
+                (onClick)="scrollTo('projects')">
+              </p-button>
+  
+  
+              <p-button
+                label="Contact Me"
+                icon="pi pi-send"
+                [outlined]="true"
+                styleClass="secondary-button"
+                (onClick)="scrollTo('contact')">
+              </p-button>
+  
+            </div>
+  
+  
+            <!-- Stats -->
+            <div class="hero-stats">
+  
+              @for (
+                stat of stats;
+                track stat.label
+              ) {
+  
+                <div class="stat">
+  
+                  <strong>
+                    {{ stat.value }}
+                  </strong>
+  
+                  <span>
+                    {{ stat.label }}
+                  </span>
+  
+                </div>
+  
+              }
+  
+            </div>
+  
+          }
+  
+        </div>
+  
+  
+        <!-- =================================================
+             DEVELOPER VISUAL
+             ================================================= -->
+        <div class="hero-visual">
+  
+          <div class="code-window">
+  
+            <!-- Window header -->
+            <div class="window-header">
+  
+              <div class="window-dots">
+  
+                <span></span>
+                <span></span>
+                <span></span>
+  
+              </div>
+  
+              <span class="window-title">
+                khant-ti-kyi.ts
+              </span>
+  
+              <div class="window-spacer"></div>
+  
+            </div>
+  
+  
+            <!-- Code -->
+            <div class="code-content">
+  
+              <div class="code-line">
+  
+                <span class="line-number">
+                  01
+                </span>
+  
+                <span class="code-purple">
+                  const
+                </span>
+  
+                <span class="code-blue">
+                  developer
+                </span>
+  
+                <span>
+                  =
+                </span>
+  
+                <span class="code-yellow">
+                  &#123;
+                </span>
+  
+              </div>
+  
+  
+              <div class="code-line">
+  
+                <span class="line-number">
+                  02
+                </span>
+  
+                <span class="code-property">
+                  name:
+                </span>
+  
+                <span class="code-green">
+                  'Khant Ti Kyi'
+                </span>
+  
+                <span>
+                  ,
+                </span>
+  
+              </div>
+  
+  
+              <div class="code-line">
+  
+                <span class="line-number">
+                  03
+                </span>
+  
+                <span class="code-property">
+                  role:
+                </span>
+  
+                <span class="code-green">
+                  'Senior Frontend Developer'
+                </span>
+  
+                <span>
+                  ,
+                </span>
+  
+              </div>
+  
+  
+              <div class="code-line">
+  
+                <span class="line-number">
+                  04
+                </span>
+  
+                <span class="code-property">
+                  experience:
+                </span>
+  
+                <span class="code-orange">
+                  7
+                </span>
+  
+                <span>
+                  ,
+                </span>
+  
+              </div>
+  
+  
+              <div class="code-line">
+  
+                <span class="line-number">
+                  05
+                </span>
+  
+                <span class="code-property">
+                  angular:
+                </span>
+  
+                <span class="code-orange">
+                  6
+                </span>
+  
+                <span>
+                  ,
+                </span>
+  
+              </div>
+  
+  
+              <div class="code-line">
+  
+                <span class="line-number">
+                  06
+                </span>
+  
+                <span class="code-property">
+                  passion:
+                </span>
+  
+                <span class="code-green">
+                  'Building great products'
+                </span>
+  
+                <span>
+                  ,
+                </span>
+  
+              </div>
+  
+  
+              <div class="code-line">
+  
+                <span class="line-number">
+                  07
+                </span>
+  
+                <span class="code-property">
+                  stack:
+                </span>
+  
+                <span class="code-yellow">
+                  [
+                </span>
+  
+              </div>
+  
+  
+              <div class="code-line">
+  
+                <span class="line-number">
+                  08
+                </span>
+  
+                <span class="code-green indent">
+                  'Angular',
+                </span>
+  
+              </div>
+  
+  
+              <div class="code-line">
+  
+                <span class="line-number">
+                  09
+                </span>
+  
+                <span class="code-green indent">
+                  'Ionic',
+                </span>
+  
+              </div>
+  
+  
+              <div class="code-line">
+  
+                <span class="line-number">
+                  10
+                </span>
+  
+                <span class="code-green indent">
+                  'TypeScript'
+                </span>
+  
+              </div>
+  
+  
+              <div class="code-line">
+  
+                <span class="line-number">
+                  11
+                </span>
+  
+                <span class="code-yellow">
+                  ]
+                </span>
+  
+              </div>
+  
+  
+              <div class="code-line">
+  
+                <span class="line-number">
+                  12
+                </span>
+  
+                <span class="code-yellow">
+                  &#125;
+                </span>
+  
+              </div>
+  
+            </div>
+  
+          </div>
+  
+  
+          <!-- Angular floating card -->
+          <div class="floating-card floating-card-one">
+  
+            <i class="pi pi-code"></i>
+  
+            <div>
+  
+              <strong>
+                Angular
+              </strong>
+  
+              <span>
+                6+ Years
+              </span>
+  
+            </div>
+  
+          </div>
+  
+  
+          <!-- Mobile floating card -->
+          <div class="floating-card floating-card-two">
+  
+            <i class="pi pi-mobile"></i>
+  
+            <div>
+  
+              <strong>
+                Mobile
+              </strong>
+  
+              <span>
+                Ionic + Capacitor
+              </span>
+  
+            </div>
+  
+          </div>
+  
+        </div>
+  
+      </div>
+  
+  
+      <!-- Scroll indicator -->
+      <button
+        class="scroll-indicator"
+        type="button"
+        aria-label="Scroll to about section"
+        (click)="scrollTo('about')">
+  
+        <span>
+          Scroll to explore
+        </span>
+  
+        <i class="pi pi-arrow-down"></i>
+  
+      </button>
+  
+    </section>
+  
+  
+    <!-- =====================================================
+         ABOUT
+         ===================================================== -->
+    <section
+      class="section about-section"
+      id="about">
+  
+      <div class="container">
+  
+        <div class="section-heading">
+  
+          <p class="eyebrow">
+            ABOUT ME
+          </p>
+  
+          <h2>
+  
+            Building products that are
+  
+            <span class="gradient-text">
+              simple &amp; powerful.
+            </span>
+  
+          </h2>
+  
+          <p>
+            I enjoy turning complex requirements into clean,
+            intuitive and maintainable applications.
+          </p>
+  
+        </div>
+  
+  
+        <div class="about-grid">
+  
+          <div class="about-content">
+  
+            @if (profile?.bio) {
+  
+              <p>
+                {{ profile?.bio }}
+              </p>
+  
+            }
+  
+  
+            <p>
+              I'm a Senior Frontend Developer focused on creating
+              modern web and mobile experiences. My main expertise
+              is Angular and the Ionic ecosystem, with strong
+              experience working on business-critical applications.
+            </p>
+  
+  
+            <p>
+              Throughout my career, I've worked on financial,
+              insurance and enterprise applications where
+              performance, reliability and maintainability matter.
+            </p>
+  
+  
+            <p>
+              I also enjoy solving architecture problems such as
+              offline-first applications, local database
+              synchronization, API integration and cross-platform
+              mobile development.
+            </p>
+  
+  
+            <button
+              type="button"
+              class="text-button"
+              (click)="scrollTo('contact')">
+  
+              Let's work together
+  
+              <i class="pi pi-arrow-right"></i>
+  
+            </button>
+  
+          </div>
+  
+  
+          <div class="about-highlight">
+  
+            <div class="highlight-icon">
+  
+              <i class="pi pi-sparkles"></i>
+  
+            </div>
+  
+  
+            <h3>
+              From idea to production
+            </h3>
+  
+  
+            <p>
+              I care about the complete development journey —
+              architecture, UI, performance, APIs, testing and
+              deployment.
+            </p>
+  
+  
+            <div class="highlight-line"></div>
+  
+  
+            <span>
+              Frontend · Mobile · Architecture
+            </span>
+  
+          </div>
+  
+        </div>
+  
+      </div>
+  
+    </section>
+  
+  
+    <!-- =====================================================
+         SKILLS
+         ===================================================== -->
+    <section
+      class="section skills-section"
+      id="skills">
+  
+      <div class="container">
+  
+        <div class="section-heading centered">
+  
+          <p class="eyebrow">
+            TECHNOLOGY
+          </p>
+  
+          <h2>
+  
+            My
+  
+            <span class="gradient-text">
+              toolbox.
+            </span>
+  
+          </h2>
+  
+          <p>
+            Technologies I use to build reliable and scalable
+            applications.
+          </p>
+  
+        </div>
+  
+  
+        <div class="skills-grid">
+  
+          @for (
+            skill of skills;
+            track skill.id || skill.category
+          ) {
+  
+            <div class="skill-card">
+  
+              <div class="skill-icon">
+  
+                <i
+                  class="pi"
+                  [class]="skill.icon || 'pi-code'">
+                </i>
+  
+              </div>
+  
+  
+              <h3>
+                {{ skill.category }}
+              </h3>
+  
+  
+              <div class="skill-list">
+  
+                @for (
+                  item of skill.items;
+                  track item
+                ) {
+  
+                  <span>
+                    {{ item }}
+                  </span>
+  
+                }
+  
+              </div>
+  
+            </div>
+  
+          }
+  
+  
+          <!-- Empty state -->
+          @if (!loading && !error && skills.length === 0) {
+  
+            <div class="empty-state">
+  
+              <i class="pi pi-code"></i>
+  
+              <p>
+                No skills available.
+              </p>
+  
+            </div>
+  
+          }
+  
+        </div>
+  
+      </div>
+  
+    </section>
+  
+  
+    <!-- =====================================================
+         EXPERIENCE
+         ===================================================== -->
+    <section
+      class="section experience-section"
+      id="experience">
+  
+      <div class="container">
+  
+        <div class="section-heading">
+  
+          <p class="eyebrow">
+            EXPERIENCE
+          </p>
+  
+          <h2>
+  
+            Where I've
+  
+            <span class="gradient-text">
+              worked.
+            </span>
+  
+          </h2>
+  
+          <p>
+            A selection of my professional experience and
+            project work.
+          </p>
+  
+        </div>
+  
+  
+        <div class="timeline">
+  
+          @for (
+            experience of experiences;
+            track experience.id || experience.company
+          ) {
+  
+            <article class="timeline-item">
+  
+              <div class="timeline-marker"></div>
+  
+  
+              <div class="timeline-content">
+  
+                @if (experience.period) {
+  
+                  <span class="timeline-period">
+                    {{ experience.period }}
+                  </span>
+  
+                }
+  
+  
+                <h3>
+                  {{ experience.role }}
+                </h3>
+  
+  
+                <h4>
+                  {{ experience.company }}
+                </h4>
+  
+  
+                @if (experience.description) {
+  
+                  <p>
+                    {{ experience.description }}
+                  </p>
+  
+                }
+  
+  
+                @if (
+                  experience.technologies &&
+                  experience.technologies.length > 0
+                ) {
+  
+                  <div class="technology-tags">
+  
+                    @for (
+                      technology of experience.technologies;
+                      track technology
+                    ) {
+  
+                      <span>
+                        {{ technology }}
+                      </span>
+  
+                    }
+  
+                  </div>
+  
+                }
+  
+              </div>
+  
+            </article>
+  
+          }
+  
+  
+          <!-- Empty state -->
+          @if (
+            !loading &&
+            !error &&
+            experiences.length === 0
+          ) {
+  
+            <div class="empty-state">
+  
+              <i class="pi pi-briefcase"></i>
+  
+              <p>
+                No experience available.
+              </p>
+  
+            </div>
+  
+          }
+  
+        </div>
+  
+      </div>
+  
+    </section>
+  
+  
+    <!-- =====================================================
+         PROJECTS
+         ===================================================== -->
+    <section
+      class="section projects-section"
+      id="projects">
+  
+      <div class="container">
+  
+        <div class="section-heading">
+  
+          <p class="eyebrow">
+            SELECTED WORK
+          </p>
+  
+          <h2>
+  
+            Things I've
+  
+            <span class="gradient-text">
+              built.
+            </span>
+  
+          </h2>
+  
+          <p>
+            A few projects and technical solutions from my
+            development journey.
+          </p>
+  
+        </div>
+  
+  
+        <div class="projects-grid">
+  
+          @for (
+            project of projects;
+            track project.id || project.title;
+            let i = $index
+          ) {
+  
+            <article class="project-card">
+  
+              <div class="project-image">
+  
+                <div class="project-icon">
+  
+                  <i
+                    class="pi"
+                    [class]="project.icon || 'pi-code'">
+                  </i>
+  
+                </div>
+  
+  
+                <span class="project-number">
+  
+                  {{ formatProjectNumber(i) }}
+  
+                </span>
+  
+              </div>
+  
+  
+              <div class="project-content">
+  
+                @if (project.category) {
+  
+                  <span class="project-category">
+  
+                    {{ project.category }}
+  
+                  </span>
+  
+                }
+  
+  
+                <h3>
+                  {{ project.title }}
+                </h3>
+  
+  
+                @if (project.description) {
+  
+                  <p>
+                    {{ project.description }}
+                  </p>
+  
+                }
+  
+  
+                @if (
+                  project.technologies &&
+                  project.technologies.length > 0
+                ) {
+  
+                  <div class="technology-tags">
+  
+                    @for (
+                      technology of project.technologies;
+                      track technology
+                    ) {
+  
+                      <span>
+                        {{ technology }}
+                      </span>
+  
+                    }
+  
+                  </div>
+  
+                }
+  
+  
+                @if (
+                  project.github_url ||
+                  project.live_url
+                ) {
+  
+                  <div class="project-links">
+  
+                    @if (project.live_url) {
+  
+                      <a
+                        [href]="project.live_url"
+                        target="_blank"
+                        rel="noopener noreferrer">
+  
+                        View Project
+  
+                        <i class="pi pi-external-link"></i>
+  
+                      </a>
+  
+                    }
+  
+  
+                    @if (project.github_url) {
+  
+                      <a
+                        [href]="project.github_url"
+                        target="_blank"
+                        rel="noopener noreferrer">
+  
+                        GitHub
+  
+                        <i class="pi pi-github"></i>
+  
+                      </a>
+  
+                    }
+  
+                  </div>
+  
+                }
+  
+              </div>
+  
+            </article>
+  
+          }
+  
+  
+          <!-- Empty state -->
+          @if (
+            !loading &&
+            !error &&
+            projects.length === 0
+          ) {
+  
+            <div class="empty-state">
+  
+              <i class="pi pi-folder-open"></i>
+  
+              <p>
+                No projects available.
+              </p>
+  
+            </div>
+  
+          }
+  
+        </div>
+  
+  
+        <div class="projects-footer">
+  
+          <button
+            type="button"
+            class="outline-button"
+            (click)="scrollTo('contact')">
+  
+            Discuss a project
+  
+            <i class="pi pi-arrow-right"></i>
+  
+          </button>
+  
+        </div>
+  
+      </div>
+  
+    </section>
+  
+  
+    <!-- =====================================================
+         EDUCATION
+         ===================================================== -->
+    <section
+      class="section education-section"
+      id="education">
+  
+      <div class="container">
+  
+        @for (
+          item of education;
+          track item.id || item.degree
+        ) {
+  
+          <div class="education-card">
+  
+            <div class="education-icon">
+  
+              <i class="pi pi-graduation-cap"></i>
+  
+            </div>
+  
+  
+            <div class="education-content">
+  
+              <p class="eyebrow">
+                EDUCATION
+              </p>
+  
+  
+              <h2>
+                {{ item.degree }}
+              </h2>
+  
+  
+              @if (item.field) {
+  
+                <h3>
+                  {{ item.field }}
+                </h3>
+  
+              }
+  
+  
+              @if (item.institution) {
+  
+                <h4>
+                  {{ item.institution }}
+                </h4>
+  
+              }
+  
+  
+              @if (item.description) {
+  
+                <p>
+                  {{ item.description }}
+                </p>
+  
+              }
+  
+  
+              @if (
+                item.start_year ||
+                item.end_year
+              ) {
+  
+                <span class="education-period">
+  
+                  @if (item.start_year) {
+                    {{ item.start_year }}
+                  }
+  
+                  @if (
+                    item.start_year &&
+                    item.end_year
+                  ) {
+                    -
+                  }
+  
+                  @if (item.end_year) {
+                    {{ item.end_year }}
+                  }
+  
+                </span>
+  
+              }
+  
+            </div>
+  
+          </div>
+  
+        }
+  
+  
+        @if (
+          !loading &&
+          !error &&
+          education.length === 0
+        ) {
+  
+          <div class="empty-state">
+  
+            <i class="pi pi-graduation-cap"></i>
+  
+            <p>
+              No education information available.
+            </p>
+  
+          </div>
+  
+        }
+  
+      </div>
+  
+    </section>
+  
+  
+    <!-- =====================================================
+         CONTACT
+         ===================================================== -->
+    <section
+      class="section contact-section"
+      id="contact">
+  
+      <div class="container">
+  
+        <div class="contact-card">
+  
+          <div class="contact-content">
+  
+            <p class="eyebrow">
+              GET IN TOUCH
+            </p>
+  
+  
+            <h2>
+  
+              Let's build something
+  
+              <span class="gradient-text">
+                great.
+              </span>
+  
+            </h2>
+  
+  
+            <p>
+              Have a project, opportunity or just want to
+              talk about technology? I'd love to hear from you.
+            </p>
+  
+  
+            <div class="contact-actions">
+  
+              <!-- Email -->
+              @if (profile?.email) {
+  
+                <a
+                  [href]="'mailto:' + profile!.email"
+                  class="contact-button primary">
+  
+                  <i class="pi pi-envelope"></i>
+  
+                  Email Me
+  
+                </a>
+  
+              }
+  
+  
+              <!-- LinkedIn -->
+              @if (profile?.linkedin_url) {
+  
+                <a
+                  [href]="profile!.linkedin_url"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="contact-button">
+  
+                  <i class="pi pi-linkedin"></i>
+  
+                  LinkedIn
+  
+                </a>
+  
+              }
+  
+  
+              <!-- GitHub -->
+              @if (profile?.github_url) {
+  
+                <a
+                  [href]="profile!.github_url"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="contact-button">
+  
+                  <i class="pi pi-github"></i>
+  
+                  GitHub
+  
+                </a>
+  
+              }
+  
+            </div>
+  
+          </div>
+  
+  
+          <!-- Decoration -->
+          <div class="contact-decoration">
+  
+            <div class="orb orb-one"></div>
+  
+            <div class="orb orb-two"></div>
+  
+            <i class="pi pi-send"></i>
+  
+          </div>
+  
+        </div>
+  
+      </div>
+  
+    </section>
+  
+  </div>

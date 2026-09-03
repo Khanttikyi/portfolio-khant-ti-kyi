@@ -1,0 +1,104 @@
+<header class="navbar">
+
+    <div class="navbar-inner">
+  
+      <!-- LOGO -->
+      <a
+        class="logo"
+        href="#home"
+        (click)="closeMenu()">
+  
+        <span class="logo-mark">
+          K
+        </span>
+  
+        <strong>
+          KHANT TI KYI
+        </strong>
+  
+      </a>
+  
+  
+      <!-- NAVIGATION -->
+      <nav [class.mobile-open]="menuOpen">
+  
+        <a href="#about" (click)="closeMenu()">
+          About
+        </a>
+  
+        <a href="#skills" (click)="closeMenu()">
+          Skills
+        </a>
+  
+        <a href="#experience" (click)="closeMenu()">
+          Experience
+        </a>
+  
+        <a href="#projects" (click)="closeMenu()">
+          Projects
+        </a>
+  
+        <a href="#education" (click)="closeMenu()">
+          Education
+        </a>
+  
+        <a href="#contact" (click)="closeMenu()">
+          Contact
+        </a>
+  
+      </nav>
+  
+  
+      <!-- ACTIONS -->
+      <div class="navbar-actions">
+  
+        <!-- DOWNLOAD CV -->
+        <a
+          class="cv-button"
+          [href]="profile?.cv_url"
+          target="_blank"
+          rel="noopener">
+  
+          <i class="pi pi-download"></i>
+  
+          <span>CV</span>
+  
+        </a>
+  
+  
+        <!-- THEME -->
+        <!-- <p-button
+          [icon]="theme() === 'dark'
+            ? 'pi pi-sun'
+            : 'pi pi-moon'"
+          [rounded]="true"
+          [text]="true"
+          severity="secondary"
+          [attr.aria-label]="theme() === 'dark'
+            ? 'Switch to light mode'
+            : 'Switch to dark mode'"
+          (onClick)="toggleTheme()">
+        </p-button> -->
+  
+  
+        <!-- MOBILE MENU -->
+        <button
+          class="menu-button"
+          type="button"
+          aria-label="Toggle navigation"
+          [attr.aria-expanded]="menuOpen"
+          (click)="toggleMenu()">
+  
+          <i
+            [class]="menuOpen
+              ? 'pi pi-times'
+              : 'pi pi-bars'">
+          </i>
+  
+        </button>
+  
+      </div>
+  
+    </div>
+  
+  </header>

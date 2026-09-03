@@ -1,0 +1,191 @@
+<section class="section skills-section" id="skills">
+  <div class="container">
+
+    <!-- Section Heading -->
+    <div class="section-heading centered">
+
+      <p class="eyebrow">
+        TECHNOLOGY
+      </p>
+
+      <h2>
+        My
+        <span class="gradient-text">
+          toolbox.
+        </span>
+      </h2>
+
+      <p>
+        Technologies and practices I use to build reliable,
+        scalable, and user-focused applications.
+      </p>
+
+    </div>
+
+
+    <!-- Loading -->
+    @if (loading) {
+
+      <div class="skills-loading">
+
+        @for (item of [1, 2, 3, 4, 5, 6]; track item) {
+          <div class="skill-category-skeleton"></div>
+        }
+
+      </div>
+
+    }
+
+
+    <!-- Skills -->
+    @if (!loading && !error && groupedSkills.length > 0) {
+
+      <div class="skills-groups">
+
+        @for (
+          group of groupedSkills;
+          track group.category
+        ) {
+
+          <section
+            class="skill-group"
+            [style.--group-delay]="($index * 80) + 'ms'"
+          >
+
+            <!-- Category Header -->
+            <div class="skill-group-header">
+
+              <div class="category-number">
+                {{ ($index + 1).toString().padStart(2, '0') }}
+              </div>
+
+              <div class="category-line"></div>
+
+              <div class="category-title">
+                <span>Specialization</span>
+
+                <h3>
+                  {{ group.category }}
+                </h3>
+              </div>
+
+              <div class="category-count">
+                {{ group.skills.length }}
+                <span>skills</span>
+              </div>
+
+            </div>
+
+
+            <!-- Skills -->
+            <div class="skill-list">
+
+              @for (
+                skill of group.skills;
+                track skill.id
+              ) {
+
+                <div
+                  class="skill-item"
+                  [style.--skill-delay]="($index * 40) + 'ms'"
+                >
+
+                  <div class="skill-item-left">
+
+                    <div class="skill-icon">
+                      <i
+                        class="pi"
+                        [class]="skill.icon || 'pi-code'"
+                      ></i>
+                    </div>
+
+                    <div class="skill-info">
+
+                      <strong>
+                        {{ skill.name }}
+                      </strong>
+
+                      @if (
+                        skill.years_experience !== null &&
+                        skill.years_experience !== undefined
+                      ) {
+                        <span>
+                          {{ skill.years_experience }}+ years
+                        </span>
+                      }
+
+                    </div>
+
+                  </div>
+
+
+                  @if (
+                    skill.proficiency !== null &&
+                    skill.proficiency !== undefined
+                  ) {
+
+                    <div class="skill-level">
+
+                      <span>
+                        {{ skill.proficiency }}%
+                      </span>
+
+                      <div class="skill-progress">
+                        <div
+                          class="skill-progress-bar"
+                          [style.width.%]="skill.proficiency"
+                        ></div>
+                      </div>
+
+                    </div>
+
+                  }
+
+                </div>
+
+              }
+
+            </div>
+
+          </section>
+
+        }
+
+      </div>
+
+    }
+
+
+    <!-- Empty -->
+    @if (!loading && !error && skills.length === 0) {
+
+      <div class="empty-state">
+
+        <i class="pi pi-code"></i>
+
+        <p>
+          No skills available.
+        </p>
+
+      </div>
+
+    }
+
+
+    <!-- Error -->
+    @if (!loading && error) {
+
+      <div class="empty-state error-state">
+
+        <i class="pi pi-exclamation-circle"></i>
+
+        <p>
+          Unable to load skills.
+        </p>
+
+      </div>
+
+    }
+
+  </div>
+</section>

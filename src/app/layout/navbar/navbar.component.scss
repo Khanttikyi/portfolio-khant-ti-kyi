@@ -1,0 +1,699 @@
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+   .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  
+    height: 72px;
+  
+    background: color-mix(
+      in srgb,
+      var(--navbar-bg, var(--surface)) 90%,
+      transparent
+    );
+  
+    border-bottom: 1px solid var(--border-color);
+  
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  
+    transition:
+      background 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  
+  
+  /* =========================================================
+     NAVBAR INNER
+     ========================================================= */
+  
+  .navbar-inner {
+    width: min(1200px, calc(100% - 40px));
+    height: 72px;
+  
+    margin: 0 auto;
+  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    gap: 28px;
+  }
+  
+  
+  /* =========================================================
+     LOGO
+     ========================================================= */
+  
+  .logo {
+    display: inline-flex;
+    align-items: center;
+  
+    gap: 10px;
+  
+    color: var(--text-primary);
+    text-decoration: none;
+  
+    flex-shrink: 0;
+  
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+  
+  .logo:hover {
+    color: var(--accent);
+  }
+  
+  .logo-mark {
+    width: 38px;
+    height: 38px;
+  
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  
+    border-radius: 10px;
+  
+    background:
+      linear-gradient(
+        135deg,
+        var(--accent),
+        var(--accent-secondary, #8b5cf6)
+      );
+  
+    color: #ffffff;
+  
+    font-size: 16px;
+    font-weight: 800;
+  
+    box-shadow:
+      0 8px 24px
+      color-mix(in srgb, var(--accent) 25%, transparent);
+  
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  
+  .logo:hover .logo-mark {
+    transform: translateY(-2px) rotate(-3deg);
+  
+    box-shadow:
+      0 12px 30px
+      color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  
+  .logo strong {
+    font-size: 13px;
+    font-weight: 700;
+  
+    letter-spacing: 0.08em;
+  
+    white-space: nowrap;
+  
+    color: var(--text-primary);
+  }
+  
+  
+  /* =========================================================
+     DESKTOP NAVIGATION
+     ========================================================= */
+  
+  .navbar-inner > nav {
+    display: flex;
+    align-items: center;
+  
+    gap: 4px;
+  
+    margin-left: auto;
+  }
+  
+  .navbar-inner > nav a {
+    position: relative;
+  
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  
+    min-height: 40px;
+  
+    padding: 0 12px;
+  
+    border-radius: 9px;
+  
+    color: var(--text-secondary);
+  
+    text-decoration: none;
+  
+    font-size: 13px;
+    font-weight: 500;
+  
+    white-space: nowrap;
+  
+    transition:
+      color 0.2s ease,
+      background 0.2s ease,
+      transform 0.2s ease;
+  }
+  
+  .navbar-inner > nav a:hover {
+    color: var(--text-primary);
+  
+    background: var(--surface-hover);
+  
+    transform: translateY(-1px);
+  }
+  
+  .navbar-inner > nav a::after {
+    content: "";
+  
+    position: absolute;
+  
+    left: 12px;
+    right: 12px;
+    bottom: 5px;
+  
+    height: 2px;
+  
+    border-radius: 999px;
+  
+    background:
+      linear-gradient(
+        90deg,
+        var(--accent),
+        var(--accent-secondary, #8b5cf6)
+      );
+  
+    transform: scaleX(0);
+  
+    transform-origin: center;
+  
+    transition: transform 0.25s ease;
+  }
+  
+  .navbar-inner > nav a:hover::after {
+    transform: scaleX(1);
+  }
+  
+  
+  /* =========================================================
+     NAVBAR ACTIONS
+     ========================================================= */
+  
+  .navbar-actions {
+    display: flex;
+    align-items: center;
+  
+    gap: 8px;
+  
+    flex-shrink: 0;
+  }
+  
+  
+  /* =========================================================
+     CV BUTTON
+     ========================================================= */
+  
+  .cv-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  
+    gap: 7px;
+  
+    min-height: 38px;
+  
+    padding: 0 13px;
+  
+    border: 1px solid var(--accent-border);
+  
+    border-radius: 9px;
+  
+    background: var(--surface);
+  
+    color: var(--text-primary);
+  
+    text-decoration: none;
+  
+    font-size: 12px;
+    font-weight: 600;
+  
+    transition:
+      color 0.2s ease,
+      background 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  
+  .cv-button i {
+    font-size: 13px;
+  
+    color: var(--accent);
+  }
+  
+  .cv-button:hover {
+    color: var(--accent);
+  
+    background: var(--surface-hover);
+  
+    border-color: var(--accent);
+  
+    transform: translateY(-2px);
+  
+    box-shadow:
+      0 8px 22px
+      color-mix(in srgb, var(--accent) 15%, transparent);
+  }
+  
+  
+  /* =========================================================
+     MOBILE MENU BUTTON
+     ========================================================= */
+  
+  .menu-button {
+    display: none;
+  
+    width: 40px;
+    height: 40px;
+  
+    align-items: center;
+    justify-content: center;
+  
+    padding: 0;
+  
+    border: 1px solid var(--border-color);
+  
+    border-radius: 10px;
+  
+    background: var(--surface);
+  
+    color: var(--text-primary);
+  
+    cursor: pointer;
+  
+    transition:
+      color 0.2s ease,
+      background 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.2s ease;
+  }
+  
+  .menu-button i {
+    font-size: 17px;
+  }
+  
+  .menu-button:hover {
+    color: var(--accent);
+  
+    background: var(--surface-hover);
+  
+    border-color: var(--accent-border);
+  
+    transform: translateY(-1px);
+  }
+  
+  .menu-button:active {
+    transform: scale(0.96);
+  }
+  
+  
+  /* =========================================================
+     MOBILE NAVIGATION
+     ========================================================= */
+  
+  @media (max-width: 850px) {
+  
+    .navbar {
+      height: 64px;
+    }
+  
+    .navbar-inner {
+      width: calc(100% - 28px);
+  
+      height: 64px;
+  
+      gap: 12px;
+    }
+  
+  
+    /* -------------------------------------------------------
+       MOBILE LOGO
+       ------------------------------------------------------- */
+  
+    .logo {
+      gap: 9px;
+    }
+  
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+  
+      border-radius: 9px;
+  
+      font-size: 14px;
+    }
+  
+    .logo strong {
+      font-size: 12px;
+  
+      letter-spacing: 0.07em;
+    }
+  
+  
+    /* -------------------------------------------------------
+       HIDE DESKTOP NAV / CREATE MOBILE DROPDOWN
+       ------------------------------------------------------- */
+  
+    .navbar-inner > nav {
+      position: absolute;
+  
+      top: calc(100% + 10px);
+  
+      left: 14px;
+      right: 14px;
+  
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+  
+      gap: 4px;
+  
+      padding: 8px;
+  
+  
+      /*
+       * IMPORTANT:
+       * Use the theme surface instead of hard-coded black.
+       */
+      // background: var(--surface);
+      background: rgb(255 255 255 / 65%);
+      border: 1px solid var(--border-color);
+  
+      border-radius: 16px;
+  
+      box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.16),
+        0 4px 14px rgba(0, 0, 0, 0.08);
+  
+  
+      /* Closed state */
+      max-height: 0;
+  
+      opacity: 0;
+  
+      visibility: hidden;
+  
+      pointer-events: none;
+  
+      overflow: hidden;
+  
+      transform:
+        translateY(-10px)
+        scale(0.98);
+  
+      transform-origin: top center;
+  
+      transition:
+        max-height 0.35s ease,
+        opacity 0.22s ease,
+        transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0.3s ease;
+    }
+  
+  
+    /* -------------------------------------------------------
+       OPEN MOBILE MENU
+       ------------------------------------------------------- */
+  
+    .navbar-inner > nav.mobile-open {
+      max-height: 500px;
+  
+      opacity: 1;
+  
+      visibility: visible;
+  
+      pointer-events: auto;
+  
+      transform:
+        translateY(0)
+        scale(1);
+    }
+  
+  
+    /* -------------------------------------------------------
+       MOBILE NAV LINKS
+       ------------------------------------------------------- */
+  
+    .navbar-inner > nav a {
+      width: 100%;
+  
+      min-height: 46px;
+  
+      display: flex;
+  
+      align-items: center;
+      justify-content: flex-start;
+  
+      padding: 0 14px;
+  
+      border-radius: 10px;
+  
+      /*
+       * Explicit text color.
+       * This prevents black-on-black if theme inheritance
+       * behaves unexpectedly.
+       */
+      color: var(--text-primary);
+  
+      background: transparent;
+  
+      font-size: 13px;
+      font-weight: 500;
+  
+      text-decoration: none;
+  
+      transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        padding-left 0.2s ease;
+    }
+  
+  
+    /* Remove desktop underline */
+    .navbar-inner > nav a::after {
+      display: none;
+    }
+  
+  
+    /* Mobile hover */
+    .navbar-inner > nav a:hover {
+      color: var(--accent);
+  
+      background: var(--surface-hover);
+  
+      padding-left: 18px;
+  
+      transform: none;
+    }
+  
+  
+    /* Mobile active */
+    .navbar-inner > nav a:active {
+      transform: none;
+    }
+  
+  
+    /* -------------------------------------------------------
+       ACTIONS
+       ------------------------------------------------------- */
+  
+    .navbar-actions {
+      gap: 4px;
+    }
+  
+  
+    /* CV hidden on mobile */
+    .cv-button {
+      display: none;
+    }
+  
+  
+    /* Hamburger visible */
+    .menu-button {
+      display: inline-flex;
+    }
+  }
+  
+  
+  /* =========================================================
+     SMALL MOBILE
+     ========================================================= */
+  
+  @media (max-width: 480px) {
+  
+    .navbar-inner {
+      width: calc(100% - 20px);
+    }
+  
+    .logo strong {
+      font-size: 11px;
+  
+      letter-spacing: 0.06em;
+    }
+  
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+  
+      font-size: 14px;
+    }
+  
+    .menu-button {
+      width: 38px;
+      height: 38px;
+    }
+  
+    .navbar-inner > nav {
+      left: 10px;
+      right: 10px;
+  
+      border-radius: 15px;
+    }
+  }
+  
+  
+  /* =========================================================
+     VERY SMALL DEVICES
+     ========================================================= */
+  
+  @media (max-width: 360px) {
+  
+    .logo strong {
+      font-size: 10px;
+    }
+  
+    .logo-mark {
+      width: 30px;
+      height: 30px;
+    }
+  
+    .menu-button {
+      width: 36px;
+      height: 36px;
+    }
+  
+    .navbar-inner > nav a {
+      min-height: 44px;
+  
+      font-size: 12px;
+    }
+  }
+  
+  
+  /* =========================================================
+     THEME SAFETY
+     ========================================================= */
+  
+  /*
+   * If your current theme has:
+   *
+   * --surface: #000;
+   * --text-primary: #000;
+   *
+   * you will still get black text on a black background.
+   *
+   * The following values are safe defaults for a light theme.
+   *
+   * If you already define these variables globally,
+   * keep your existing theme system instead of duplicating
+   * them here.
+   */
+  
+  
+  /* =========================================================
+     OPTIONAL LIGHT THEME
+     ========================================================= */
+  
+  :root {
+    --surface: #ffffff;
+  
+    --surface-hover: #f5f5f7;
+  
+    --text-primary: #111827;
+  
+    --text-secondary: #6b7280;
+  
+    --border-color: rgba(17, 24, 39, 0.10);
+  
+    --accent: #6366f1;
+  
+    --accent-secondary: #8b5cf6;
+  
+    --accent-border: rgba(99, 102, 241, 0.30);
+  
+    --navbar-bg: #ffffff;
+  
+    --card-shadow:
+      0 10px 30px rgba(0, 0, 0, 0.08);
+  }
+  
+  
+  /* =========================================================
+     OPTIONAL DARK THEME
+     ========================================================= */
+  
+  .dark-theme {
+    --surface: #111318;
+  
+    --surface-hover: #1a1d24;
+  
+    --text-primary: #f5f7fb;
+  
+    --text-secondary: #a7adbb;
+  
+    --border-color: rgba(255, 255, 255, 0.10);
+  
+    --accent: #818cf8;
+  
+    --accent-secondary: #a78bfa;
+  
+    --accent-border: rgba(129, 140, 248, 0.30);
+  
+    --navbar-bg: #0d0f13;
+  
+    --card-shadow:
+      0 18px 45px rgba(0, 0, 0, 0.35);
+  }
+  
+  
+  /* =========================================================
+     REDUCED MOTION
+     ========================================================= */
+  
+  @media (prefers-reduced-motion: reduce) {
+  
+    .navbar,
+    .logo,
+    .logo-mark,
+    .navbar-inner > nav,
+    .navbar-inner > nav a,
+    .cv-button,
+    .menu-button {
+      transition: none !important;
+    }
+  
+    .navbar-inner > nav a:hover,
+    .cv-button:hover,
+    .menu-button:hover,
+    .logo:hover .logo-mark {
+      transform: none;
+    }
+  }
