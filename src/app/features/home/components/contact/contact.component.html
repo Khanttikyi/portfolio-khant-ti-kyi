@@ -27,14 +27,12 @@
           Get In Touch
         </span>
 
-
         <h2>
           Let's build something
           <span class="gradient-text">
             great together.
           </span>
         </h2>
-
 
         <p>
           Have a project in mind or looking for a
@@ -110,8 +108,189 @@
             }
 
           </div>
-
         }
+
+      </div>
+
+
+      <!-- =====================================================
+           CONTACT FORM
+           ===================================================== -->
+      <div class="contact-form-wrapper">
+
+        <div class="form-header">
+
+          <span class="form-eyebrow">
+            <i class="pi pi-send"></i>
+            Send a Message
+          </span>
+
+          <h3>
+            Let's talk about your project.
+          </h3>
+
+        </div>
+
+
+        <form
+          class="contact-form"
+          [formGroup]="contactForm"
+          (ngSubmit)="submitForm()"
+        >
+
+          <!-- Name + Email -->
+          <div class="form-row">
+
+            <div class="form-field">
+
+              <label for="contact-name">
+                Name
+              </label>
+
+              <input
+                id="contact-name"
+                type="text"
+                formControlName="name"
+                placeholder="Your name"
+                autocomplete="name"
+              />
+
+              @if (
+                contactForm.get('name')?.touched &&
+                contactForm.get('name')?.invalid
+              ) {
+                <span class="field-error">
+                  Please enter your name.
+                </span>
+              }
+
+            </div>
+
+
+            <div class="form-field">
+
+              <label for="contact-email">
+                Email
+              </label>
+
+              <input
+                id="contact-email"
+                type="email"
+                formControlName="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+              />
+
+              @if (
+                contactForm.get('email')?.touched &&
+                contactForm.get('email')?.invalid
+              ) {
+                <span class="field-error">
+                  Please enter a valid email.
+                </span>
+              }
+
+            </div>
+
+          </div>
+
+
+          <!-- Subject -->
+          <div class="form-field">
+
+            <label for="contact-subject">
+              Subject
+              <span>(optional)</span>
+            </label>
+
+            <input
+              id="contact-subject"
+              type="text"
+              formControlName="subject"
+              placeholder="What would you like to discuss?"
+            />
+
+          </div>
+
+
+          <!-- Message -->
+          <div class="form-field">
+
+            <label for="contact-message">
+              Message
+            </label>
+
+            <textarea
+              id="contact-message"
+              formControlName="message"
+              rows="5"
+              placeholder="Tell me a little about your project..."
+            ></textarea>
+
+            @if (
+              contactForm.get('message')?.touched &&
+              contactForm.get('message')?.invalid
+            ) {
+              <span class="field-error">
+                Please enter your message.
+              </span>
+            }
+
+          </div>
+
+
+          <!-- Success -->
+          @if (isSuccess) {
+            <div class="form-success">
+              <i class="pi pi-check-circle"></i>
+
+              <span>
+                Thanks! Your message has been sent successfully.
+              </span>
+            </div>
+          }
+
+
+          <!-- Error -->
+          @if (errorMessage) {
+            <div class="form-error">
+              <i class="pi pi-exclamation-circle"></i>
+
+              <span>
+                {{ errorMessage }}
+              </span>
+            </div>
+          }
+
+
+          <!-- Submit -->
+          <button
+            type="submit"
+            class="contact-submit"
+            [disabled]="isSubmitting"
+          >
+
+            @if (isSubmitting) {
+
+              <i class="pi pi-spin pi-spinner"></i>
+
+              <span>
+                Sending...
+              </span>
+
+            } @else {
+
+              <span>
+                Send Message
+              </span>
+
+              <i class="pi pi-arrow-right"></i>
+
+            }
+
+          </button>
+
+        </form>
 
       </div>
 

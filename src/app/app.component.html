@@ -1,7 +1,11 @@
-<app-navbar [profile]="profile"></app-navbar>
+@if (!isAdminRoute) {
+  <app-navbar [profile]="profile"></app-navbar>
+}
 
-<main>
+<main [class.admin-main-container]="isAdminRoute">
   <router-outlet></router-outlet>
 </main>
 
-<app-footer [profile]="profile"></app-footer>
+@if (!isAdminRoute) {
+  <app-footer [profile]="profile"></app-footer>
+}

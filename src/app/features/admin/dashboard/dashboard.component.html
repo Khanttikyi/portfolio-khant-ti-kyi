@@ -1,0 +1,463 @@
+<div class="dashboard">
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+  
+    <header class="dashboard-header">
+  
+      <div class="header-title">
+  
+        <span class="eyebrow">
+          PORTFOLIO ADMIN
+        </span>
+  
+        <h1>
+          Dashboard
+        </h1>
+  
+        <p>
+          Manage your portfolio content and messages.
+        </p>
+  
+      </div>
+  
+      <div class="header-actions">
+  
+        <div class="user-info">
+  
+          <div class="user-avatar">
+            {{ userEmail.charAt(0).toUpperCase() }}
+          </div>
+  
+          <span class="user-email">
+            {{ userEmail }}
+          </span>
+  
+        </div>
+  
+        <button
+          type="button"
+          class="logout-button"
+          (click)="logout()"
+        >
+          Logout
+        </button>
+  
+      </div>
+  
+    </header>
+  
+  
+    <!-- =====================================================
+         ERROR
+         ===================================================== -->
+  
+    @if (errorMessage) {
+  
+      <div class="error-banner">
+  
+        <span class="error-icon">
+          !
+        </span>
+  
+        <span>
+          {{ errorMessage }}
+        </span>
+  
+        <button
+          type="button"
+          (click)="loadDashboard()"
+        >
+          Retry
+        </button>
+  
+      </div>
+  
+    }
+  
+  
+    <!-- =====================================================
+         LOADING
+         ===================================================== -->
+  
+    @if (loading) {
+  
+      <div class="loading-container">
+  
+        <div class="loading-spinner"></div>
+  
+        <p>
+          Loading dashboard...
+        </p>
+  
+      </div>
+  
+    } @else {
+  
+      <!-- =====================================================
+           STATS
+           ===================================================== -->
+  
+      <main class="dashboard-content">
+  
+        <section class="stats-grid">
+  
+  
+          <!-- PROFILE -->
+  
+          <div class="stat-card">
+  
+            <div class="stat-card-top">
+  
+              <div class="stat-icon profile-icon">
+                👤
+              </div>
+  
+              <span class="stat-status">
+                Content
+              </span>
+  
+            </div>
+  
+            <div class="stat-value">
+              {{ stats.profile }}
+            </div>
+  
+            <div class="stat-label">
+              Profile
+            </div>
+  
+            <p>
+              Personal profile information
+            </p>
+  
+          </div>
+  
+  
+          <!-- SKILLS -->
+  
+          <div class="stat-card">
+  
+            <div class="stat-card-top">
+  
+              <div class="stat-icon skills-icon">
+                ⚡
+              </div>
+  
+              <span class="stat-status">
+                Content
+              </span>
+  
+            </div>
+  
+            <div class="stat-value">
+              {{ stats.skills }}
+            </div>
+  
+            <div class="stat-label">
+              Skills
+            </div>
+  
+            <p>
+              Technical skills in portfolio
+            </p>
+  
+          </div>
+  
+  
+          <!-- EXPERIENCE -->
+  
+          <div class="stat-card">
+  
+            <div class="stat-card-top">
+  
+              <div class="stat-icon experience-icon">
+                💼
+              </div>
+  
+              <span class="stat-status">
+                Content
+              </span>
+  
+            </div>
+  
+            <div class="stat-value">
+              {{ stats.experience }}
+            </div>
+  
+            <div class="stat-label">
+              Experience
+            </div>
+  
+            <p>
+              Professional experience records
+            </p>
+  
+          </div>
+  
+  
+          <!-- PROJECTS -->
+  
+          <div class="stat-card">
+  
+            <div class="stat-card-top">
+  
+              <div class="stat-icon projects-icon">
+                🚀
+              </div>
+  
+              <span class="stat-status">
+                Content
+              </span>
+  
+            </div>
+  
+            <div class="stat-value">
+              {{ stats.projects }}
+            </div>
+  
+            <div class="stat-label">
+              Projects
+            </div>
+  
+            <p>
+              Portfolio projects
+            </p>
+  
+          </div>
+  
+  
+          <!-- EDUCATION -->
+  
+          <div class="stat-card">
+  
+            <div class="stat-card-top">
+  
+              <div class="stat-icon education-icon">
+                🎓
+              </div>
+  
+              <span class="stat-status">
+                Content
+              </span>
+  
+            </div>
+  
+            <div class="stat-value">
+              {{ stats.education }}
+            </div>
+  
+            <div class="stat-label">
+              Education
+            </div>
+  
+            <p>
+              Education history records
+            </p>
+  
+          </div>
+  
+  
+          <!-- MESSAGES -->
+  
+          <div class="stat-card messages-card">
+  
+            <div class="stat-card-top">
+  
+              <div class="stat-icon messages-icon">
+                ✉️
+              </div>
+  
+              <span class="stat-status message-status">
+                Inbox
+              </span>
+  
+            </div>
+  
+            <div class="stat-value">
+              {{ stats.messages }}
+            </div>
+  
+            <div class="stat-label">
+              Messages
+            </div>
+  
+            <p>
+              Messages received from visitors
+            </p>
+  
+          </div>
+  
+        </section>
+  
+  
+        <!-- =====================================================
+             OVERVIEW
+             ===================================================== -->
+  
+        <section class="overview-section">
+  
+          <div class="section-heading">
+  
+            <div>
+              <span class="section-eyebrow">
+                QUICK OVERVIEW
+              </span>
+  
+              <h2>
+                Portfolio Content
+              </h2>
+            </div>
+  
+            <button
+              type="button"
+              class="refresh-button"
+              (click)="loadDashboard()"
+              [disabled]="loading"
+            >
+              ↻ Refresh
+            </button>
+  
+          </div>
+  
+  
+          <div class="overview-card">
+  
+            <div class="overview-item">
+  
+              <div class="overview-icon">
+                👤
+              </div>
+  
+              <div class="overview-content">
+  
+                <strong>
+                  Profile
+                </strong>
+  
+                <span>
+                  {{ stats.profile }} record
+                  @if (stats.profile !== 1) {
+                    s
+                  }
+                </span>
+  
+              </div>
+  
+            </div>
+  
+  
+            <div class="overview-item">
+  
+              <div class="overview-icon">
+                ⚡
+              </div>
+  
+              <div class="overview-content">
+  
+                <strong>
+                  Skills
+                </strong>
+  
+                <span>
+                  {{ stats.skills }} skills
+                </span>
+  
+              </div>
+  
+            </div>
+  
+  
+            <div class="overview-item">
+  
+              <div class="overview-icon">
+                💼
+              </div>
+  
+              <div class="overview-content">
+  
+                <strong>
+                  Experience
+                </strong>
+  
+                <span>
+                  {{ stats.experience }} records
+                </span>
+  
+              </div>
+  
+            </div>
+  
+  
+            <div class="overview-item">
+  
+              <div class="overview-icon">
+                🚀
+              </div>
+  
+              <div class="overview-content">
+  
+                <strong>
+                  Projects
+                </strong>
+  
+                <span>
+                  {{ stats.projects }} projects
+                </span>
+  
+              </div>
+  
+            </div>
+  
+  
+            <div class="overview-item">
+  
+              <div class="overview-icon">
+                🎓
+              </div>
+  
+              <div class="overview-content">
+  
+                <strong>
+                  Education
+                </strong>
+  
+                <span>
+                  {{ stats.education }} records
+                </span>
+  
+              </div>
+  
+            </div>
+  
+  
+            <div class="overview-item">
+  
+              <div class="overview-icon">
+                ✉️
+              </div>
+  
+              <div class="overview-content">
+  
+                <strong>
+                  Messages
+                </strong>
+  
+                <span>
+                  {{ stats.messages }} received
+                </span>
+  
+              </div>
+  
+            </div>
+  
+          </div>
+  
+        </section>
+  
+      </main>
+  
+    }
+  
+  </div>

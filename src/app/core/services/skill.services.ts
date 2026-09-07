@@ -10,8 +10,11 @@ export class SkillService {
 
   private readonly supabase = inject(SupabaseService);
 
-  async getSkills(): Promise<Skill[]> {
+  // ============================================================
+  // PUBLIC
+  // ============================================================
 
+  async getSkills(): Promise<Skill[]> {
     const { data, error } = await this.supabase.client
       .from('skills')
       .select('*')
@@ -25,5 +28,77 @@ export class SkillService {
     }
 
     return data ?? [];
+  }
+
+  // ============================================================
+  // ADMIN
+  // ============================================================
+
+  async getAllSkills(): Promise<Skill[]> {
+    const { data, error } = await this.supabase.client
+      .from('skills')
+      .select('*')
+      .order('category')
+      .order('display_order');
+
+    if (error) {
+      console.error('Error loading all skills:', error);
+      throw error;
+    }
+
+    return data ?? [];
+  }
+
+  async createSkill(
+    skill: Omit<Skill, 'id' | 'created_at' | 'updated_at'>
+  ): Promise<Skill> {
+
+    const { data, error } = await this.supabase.client
+      .from('skills')
+      .insert(skill)
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error creating skill:', error);
+      throw error;
+    }
+
+    return data;
+  }
+
+  async updateSkill(
+    id: string,
+    skill: Partial<Skill>
+  ): Promise<Skill> {
+
+    const { data, error } = await this.supabase.client
+      .from('skills')
+      .update({
+        ...skill,
+        updated_at: new Date().toISOString()
+      })
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error updating skill:', error);
+      throw error;
+    }
+
+    return data;
+  }
+
+  async deleteSkill(id: string): Promise<void> {
+    const { error } = await this.supabase.client
+      .from('skills')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      console.error('Error deleting skill:', error);
+      throw error;
+    }
   }
 }

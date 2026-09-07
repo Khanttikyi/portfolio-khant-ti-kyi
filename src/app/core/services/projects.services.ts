@@ -10,8 +10,11 @@ export class ProjectService {
 
   private readonly supabase = inject(SupabaseService);
 
-  async getProjects(): Promise<Project[]> {
+  // ============================================================
+  // PUBLIC
+  // ============================================================
 
+  async getProjects(): Promise<Project[]> {
     const { data, error } = await this.supabase.client
       .from('projects')
       .select('*')
@@ -26,9 +29,7 @@ export class ProjectService {
     return data ?? [];
   }
 
-
   async getFeaturedProjects(): Promise<Project[]> {
-
     const { data, error } = await this.supabase.client
       .from('projects')
       .select('*')
@@ -44,11 +45,9 @@ export class ProjectService {
     return data ?? [];
   }
 
-
   async getProjectBySlug(
     slug: string
   ): Promise<Project | null> {
-
     const { data, error } = await this.supabase.client
       .from('projects')
       .select('*')
@@ -62,5 +61,76 @@ export class ProjectService {
     }
 
     return data;
+  }
+
+  // ============================================================
+  // ADMIN
+  // ============================================================
+
+  async getAllProjects(): Promise<Project[]> {
+    const { data, error } = await this.supabase.client
+      .from('projects')
+      .select('*')
+      .order('display_order');
+
+    if (error) {
+      console.error('Error loading all projects:', error);
+      throw error;
+    }
+
+    return data ?? [];
+  }
+
+  async createProject(
+    project: Omit<Project, 'id' | 'created_at' | 'updated_at'>
+  ): Promise<Project> {
+
+    const { data, error } = await this.supabase.client
+      .from('projects')
+      .insert(project)
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error creating project:', error);
+      throw error;
+    }
+
+    return data;
+  }
+
+  async updateProject(
+    id: string,
+    project: Partial<Project>
+  ): Promise<Project> {
+
+    const { data, error } = await this.supabase.client
+      .from('projects')
+      .update({
+        ...project,
+        updated_at: new Date().toISOString()
+      })
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error updating project:', error);
+      throw error;
+    }
+
+    return data;
+  }
+
+  async deleteProject(id: string): Promise<void> {
+    const { error } = await this.supabase.client
+      .from('projects')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      console.error('Error deleting project:', error);
+      throw error;
+    }
   }
 }

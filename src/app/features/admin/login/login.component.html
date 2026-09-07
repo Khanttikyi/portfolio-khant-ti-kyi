@@ -1,0 +1,108 @@
+<div class="login-page">
+
+    <div class="login-background">
+      <div class="glow glow-one"></div>
+      <div class="glow glow-two"></div>
+    </div>
+  
+    <div class="login-container">
+  
+      <div class="login-card">
+  
+        <div class="login-header">
+  
+          <div class="logo">
+            <span>KTK</span>
+          </div>
+  
+          <h1>Admin Portal</h1>
+  
+          <p>
+            Sign in to manage your portfolio
+          </p>
+  
+        </div>
+  
+        <form (ngSubmit)="login()">
+  
+          <div class="form-group">
+  
+            <label for="email">
+              Email
+            </label>
+  
+            <input
+              id="email"
+              type="email"
+              name="email"
+              [(ngModel)]="email"
+              placeholder="admin@example.com"
+              autocomplete="email"
+              [disabled]="loading"
+            />
+  
+          </div>
+  
+          <div class="form-group">
+  
+            <label for="password">
+              Password
+            </label>
+  
+            <div class="password-wrapper">
+  
+              <input
+                id="password"
+                [type]="showPassword ? 'text' : 'password'"
+                name="password"
+                [(ngModel)]="password"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                [disabled]="loading"
+              />
+  
+              <button
+                type="button"
+                class="password-toggle"
+                (click)="togglePassword()"
+                [disabled]="loading"
+              >
+                {{ showPassword ? 'Hide' : 'Show' }}
+              </button>
+  
+            </div>
+  
+          </div>
+  
+          @if (errorMessage) {
+            <div class="error-message">
+              {{ errorMessage }}
+            </div>
+          }
+  
+          <button
+            type="submit"
+            class="login-button"
+            [disabled]="loading"
+          >
+  
+            @if (loading) {
+              <span class="spinner"></span>
+              Signing in...
+            } @else {
+              Sign In
+            }
+  
+          </button>
+  
+        </form>
+  
+        <div class="login-footer">
+          <span>Portfolio Admin</span>
+        </div>
+  
+      </div>
+  
+    </div>
+  
+  </div>

@@ -1,0 +1,723 @@
+<div class="profile-page">
+
+    <!-- ============================================================
+         PAGE HEADER
+         ============================================================ -->
+  
+    <div class="page-header">
+  
+      <div>
+        <div class="breadcrumb">
+          Admin / Profile
+        </div>
+  
+        <h1>Profile</h1>
+  
+        <p>
+          Manage the information displayed on your portfolio.
+        </p>
+      </div>
+  
+      <button
+        type="button"
+        class="refresh-button"
+        (click)="loadProfile()"
+        [disabled]="loading || saving"
+      >
+        <span class="button-icon">↻</span>
+        Refresh
+      </button>
+  
+    </div>
+  
+  
+    <!-- ============================================================
+         LOADING
+         ============================================================ -->
+  
+    @if (loading) {
+  
+      <div class="state-card loading-state">
+  
+        <div class="spinner"></div>
+  
+        <h3>Loading profile...</h3>
+  
+        <p>
+          Please wait while your profile information is loaded.
+        </p>
+  
+      </div>
+  
+    }
+  
+  
+    <!-- ============================================================
+         ERROR
+         ============================================================ -->
+  
+    @if (!loading && errorMessage) {
+  
+      <div class="alert alert-error">
+  
+        <div class="alert-icon">!</div>
+  
+        <div class="alert-content">
+          <strong>Something went wrong</strong>
+          <span>{{ errorMessage }}</span>
+        </div>
+  
+        <button
+          type="button"
+          (click)="loadProfile()"
+        >
+          Retry
+        </button>
+  
+      </div>
+  
+    }
+  
+  
+    <!-- ============================================================
+         SUCCESS
+         ============================================================ -->
+  
+    @if (!loading && successMessage) {
+  
+      <div class="alert alert-success">
+  
+        <div class="alert-icon">✓</div>
+  
+        <div class="alert-content">
+          <strong>Success</strong>
+          <span>{{ successMessage }}</span>
+        </div>
+  
+      </div>
+  
+    }
+  
+  
+    <!-- ============================================================
+         PROFILE FORM
+         ============================================================ -->
+  
+    @if (!loading && profile) {
+  
+      <form
+        class="profile-form"
+        (ngSubmit)="saveProfile()"
+      >
+  
+        <!-- ========================================================
+             BASIC INFORMATION
+             ======================================================== -->
+  
+        <section class="form-card">
+  
+          <div class="card-header">
+  
+            <div>
+              <span class="section-number">01</span>
+  
+              <div>
+                <h2>Basic Information</h2>
+  
+                <p>
+                  Your main portfolio identity and introduction.
+                </p>
+              </div>
+            </div>
+  
+          </div>
+  
+  
+          <div class="form-grid">
+  
+            <!-- NAME -->
+  
+            <div class="form-group">
+  
+              <label for="name">
+                Name
+                <span>*</span>
+              </label>
+  
+              <input
+                id="name"
+                name="name"
+                type="text"
+                [(ngModel)]="profile.name"
+                placeholder="Your full name"
+                required
+                [disabled]="saving"
+              />
+  
+            </div>
+  
+  
+            <!-- TITLE -->
+  
+            <div class="form-group">
+  
+              <label for="title">
+                Title
+                <span>*</span>
+              </label>
+  
+              <input
+                id="title"
+                name="title"
+                type="text"
+                [(ngModel)]="profile.title"
+                placeholder="Senior Frontend Developer"
+                required
+                [disabled]="saving"
+              />
+  
+            </div>
+  
+  
+            <!-- SHORT TITLE -->
+  
+            <div class="form-group">
+  
+              <label for="short-title">
+                Short Title
+              </label>
+  
+              <input
+                id="short-title"
+                name="short_title"
+                type="text"
+                [(ngModel)]="profile.short_title"
+                placeholder="Frontend Developer"
+                [disabled]="saving"
+              />
+  
+            </div>
+  
+  
+            <!-- TAGLINE -->
+  
+            <div class="form-group form-group-full">
+  
+              <label for="tagline">
+                Tagline
+              </label>
+  
+              <input
+                id="tagline"
+                name="tagline"
+                type="text"
+                [(ngModel)]="profile.tagline"
+                placeholder="Building modern web and mobile experiences."
+                [disabled]="saving"
+              />
+  
+            </div>
+  
+  
+            <!-- BIO -->
+  
+            <div class="form-group form-group-full">
+  
+              <label for="bio">
+                Biography
+              </label>
+  
+              <textarea
+                id="bio"
+                name="bio"
+                rows="7"
+                [(ngModel)]="profile.bio"
+                placeholder="Tell visitors about yourself..."
+                [disabled]="saving"
+              ></textarea>
+  
+            </div>
+  
+          </div>
+  
+        </section>
+  
+  
+        <!-- ========================================================
+             CONTACT INFORMATION
+             ======================================================== -->
+  
+        <section class="form-card">
+  
+          <div class="card-header">
+  
+            <div>
+              <span class="section-number">02</span>
+  
+              <div>
+                <h2>Contact Information</h2>
+  
+                <p>
+                  Contact details displayed on your portfolio.
+                </p>
+              </div>
+            </div>
+  
+          </div>
+  
+  
+          <div class="form-grid">
+  
+            <!-- EMAIL -->
+  
+            <div class="form-group">
+  
+              <label for="email">
+                Email
+              </label>
+  
+              <input
+                id="email"
+                name="email"
+                type="email"
+                [(ngModel)]="profile.email"
+                placeholder="your@email.com"
+                [disabled]="saving"
+              />
+  
+            </div>
+  
+  
+            <!-- PHONE -->
+  
+            <div class="form-group">
+  
+              <label for="phone">
+                Phone
+              </label>
+  
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                [(ngModel)]="profile.phone"
+                placeholder="+66 ..."
+                [disabled]="saving"
+              />
+  
+            </div>
+  
+  
+            <!-- LOCATION -->
+  
+            <div class="form-group">
+  
+              <label for="location">
+                Location
+              </label>
+  
+              <input
+                id="location"
+                name="location"
+                type="text"
+                [(ngModel)]="profile.location"
+                placeholder="Bangkok, Thailand"
+                [disabled]="saving"
+              />
+  
+            </div>
+  
+          </div>
+  
+        </section>
+  
+  
+        <!-- ========================================================
+             SOCIAL LINKS
+             ======================================================== -->
+  
+        <section class="form-card">
+  
+          <div class="card-header">
+  
+            <div>
+              <span class="section-number">03</span>
+  
+              <div>
+                <h2>Social & Portfolio Links</h2>
+  
+                <p>
+                  Links visitors can use to find you online.
+                </p>
+              </div>
+            </div>
+  
+          </div>
+  
+  
+          <div class="form-grid">
+  
+            <!-- GITHUB -->
+  
+            <div class="form-group">
+  
+              <label for="github-url">
+                GitHub URL
+              </label>
+  
+              <input
+                id="github-url"
+                name="github_url"
+                type="url"
+                [(ngModel)]="profile.github_url"
+                placeholder="https://github.com/..."
+                [disabled]="saving"
+              />
+  
+            </div>
+  
+  
+            <!-- LINKEDIN -->
+  
+            <div class="form-group">
+  
+              <label for="linkedin-url">
+                LinkedIn URL
+              </label>
+  
+              <input
+                id="linkedin-url"
+                name="linkedin_url"
+                type="url"
+                [(ngModel)]="profile.linkedin_url"
+                placeholder="https://linkedin.com/in/..."
+                [disabled]="saving"
+              />
+  
+            </div>
+  
+  
+            <!-- CV -->
+  
+            <div class="form-group">
+  
+              <label for="cv-url">
+                CV URL
+              </label>
+  
+              <input
+                id="cv-url"
+                name="cv_url"
+                type="url"
+                [(ngModel)]="profile.cv_url"
+                placeholder="https://..."
+                [disabled]="saving"
+              />
+  
+            </div>
+  
+  
+            <!-- PROFILE IMAGE -->
+  
+            <div class="form-group">
+  
+              <label for="profile-image-url">
+                Profile Image URL
+              </label>
+  
+              <input
+                id="profile-image-url"
+                name="profile_image_url"
+                type="url"
+                [(ngModel)]="profile.profile_image_url"
+                placeholder="https://..."
+                [disabled]="saving"
+              />
+  
+            </div>
+  
+          </div>
+  
+  
+          <!-- IMAGE PREVIEW -->
+  
+          @if (profile.profile_image_url) {
+  
+            <div class="image-preview">
+  
+              <img
+                [src]="profile.profile_image_url"
+                alt="Profile preview"
+              />
+  
+              <div>
+                <strong>Profile Image Preview</strong>
+                <span>
+                  This image will be used on your portfolio.
+                </span>
+              </div>
+  
+            </div>
+  
+          }
+  
+        </section>
+  
+  
+        <!-- ========================================================
+             EXPERIENCE HIGHLIGHTS
+             ======================================================== -->
+  
+        <section class="form-card">
+  
+          <div class="card-header">
+  
+            <div>
+              <span class="section-number">04</span>
+  
+              <div>
+                <h2>Experience Highlights</h2>
+  
+                <p>
+                  Small experience highlights shown on your profile.
+                </p>
+              </div>
+            </div>
+  
+          </div>
+  
+  
+          <div class="experience-list">
+  
+            @if (
+              !profile.experiences ||
+              profile.experiences.length === 0
+            ) {
+  
+              <div class="empty-experience">
+                No experience highlights added yet.
+              </div>
+  
+            } @else {
+  
+              @for (
+                experience of profile.experiences;
+                track trackExperience($index, experience);
+                let i = $index
+              ) {
+  
+                <div class="experience-item">
+  
+                  <div class="experience-index">
+                    {{ i + 1 }}
+                  </div>
+  
+                  <div class="experience-content">
+  
+                    <strong>
+                      {{ experience.label }}
+                    </strong>
+  
+                    <span>
+                      {{ experience.value }}
+                    </span>
+  
+                  </div>
+  
+                  <button
+                    type="button"
+                    class="remove-button"
+                    (click)="removeExperience(i)"
+                    [disabled]="saving"
+                    aria-label="Remove experience"
+                  >
+                    ×
+                  </button>
+  
+                </div>
+  
+              }
+  
+            }
+  
+          </div>
+  
+  
+          <!-- ADD EXPERIENCE -->
+  
+          <div class="add-experience">
+  
+            <div class="form-group">
+  
+              <label for="experience-label">
+                Label
+              </label>
+  
+              <input
+                id="experience-label"
+                name="new_experience_label"
+                type="text"
+                [(ngModel)]="newExperienceLabel"
+                placeholder="Angular"
+                [disabled]="saving"
+              />
+  
+            </div>
+  
+  
+            <div class="form-group">
+  
+              <label for="experience-value">
+                Value
+              </label>
+  
+              <input
+                id="experience-value"
+                name="new_experience_value"
+                type="text"
+                [(ngModel)]="newExperienceValue"
+                placeholder="6+ years"
+                [disabled]="saving"
+              />
+  
+            </div>
+  
+  
+            <button
+              type="button"
+              class="add-button"
+              (click)="addExperience()"
+              [disabled]="
+                saving ||
+                !newExperienceLabel.trim() ||
+                !newExperienceValue.trim()
+              "
+            >
+              <span>+</span>
+              Add
+            </button>
+  
+          </div>
+  
+        </section>
+  
+  
+        <!-- ========================================================
+             AVAILABILITY
+             ======================================================== -->
+  
+        <section class="form-card">
+  
+          <div class="card-header">
+  
+            <div>
+              <span class="section-number">05</span>
+  
+              <div>
+                <h2>Availability</h2>
+  
+                <p>
+                  Control whether your portfolio shows that you are
+                  available for work.
+                </p>
+              </div>
+            </div>
+  
+          </div>
+  
+  
+          <label class="toggle-row">
+  
+            <input
+              type="checkbox"
+              name="available_for_work"
+              [(ngModel)]="profile.available_for_work"
+              [disabled]="saving"
+            />
+  
+            <span class="toggle"></span>
+  
+            <span class="toggle-content">
+  
+              <strong>
+                Available for work
+              </strong>
+  
+              <small>
+                Show that you are currently available for new
+                opportunities.
+              </small>
+  
+            </span>
+  
+          </label>
+  
+  
+          <div class="form-group highlight-field">
+  
+            <label for="highlight">
+              Highlight
+            </label>
+  
+            <textarea
+              id="highlight"
+              name="highlight"
+              rows="4"
+              [(ngModel)]="profile.highlight"
+              placeholder="Available for frontend and full-stack opportunities..."
+              [disabled]="saving"
+            ></textarea>
+  
+          </div>
+  
+        </section>
+  
+  
+        <!-- ========================================================
+             SAVE
+             ======================================================== -->
+  
+        <div class="form-actions">
+  
+          <div class="last-updated">
+  
+            @if (profile.updated_at) {
+              Last updated:
+              {{ profile.updated_at | date:'MMM d, yyyy, h:mm a' }}
+            }
+  
+          </div>
+  
+          <button
+            type="submit"
+            class="save-button"
+            [disabled]="
+              saving ||
+              !profile.name.trim() ||
+              !profile.title.trim()
+            "
+          >
+  
+            @if (saving) {
+  
+              <span class="button-spinner"></span>
+  
+              Saving...
+  
+            } @else {
+  
+              <span>✓</span>
+  
+              Save Changes
+  
+            }
+  
+          </button>
+  
+        </div>
+  
+      </form>
+  
+    }
+  
+  </div>
