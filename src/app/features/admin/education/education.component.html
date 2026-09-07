@@ -1,1 +1,646 @@
-<p>education works!</p>
+<div class="education-admin">
+
+    <!-- ========================================================
+         PAGE HEADER
+         ======================================================== -->
+  
+    <div class="page-header">
+  
+      <div class="page-header-content">
+  
+        <div class="page-title-wrapper">
+  
+          <div class="page-icon">
+            🎓
+          </div>
+  
+          <div>
+            <h1>Education</h1>
+  
+            <p>
+              Manage your educational background and qualifications.
+            </p>
+          </div>
+  
+        </div>
+  
+        <button
+          type="button"
+          class="btn-primary"
+          (click)="openAddForm()"
+          [disabled]="showForm"
+        >
+          <span class="btn-icon">+</span>
+          Add Education
+        </button>
+  
+      </div>
+  
+    </div>
+  
+  
+    <!-- ========================================================
+         ALERTS
+         ======================================================== -->
+  
+    <div
+      class="alert alert-error"
+      *ngIf="errorMessage"
+    >
+      <span class="alert-icon">!</span>
+  
+      <span>{{ errorMessage }}</span>
+  
+      <button
+        type="button"
+        class="alert-close"
+        (click)="errorMessage = ''"
+      >
+        ×
+      </button>
+    </div>
+  
+  
+    <div
+      class="alert alert-success"
+      *ngIf="successMessage"
+    >
+      <span class="alert-icon">✓</span>
+  
+      <span>{{ successMessage }}</span>
+  
+      <button
+        type="button"
+        class="alert-close"
+        (click)="successMessage = ''"
+      >
+        ×
+      </button>
+    </div>
+  
+  
+    <!-- ========================================================
+         FORM
+         ======================================================== -->
+  
+    <div
+      class="education-form-card"
+      *ngIf="showForm"
+    >
+  
+      <div class="form-header">
+  
+        <div>
+          <h2>
+            {{ isEditing ? 'Edit Education' : 'Add Education' }}
+          </h2>
+  
+          <p>
+            {{
+              isEditing
+                ? 'Update the education record below.'
+                : 'Add a new education record to your portfolio.'
+            }}
+          </p>
+        </div>
+  
+        <button
+          type="button"
+          class="close-form-btn"
+          (click)="closeForm()"
+          [disabled]="isSaving"
+        >
+          ×
+        </button>
+  
+      </div>
+  
+  
+      <form
+        #educationForm="ngForm"
+        (ngSubmit)="saveEducation()"
+        novalidate
+      >
+  
+        <div class="form-grid">
+  
+          <!-- Institution -->
+  
+          <div class="form-group full-width">
+  
+            <label for="institution">
+              Institution
+              <span>*</span>
+            </label>
+  
+            <input
+              id="institution"
+              type="text"
+              name="institution"
+              [(ngModel)]="form.institution"
+              placeholder="e.g. University of Yangon"
+              required
+            />
+  
+          </div>
+  
+  
+          <!-- Degree -->
+  
+          <div class="form-group">
+  
+            <label for="degree">
+              Degree
+            </label>
+  
+            <input
+              id="degree"
+              type="text"
+              name="degree"
+              [(ngModel)]="form.degree"
+              placeholder="e.g. Bachelor of Computer Science"
+            />
+  
+          </div>
+  
+  
+          <!-- Field -->
+  
+          <div class="form-group">
+  
+            <label for="field_of_study">
+              Field of Study
+            </label>
+  
+            <input
+              id="field_of_study"
+              type="text"
+              name="field_of_study"
+              [(ngModel)]="form.field_of_study"
+              placeholder="e.g. Computer Science"
+            />
+  
+          </div>
+  
+  
+          <!-- Start Date -->
+  
+          <div class="form-group">
+  
+            <label for="start_date">
+              Start Date
+            </label>
+  
+            <input
+              id="start_date"
+              type="date"
+              name="start_date"
+              [(ngModel)]="form.start_date"
+            />
+  
+          </div>
+  
+  
+          <!-- End Date -->
+  
+          <div class="form-group">
+  
+            <label for="end_date">
+              End Date
+            </label>
+  
+            <input
+              id="end_date"
+              type="date"
+              name="end_date"
+              [(ngModel)]="form.end_date"
+            />
+  
+          </div>
+  
+  
+          <!-- Institution URL -->
+  
+          <div class="form-group">
+  
+            <label for="institution_url">
+              Institution URL
+            </label>
+  
+            <input
+              id="institution_url"
+              type="url"
+              name="institution_url"
+              [(ngModel)]="form.institution_url"
+              placeholder="https://example.com"
+            />
+  
+          </div>
+  
+  
+          <!-- Logo URL -->
+  
+          <div class="form-group">
+  
+            <label for="logo_url">
+              Logo URL
+            </label>
+  
+            <input
+              id="logo_url"
+              type="url"
+              name="logo_url"
+              [(ngModel)]="form.logo_url"
+              placeholder="https://example.com/logo.png"
+            />
+  
+          </div>
+  
+  
+          <!-- Display Order -->
+  
+          <div class="form-group">
+  
+            <label for="display_order">
+              Display Order
+            </label>
+  
+            <input
+              id="display_order"
+              type="number"
+              name="display_order"
+              [(ngModel)]="form.display_order"
+              min="0"
+            />
+  
+            <small>
+              Lower numbers appear first.
+            </small>
+  
+          </div>
+  
+  
+          <!-- Active -->
+  
+          <div class="form-group">
+  
+            <label class="checkbox-label">
+  
+              <input
+                type="checkbox"
+                name="is_active"
+                [(ngModel)]="form.is_active"
+              />
+  
+              <span class="custom-checkbox"></span>
+  
+              <span>
+                Active
+              </span>
+  
+            </label>
+  
+            <small>
+              Active education records are displayed on the portfolio.
+            </small>
+  
+          </div>
+  
+  
+          <!-- Description -->
+  
+          <div class="form-group full-width">
+  
+            <label for="description">
+              Description
+            </label>
+  
+            <textarea
+              id="description"
+              name="description"
+              [(ngModel)]="form.description"
+              rows="5"
+              placeholder="Describe your education, achievements, coursework, etc."
+            ></textarea>
+  
+          </div>
+  
+        </div>
+  
+  
+        <!-- FORM ACTIONS -->
+  
+        <div class="form-actions">
+  
+          <button
+            type="button"
+            class="btn-secondary"
+            (click)="closeForm()"
+            [disabled]="isSaving"
+          >
+            Cancel
+          </button>
+  
+          <button
+            type="submit"
+            class="btn-primary"
+            [disabled]="isSaving || !educationForm.valid"
+          >
+  
+            <span
+              class="spinner"
+              *ngIf="isSaving"
+            ></span>
+  
+            <span>
+              {{
+                isSaving
+                  ? 'Saving...'
+                  : isEditing
+                    ? 'Update Education'
+                    : 'Add Education'
+              }}
+            </span>
+  
+          </button>
+  
+        </div>
+  
+      </form>
+  
+    </div>
+  
+  
+    <!-- ========================================================
+         EDUCATION LIST
+         ======================================================== -->
+  
+    <div class="education-list-card">
+  
+      <div class="list-header">
+  
+        <div>
+          <h2>
+            Education Records
+          </h2>
+  
+          <p>
+            {{ educationList.length }}
+            {{ educationList.length === 1 ? 'record' : 'records' }}
+          </p>
+        </div>
+  
+        <button
+          type="button"
+          class="refresh-btn"
+          (click)="loadEducation()"
+          [disabled]="isLoading"
+        >
+          <span
+            [class.rotating]="isLoading"
+          >
+            ↻
+          </span>
+  
+          Refresh
+        </button>
+  
+      </div>
+  
+  
+      <!-- LOADING -->
+  
+      <div
+        class="loading-state"
+        *ngIf="isLoading"
+      >
+        <div class="loading-spinner"></div>
+  
+        <p>
+          Loading education records...
+        </p>
+      </div>
+  
+  
+      <!-- EMPTY -->
+  
+      <div
+        class="empty-state"
+        *ngIf="
+          !isLoading &&
+          educationList.length === 0
+        "
+      >
+        <div class="empty-icon">
+          🎓
+        </div>
+  
+        <h3>
+          No education records
+        </h3>
+  
+        <p>
+          Add your first education record to get started.
+        </p>
+  
+        <button
+          type="button"
+          class="btn-primary"
+          (click)="openAddForm()"
+        >
+          + Add Education
+        </button>
+      </div>
+  
+  
+      <!-- TABLE -->
+  
+      <div
+        class="table-wrapper"
+        *ngIf="
+          !isLoading &&
+          educationList.length > 0
+        "
+      >
+  
+        <table>
+  
+          <thead>
+            <tr>
+  
+              <th>
+                Education
+              </th>
+  
+              <th>
+                Period
+              </th>
+  
+              <th>
+                Order
+              </th>
+  
+              <th>
+                Status
+              </th>
+  
+              <th class="actions-column">
+                Actions
+              </th>
+  
+            </tr>
+          </thead>
+  
+          <tbody>
+  
+            <tr
+              *ngFor="
+                let item of educationList;
+                trackBy: trackById
+              "
+            >
+  
+              <!-- EDUCATION -->
+  
+              <td>
+  
+                <div class="education-info">
+  
+                  <div class="institution-logo">
+  
+                    <img
+                      *ngIf="item.logo_url"
+                      [src]="item.logo_url"
+                      [alt]="item.institution"
+                    />
+  
+                    <span
+                      *ngIf="!item.logo_url"
+                      class="logo-placeholder"
+                    >
+                      {{ item.institution.charAt(0).toUpperCase() }}
+                    </span>
+  
+                  </div>
+  
+                  <div class="education-details">
+  
+                    <strong>
+                      {{ item.institution }}
+                    </strong>
+  
+                    <span *ngIf="item.degree">
+                      {{ item.degree }}
+                    </span>
+  
+                    <small *ngIf="item.field_of_study">
+                      {{ item.field_of_study }}
+                    </small>
+  
+                  </div>
+  
+                </div>
+  
+              </td>
+  
+  
+              <!-- PERIOD -->
+  
+              <td>
+  
+                <div class="period">
+  
+                  <span>
+                    {{ formatDate(item.start_date) }}
+                  </span>
+  
+                  <span class="period-separator">
+                    →
+                  </span>
+  
+                  <span>
+                    {{
+                      item.end_date
+                        ? formatDate(item.end_date)
+                        : 'Present'
+                    }}
+                  </span>
+  
+                </div>
+  
+              </td>
+  
+  
+              <!-- ORDER -->
+  
+              <td>
+  
+                <span class="order-badge">
+                  {{ item.display_order }}
+                </span>
+  
+              </td>
+  
+  
+              <!-- STATUS -->
+  
+              <td>
+  
+                <button
+                  type="button"
+                  class="status-toggle"
+                  [class.active]="item.is_active"
+                  [class.inactive]="!item.is_active"
+                  (click)="toggleActive(item)"
+                >
+                  <span class="status-dot"></span>
+  
+                  {{
+                    item.is_active
+                      ? 'Active'
+                      : 'Inactive'
+                  }}
+                </button>
+  
+              </td>
+  
+  
+              <!-- ACTIONS -->
+  
+              <td>
+  
+                <div class="row-actions">
+  
+                  <button
+                    type="button"
+                    class="action-btn edit"
+                    (click)="editEducation(item)"
+                    title="Edit"
+                  >
+                    ✎
+                  </button>
+  
+                  <button
+                    type="button"
+                    class="action-btn delete"
+                    (click)="deleteEducation(item)"
+                    title="Delete"
+                  >
+                    🗑
+                  </button>
+  
+                </div>
+  
+              </td>
+  
+            </tr>
+  
+          </tbody>
+  
+        </table>
+  
+      </div>
+  
+    </div>
+  
+  </div>

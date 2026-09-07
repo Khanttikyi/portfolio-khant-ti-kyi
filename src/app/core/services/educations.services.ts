@@ -14,7 +14,8 @@ export class EducationService {
   // PUBLIC
   // ============================================================
 
-  async getEducation(): Promise<Education[]> {
+  async getEducations(): Promise<Education[]> {
+
     const { data, error } = await this.supabase.client
       .from('education')
       .select('*')
@@ -35,6 +36,7 @@ export class EducationService {
   // ============================================================
 
   async getAllEducation(): Promise<Education[]> {
+
     const { data, error } = await this.supabase.client
       .from('education')
       .select('*')
@@ -91,6 +93,7 @@ export class EducationService {
   }
 
   async deleteEducation(id: string): Promise<void> {
+
     const { error } = await this.supabase.client
       .from('education')
       .delete()

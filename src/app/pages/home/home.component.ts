@@ -131,7 +131,7 @@ export class HomeComponent implements OnInit {
 
         this.projectService.getProjects(),
 
-        this.educationService.getEducation()
+        this.educationService.getEducations()
 
       ]);
 

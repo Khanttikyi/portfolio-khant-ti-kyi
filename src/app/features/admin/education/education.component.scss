@@ -1,0 +1,1056 @@
+// ============================================================
+// EDUCATION ADMIN
+// ============================================================
+
+.education-admin {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 28px;
+  
+    color: #1e293b;
+  }
+  
+  
+  // ============================================================
+  // PAGE HEADER
+  // ============================================================
+  
+  .page-header {
+    margin-bottom: 24px;
+  }
+  
+  .page-header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .page-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  
+  .page-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    width: 48px;
+    height: 48px;
+  
+    border-radius: 12px;
+  
+    background: #eef2ff;
+  
+    font-size: 22px;
+  }
+  
+  .page-header h1 {
+    margin: 0;
+  
+    font-size: 26px;
+    font-weight: 700;
+  
+    color: #0f172a;
+  }
+  
+  .page-header p {
+    margin: 4px 0 0;
+  
+    font-size: 14px;
+  
+    color: #64748b;
+  }
+  
+  
+  // ============================================================
+  // BUTTONS
+  // ============================================================
+  
+  .btn-primary,
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  
+    gap: 8px;
+  
+    min-height: 42px;
+  
+    padding: 0 17px;
+  
+    border-radius: 9px;
+  
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+  
+    cursor: pointer;
+  
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+  
+  .btn-primary {
+    border: 1px solid #4f46e5;
+  
+    background: #4f46e5;
+  
+    color: #ffffff;
+  }
+  
+  .btn-primary:hover:not(:disabled) {
+    background: #4338ca;
+  
+    box-shadow:
+      0 4px 12px rgba(79, 70, 229, 0.2);
+  
+    transform: translateY(-1px);
+  }
+  
+  .btn-secondary {
+    border: 1px solid #d1d5db;
+  
+    background: #ffffff;
+  
+    color: #475569;
+  }
+  
+  .btn-secondary:hover:not(:disabled) {
+    border-color: #cbd5e1;
+  
+    background: #f8fafc;
+  }
+  
+  button:disabled {
+    opacity: 0.55;
+  
+    cursor: not-allowed;
+  }
+  
+  .btn-icon {
+    font-size: 17px;
+    line-height: 1;
+  }
+  
+  
+  // ============================================================
+  // ALERTS
+  // ============================================================
+  
+  .alert {
+    display: flex;
+    align-items: center;
+  
+    gap: 10px;
+  
+    margin-bottom: 20px;
+    padding: 12px 15px;
+  
+    border-radius: 9px;
+  
+    font-size: 13px;
+  }
+  
+  .alert-error {
+    border: 1px solid #fecaca;
+  
+    background: #fef2f2;
+  
+    color: #b91c1c;
+  }
+  
+  .alert-success {
+    border: 1px solid #bbf7d0;
+  
+    background: #f0fdf4;
+  
+    color: #15803d;
+  }
+  
+  .alert-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    width: 20px;
+    height: 20px;
+  
+    font-weight: 700;
+  }
+  
+  .alert-close {
+    margin-left: auto;
+  
+    padding: 0;
+  
+    border: 0;
+  
+    background: transparent;
+  
+    color: inherit;
+  
+    font-size: 20px;
+    line-height: 1;
+  
+    cursor: pointer;
+  }
+  
+  
+  // ============================================================
+  // FORM CARD
+  // ============================================================
+  
+  .education-form-card,
+  .education-list-card {
+    border: 1px solid #e2e8f0;
+  
+    border-radius: 14px;
+  
+    background: #ffffff;
+  
+    box-shadow:
+      0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+  
+  .education-form-card {
+    margin-bottom: 24px;
+  
+    padding: 24px;
+  }
+  
+  
+  // ============================================================
+  // FORM HEADER
+  // ============================================================
+  
+  .form-header,
+  .list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    gap: 16px;
+  }
+  
+  .form-header {
+    margin-bottom: 24px;
+  }
+  
+  .form-header h2,
+  .list-header h2 {
+    margin: 0;
+  
+    font-size: 17px;
+    font-weight: 700;
+  
+    color: #0f172a;
+  }
+  
+  .form-header p,
+  .list-header p {
+    margin: 5px 0 0;
+  
+    font-size: 13px;
+  
+    color: #64748b;
+  }
+  
+  .close-form-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    width: 34px;
+    height: 34px;
+  
+    padding: 0;
+  
+    border: 1px solid #e2e8f0;
+  
+    border-radius: 8px;
+  
+    background: #ffffff;
+  
+    color: #64748b;
+  
+    font-size: 21px;
+    line-height: 1;
+  
+    cursor: pointer;
+  
+    transition:
+      background 0.2s ease,
+      color 0.2s ease;
+  }
+  
+  .close-form-btn:hover {
+    background: #f8fafc;
+  
+    color: #0f172a;
+  }
+  
+  
+  // ============================================================
+  // FORM GRID
+  // ============================================================
+  
+  .form-grid {
+    display: grid;
+  
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  
+    gap: 19px 20px;
+  }
+  
+  .form-group {
+    min-width: 0;
+  }
+  
+  .form-group.full-width {
+    grid-column: 1 / -1;
+  }
+  
+  
+  // ============================================================
+  // FORM LABEL
+  // ============================================================
+  
+  .form-group label:not(.checkbox-label) {
+    display: block;
+  
+    margin-bottom: 7px;
+  
+    font-size: 13px;
+    font-weight: 600;
+  
+    color: #334155;
+  }
+  
+  .form-group label span {
+    color: #dc2626;
+  }
+  
+  
+  // ============================================================
+  // INPUTS
+  // ============================================================
+  
+  .form-group input:not([type='checkbox']),
+  .form-group textarea {
+    display: block;
+  
+    width: 100%;
+  
+    box-sizing: border-box;
+  
+    border: 1px solid #d1d5db;
+  
+    border-radius: 8px;
+  
+    outline: none;
+  
+    background: #ffffff;
+  
+    color: #1e293b;
+  
+    font-family: inherit;
+    font-size: 13px;
+  
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  
+  .form-group input:not([type='checkbox']) {
+    height: 42px;
+  
+    padding: 0 12px;
+  }
+  
+  .form-group textarea {
+    min-height: 120px;
+  
+    padding: 11px 12px;
+  
+    resize: vertical;
+  }
+  
+  .form-group input:not([type='checkbox'])::placeholder,
+  .form-group textarea::placeholder {
+    color: #94a3b8;
+  }
+  
+  .form-group input:not([type='checkbox']):hover,
+  .form-group textarea:hover {
+    border-color: #cbd5e1;
+  }
+  
+  .form-group input:not([type='checkbox']):focus,
+  .form-group textarea:focus {
+    border-color: #6366f1;
+  
+    box-shadow:
+      0 0 0 3px rgba(99, 102, 241, 0.1);
+  }
+  
+  .form-group small {
+    display: block;
+  
+    margin-top: 6px;
+  
+    font-size: 11px;
+  
+    color: #94a3b8;
+  }
+  
+  
+  // ============================================================
+  // DATE INPUT
+  // ============================================================
+  
+  .form-group input[type='date'] {
+    color-scheme: light;
+  }
+  
+  
+  // ============================================================
+  // CHECKBOX
+  // ============================================================
+  
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+  
+    gap: 9px;
+  
+    min-height: 42px;
+  
+    cursor: pointer;
+  
+    color: #334155;
+  }
+  
+  .checkbox-label input {
+    position: absolute;
+  
+    opacity: 0;
+  
+    pointer-events: none;
+  }
+  
+  .custom-checkbox {
+    position: relative;
+  
+    flex: 0 0 19px;
+  
+    width: 19px;
+    height: 19px;
+  
+    border: 1px solid #cbd5e1;
+  
+    border-radius: 5px;
+  
+    background: #ffffff;
+  
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease;
+  }
+  
+  .checkbox-label input:checked + .custom-checkbox {
+    border-color: #4f46e5;
+  
+    background: #4f46e5;
+  }
+  
+  .checkbox-label input:checked + .custom-checkbox::after {
+    content: '';
+  
+    position: absolute;
+  
+    left: 6px;
+    top: 2px;
+  
+    width: 5px;
+    height: 10px;
+  
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+  
+    transform: rotate(45deg);
+  }
+  
+  
+  // ============================================================
+  // FORM ACTIONS
+  // ============================================================
+  
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+  
+    gap: 10px;
+  
+    margin-top: 24px;
+    padding-top: 20px;
+  
+    border-top: 1px solid #f1f5f9;
+  }
+  
+  .spinner,
+  .loading-spinner {
+    width: 15px;
+    height: 15px;
+  
+    border: 2px solid rgba(255, 255, 255, 0.35);
+  
+    border-top-color: #ffffff;
+  
+    border-radius: 50%;
+  
+    animation: spin 0.7s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  
+  // ============================================================
+  // LIST HEADER
+  // ============================================================
+  
+  .list-header {
+    padding: 20px 22px;
+  
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .refresh-btn {
+    display: inline-flex;
+    align-items: center;
+  
+    gap: 7px;
+  
+    min-height: 34px;
+  
+    padding: 0 11px;
+  
+    border: 1px solid #e2e8f0;
+  
+    border-radius: 7px;
+  
+    background: #ffffff;
+  
+    color: #64748b;
+  
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+  
+    cursor: pointer;
+  
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
+  }
+  
+  .refresh-btn:hover:not(:disabled) {
+    border-color: #cbd5e1;
+  
+    background: #f8fafc;
+  
+    color: #334155;
+  }
+  
+  .refresh-btn span {
+    display: inline-block;
+  
+    font-size: 17px;
+    line-height: 1;
+  }
+  
+  .rotating {
+    animation: spin 0.8s linear infinite;
+  }
+  
+  
+  // ============================================================
+  // TABLE
+  // ============================================================
+  
+  .table-wrapper {
+    width: 100%;
+  
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 100%;
+  
+    min-width: 900px;
+  
+    border-collapse: collapse;
+  }
+  
+  thead {
+    background: #f8fafc;
+  }
+  
+  th {
+    padding: 12px 20px;
+  
+    border-bottom: 1px solid #e2e8f0;
+  
+    text-align: left;
+  
+    font-size: 11px;
+    font-weight: 700;
+  
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  
+    color: #64748b;
+  }
+  
+  td {
+    padding: 15px 20px;
+  
+    border-bottom: 1px solid #f1f5f9;
+  
+    vertical-align: middle;
+  
+    font-size: 13px;
+  
+    color: #475569;
+  }
+  
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+  
+  tbody tr {
+    transition: background 0.15s ease;
+  }
+  
+  tbody tr:hover {
+    background: #f8fafc;
+  }
+  
+  
+  // ============================================================
+  // EDUCATION INFO
+  // ============================================================
+  
+  .education-info {
+    display: flex;
+    align-items: center;
+  
+    gap: 12px;
+  
+    min-width: 280px;
+  }
+  
+  .institution-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    flex: 0 0 44px;
+  
+    width: 44px;
+    height: 44px;
+  
+    overflow: hidden;
+  
+    border: 1px solid #e2e8f0;
+  
+    border-radius: 9px;
+  
+    background: #f8fafc;
+  }
+  
+  .institution-logo img {
+    width: 100%;
+    height: 100%;
+  
+    padding: 5px;
+  
+    box-sizing: border-box;
+  
+    object-fit: contain;
+  }
+  
+  .logo-placeholder {
+    font-size: 17px;
+    font-weight: 700;
+  
+    color: #6366f1;
+  }
+  
+  .education-details {
+    display: flex;
+    flex-direction: column;
+  
+    gap: 3px;
+  
+    min-width: 0;
+  }
+  
+  .education-details strong {
+    overflow: hidden;
+  
+    font-size: 13px;
+    font-weight: 650;
+  
+    color: #1e293b;
+  
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  
+  .education-details span {
+    font-size: 12px;
+  
+    color: #475569;
+  }
+  
+  .education-details small {
+    font-size: 11px;
+  
+    color: #94a3b8;
+  }
+  
+  
+  // ============================================================
+  // PERIOD
+  // ============================================================
+  
+  .period {
+    display: flex;
+    align-items: center;
+  
+    gap: 7px;
+  
+    white-space: nowrap;
+  
+    font-size: 12px;
+  
+    color: #475569;
+  }
+  
+  .period-separator {
+    color: #94a3b8;
+  }
+  
+  
+  // ============================================================
+  // ORDER
+  // ============================================================
+  
+  .order-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  
+    min-width: 27px;
+    height: 27px;
+  
+    padding: 0 7px;
+  
+    border: 1px solid #e0e7ff;
+  
+    border-radius: 7px;
+  
+    background: #eef2ff;
+  
+    color: #4f46e5;
+  
+    font-size: 11px;
+    font-weight: 700;
+  }
+  
+  
+  // ============================================================
+  // STATUS
+  // ============================================================
+  
+  .status-toggle {
+    display: inline-flex;
+    align-items: center;
+  
+    gap: 7px;
+  
+    padding: 6px 9px;
+  
+    border: 1px solid transparent;
+  
+    border-radius: 999px;
+  
+    background: transparent;
+  
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+  
+    cursor: pointer;
+  
+    transition: background 0.2s ease;
+  }
+  
+  .status-toggle.active {
+    border-color: #bbf7d0;
+  
+    background: #f0fdf4;
+  
+    color: #15803d;
+  }
+  
+  .status-toggle.inactive {
+    border-color: #e2e8f0;
+  
+    background: #f8fafc;
+  
+    color: #64748b;
+  }
+  
+  .status-toggle:hover {
+    filter: brightness(0.97);
+  }
+  
+  .status-dot {
+    width: 6px;
+    height: 6px;
+  
+    border-radius: 50%;
+  
+    background: currentColor;
+  }
+  
+  
+  // ============================================================
+  // ACTIONS
+  // ============================================================
+  
+  .actions-column {
+    text-align: right;
+  }
+  
+  .row-actions {
+    display: flex;
+    justify-content: flex-end;
+  
+    gap: 6px;
+  }
+  
+  .action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    width: 32px;
+    height: 32px;
+  
+    padding: 0;
+  
+    border: 1px solid #e2e8f0;
+  
+    border-radius: 7px;
+  
+    background: #ffffff;
+  
+    font-size: 14px;
+  
+    cursor: pointer;
+  
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease;
+  }
+  
+  .action-btn.edit {
+    color: #4f46e5;
+  }
+  
+  .action-btn.edit:hover {
+    border-color: #c7d2fe;
+  
+    background: #eef2ff;
+  }
+  
+  .action-btn.delete {
+    color: #dc2626;
+  }
+  
+  .action-btn.delete:hover {
+    border-color: #fecaca;
+  
+    background: #fef2f2;
+  }
+  
+  
+  // ============================================================
+  // LOADING
+  // ============================================================
+  
+  .loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  
+    min-height: 240px;
+  
+    gap: 13px;
+  
+    color: #64748b;
+  
+    font-size: 13px;
+  }
+  
+  .loading-spinner {
+    width: 27px;
+    height: 27px;
+  
+    border-width: 3px;
+  
+    border-color: #e2e8f0;
+  
+    border-top-color: #4f46e5;
+  }
+  
+  
+  // ============================================================
+  // EMPTY
+  // ============================================================
+  
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    padding: 65px 20px;
+  
+    text-align: center;
+  }
+  
+  .empty-icon {
+    margin-bottom: 13px;
+  
+    font-size: 36px;
+  }
+  
+  .empty-state h3 {
+    margin: 0;
+  
+    font-size: 16px;
+    font-weight: 650;
+  
+    color: #1e293b;
+  }
+  
+  .empty-state p {
+    margin: 6px 0 20px;
+  
+    font-size: 13px;
+  
+    color: #64748b;
+  }
+  
+  
+  // ============================================================
+  // TABLET
+  // ============================================================
+  
+  @media (max-width: 768px) {
+  
+    .education-admin {
+      padding: 20px;
+    }
+  
+    .page-header-content {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  
+    .page-header-content .btn-primary {
+      width: 100%;
+    }
+  
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .form-group.full-width {
+      grid-column: auto;
+    }
+  
+    .education-form-card {
+      padding: 20px;
+    }
+  }
+  
+  
+  // ============================================================
+  // MOBILE
+  // ============================================================
+  
+  @media (max-width: 480px) {
+  
+    .education-admin {
+      padding: 14px;
+    }
+  
+    .page-title-wrapper {
+      align-items: flex-start;
+    }
+  
+    .page-icon {
+      width: 42px;
+      height: 42px;
+  
+      font-size: 19px;
+    }
+  
+    .page-header h1 {
+      font-size: 22px;
+    }
+  
+    .page-header p {
+      font-size: 12px;
+    }
+  
+    .education-form-card {
+      padding: 16px;
+    }
+  
+    .form-actions {
+      flex-direction: column-reverse;
+    }
+  
+    .form-actions button {
+      width: 100%;
+    }
+  
+    .list-header {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  
+    .refresh-btn {
+      width: 100%;
+  
+      justify-content: center;
+    }
+  }

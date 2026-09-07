@@ -85,7 +85,7 @@ import {
           this.skillService.getSkills(),
           this.experienceService.getExperiences(),
           this.projectService.getProjects(),
-          this.educationService.getEducation()
+          this.educationService.getEducations()
         ]);
   
         this.profile = profile;

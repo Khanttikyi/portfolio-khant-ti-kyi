@@ -1,1 +1,969 @@
-<p>projects works!</p>
+<div class="project-admin">
+
+    <!-- ============================================================
+         PAGE HEADER
+         ============================================================ -->
+  
+    <div class="page-header">
+  
+      <div class="page-header-content">
+  
+        <div class="page-title-wrapper">
+  
+          <div class="page-icon">
+            💼
+          </div>
+  
+          <div>
+  
+            <h1>Projects</h1>
+  
+            <p>
+              Manage your portfolio projects and showcase content.
+            </p>
+  
+          </div>
+  
+        </div>
+  
+        <button
+          type="button"
+          class="btn-primary"
+          (click)="openAddForm()"
+          [disabled]="showForm"
+        >
+  
+          <span class="btn-icon">
+            +
+          </span>
+  
+          Add Project
+  
+        </button>
+  
+      </div>
+  
+    </div>
+  
+  
+    <!-- ============================================================
+         ERROR
+         ============================================================ -->
+  
+    <div
+      class="alert alert-error"
+      *ngIf="errorMessage"
+    >
+  
+      <span class="alert-icon">
+        !
+      </span>
+  
+      <span>
+        {{ errorMessage }}
+      </span>
+  
+      <button
+        type="button"
+        class="alert-close"
+        (click)="errorMessage = ''"
+      >
+        ×
+      </button>
+  
+    </div>
+  
+  
+    <!-- ============================================================
+         SUCCESS
+         ============================================================ -->
+  
+    <div
+      class="alert alert-success"
+      *ngIf="successMessage"
+    >
+  
+      <span class="alert-icon">
+        ✓
+      </span>
+  
+      <span>
+        {{ successMessage }}
+      </span>
+  
+      <button
+        type="button"
+        class="alert-close"
+        (click)="successMessage = ''"
+      >
+        ×
+      </button>
+  
+    </div>
+  
+  
+    <!-- ============================================================
+         FORM
+         ============================================================ -->
+  
+    <div
+      class="project-form-card"
+      *ngIf="showForm"
+    >
+  
+      <!-- FORM HEADER -->
+  
+      <div class="form-header">
+  
+        <div>
+  
+          <h2>
+            {{ isEditing ? 'Edit Project' : 'Add Project' }}
+          </h2>
+  
+          <p>
+            {{
+              isEditing
+                ? 'Update the project information below.'
+                : 'Add a new project to your portfolio.'
+            }}
+          </p>
+  
+        </div>
+  
+        <button
+          type="button"
+          class="close-form-btn"
+          (click)="closeForm()"
+          [disabled]="isSaving"
+        >
+          ×
+        </button>
+  
+      </div>
+  
+  
+      <!-- FORM -->
+  
+      <form
+        #projectForm="ngForm"
+        (ngSubmit)="saveProject()"
+        novalidate
+      >
+  
+        <div class="form-grid">
+  
+  
+          <!-- ========================================================
+               TITLE
+               ======================================================== -->
+  
+          <div class="form-group">
+  
+            <label for="title">
+              Project Title
+              <span>*</span>
+            </label>
+  
+            <input
+              id="title"
+              type="text"
+              name="title"
+              [(ngModel)]="form.title"
+              placeholder="e.g. Insurance Management System"
+              required
+            />
+  
+          </div>
+  
+  
+          <!-- ========================================================
+               SLUG
+               ======================================================== -->
+  
+          <div class="form-group">
+  
+            <label for="slug">
+              Slug
+              <span>*</span>
+            </label>
+  
+            <input
+              id="slug"
+              type="text"
+              name="slug"
+              [(ngModel)]="form.slug"
+              placeholder="e.g. insurance-management-system"
+              required
+            />
+  
+            <small>
+              Used for the project URL.
+            </small>
+  
+          </div>
+  
+  
+          <!-- ========================================================
+               ICON
+               ======================================================== -->
+  
+          <div class="form-group">
+  
+            <label for="icon">
+              Icon
+            </label>
+  
+            <input
+              id="icon"
+              type="text"
+              name="icon"
+              [(ngModel)]="form.icon"
+              placeholder="e.g. 💻 or lucide icon name"
+            />
+  
+          </div>
+  
+  
+          <!-- ========================================================
+               CATEGORY
+               ======================================================== -->
+  
+          <div class="form-group">
+  
+            <label for="category">
+              Category
+            </label>
+  
+            <input
+              id="category"
+              type="text"
+              name="category"
+              [(ngModel)]="form.category"
+              placeholder="e.g. Web Application"
+            />
+  
+          </div>
+  
+  
+          <!-- ========================================================
+               SHORT DESCRIPTION
+               ======================================================== -->
+  
+          <div class="form-group full-width">
+  
+            <label for="short_description">
+              Short Description
+            </label>
+  
+            <textarea
+              id="short_description"
+              name="short_description"
+              [(ngModel)]="form.short_description"
+              rows="3"
+              placeholder="Short description shown on project cards..."
+            ></textarea>
+  
+          </div>
+  
+  
+          <!-- ========================================================
+               DESCRIPTION
+               ======================================================== -->
+  
+          <div class="form-group full-width">
+  
+            <label for="description">
+              Description
+            </label>
+  
+            <textarea
+              id="description"
+              name="description"
+              [(ngModel)]="form.description"
+              rows="6"
+              placeholder="Detailed project description..."
+            ></textarea>
+  
+          </div>
+  
+  
+          <!-- ========================================================
+               IMAGE URL
+               ======================================================== -->
+  
+          <div class="form-group">
+  
+            <label for="image_url">
+              Image URL
+            </label>
+  
+            <input
+              id="image_url"
+              type="url"
+              name="image_url"
+              [(ngModel)]="form.image_url"
+              placeholder="https://example.com/project-image.jpg"
+            />
+  
+          </div>
+  
+  
+          <!-- ========================================================
+               THUMBNAIL URL
+               ======================================================== -->
+  
+          <div class="form-group">
+  
+            <label for="thumbnail_url">
+              Thumbnail URL
+            </label>
+  
+            <input
+              id="thumbnail_url"
+              type="url"
+              name="thumbnail_url"
+              [(ngModel)]="form.thumbnail_url"
+              placeholder="https://example.com/thumbnail.jpg"
+            />
+  
+          </div>
+  
+  
+          <!-- ========================================================
+               PROJECT URL
+               ======================================================== -->
+  
+          <div class="form-group">
+  
+            <label for="project_url">
+              Live Project URL
+            </label>
+  
+            <input
+              id="project_url"
+              type="url"
+              name="project_url"
+              [(ngModel)]="form.project_url"
+              placeholder="https://example.com"
+            />
+  
+          </div>
+  
+  
+          <!-- ========================================================
+               GITHUB URL
+               ======================================================== -->
+  
+          <div class="form-group">
+  
+            <label for="github_url">
+              GitHub URL
+            </label>
+  
+            <input
+              id="github_url"
+              type="url"
+              name="github_url"
+              [(ngModel)]="form.github_url"
+              placeholder="https://github.com/username/project"
+            />
+  
+          </div>
+  
+  
+          <!-- ========================================================
+               TECHNOLOGIES
+               ======================================================== -->
+  
+          <div class="form-group full-width">
+  
+            <label for="technologies">
+              Technologies
+            </label>
+  
+            <input
+            id="technologies"
+            type="text"
+            name="technologies"
+            [ngModel]="form.technologies.join(', ')"
+            (ngModelChange)="onTechnologiesChange($event)"
+            placeholder="Angular, Ionic, Supabase, TypeScript"
+          />
+  
+            <small>
+              Separate technologies with commas.
+            </small>
+  
+            <div
+              class="technology-preview"
+              *ngIf="form.technologies.length > 0"
+            >
+  
+              <span
+                class="technology-tag"
+                *ngFor="let technology of form.technologies"
+              >
+                {{ technology }}
+              </span>
+  
+            </div>
+  
+          </div>
+  
+  
+          <!-- ========================================================
+               DISPLAY ORDER
+               ======================================================== -->
+  
+          <div class="form-group">
+  
+            <label for="display_order">
+              Display Order
+            </label>
+  
+            <input
+              id="display_order"
+              type="number"
+              name="display_order"
+              [(ngModel)]="form.display_order"
+              min="0"
+            />
+  
+            <small>
+              Lower numbers appear first.
+            </small>
+  
+          </div>
+  
+  
+          <!-- ========================================================
+               FEATURED
+               ======================================================== -->
+  
+          <div class="form-group">
+  
+            <label class="checkbox-label">
+  
+              <input
+                type="checkbox"
+                name="featured"
+                [(ngModel)]="form.featured"
+              />
+  
+              <span class="custom-checkbox"></span>
+  
+              <span>
+                Featured Project
+              </span>
+  
+            </label>
+  
+            <small>
+              Featured projects can be displayed in your featured section.
+            </small>
+  
+          </div>
+  
+  
+          <!-- ========================================================
+               ACTIVE
+               ======================================================== -->
+  
+          <div class="form-group">
+  
+            <label class="checkbox-label">
+  
+              <input
+                type="checkbox"
+                name="is_active"
+                [(ngModel)]="form.is_active"
+              />
+  
+              <span class="custom-checkbox"></span>
+  
+              <span>
+                Active
+              </span>
+  
+            </label>
+  
+            <small>
+              Inactive projects are hidden from the public portfolio.
+            </small>
+  
+          </div>
+  
+  
+          <!-- ========================================================
+               IMAGE PREVIEW
+               ======================================================== -->
+  
+          <div
+            class="form-group full-width"
+            *ngIf="form.image_url"
+          >
+  
+            <label>
+              Image Preview
+            </label>
+  
+            <div class="image-preview">
+  
+              <img
+                [src]="form.image_url"
+                [alt]="form.title || 'Project preview'"
+                (error)="handleImageError($event)"
+              />
+  
+            </div>
+  
+          </div>
+  
+        </div>
+  
+  
+        <!-- ==========================================================
+             FORM ACTIONS
+             ========================================================== -->
+  
+        <div class="form-actions">
+  
+          <button
+            type="button"
+            class="btn-secondary"
+            (click)="closeForm()"
+            [disabled]="isSaving"
+          >
+            Cancel
+          </button>
+  
+          <button
+            type="submit"
+            class="btn-primary"
+            [disabled]="
+              isSaving ||
+              !projectForm.valid
+            "
+          >
+  
+            <span
+              class="spinner"
+              *ngIf="isSaving"
+            ></span>
+  
+            <span>
+              {{
+                isSaving
+                  ? 'Saving...'
+                  : isEditing
+                    ? 'Update Project'
+                    : 'Add Project'
+              }}
+            </span>
+  
+          </button>
+  
+        </div>
+  
+      </form>
+  
+    </div>
+  
+  
+    <!-- ============================================================
+         PROJECT LIST
+         ============================================================ -->
+  
+    <div class="project-list-card">
+  
+      <!-- LIST HEADER -->
+  
+      <div class="list-header">
+  
+        <div>
+  
+          <h2>
+            Project Records
+          </h2>
+  
+          <p>
+            {{ projectList.length }}
+            {{
+              projectList.length === 1
+                ? 'project'
+                : 'projects'
+            }}
+          </p>
+  
+        </div>
+  
+        <button
+          type="button"
+          class="refresh-btn"
+          (click)="loadProjects()"
+          [disabled]="isLoading"
+        >
+  
+          <span
+            [class.rotating]="isLoading"
+          >
+            ↻
+          </span>
+  
+          Refresh
+  
+        </button>
+  
+      </div>
+  
+  
+      <!-- LOADING -->
+  
+      <div
+        class="loading-state"
+        *ngIf="isLoading"
+      >
+  
+        <div class="loading-spinner"></div>
+  
+        <p>
+          Loading projects...
+        </p>
+  
+      </div>
+  
+  
+      <!-- EMPTY -->
+  
+      <div
+        class="empty-state"
+        *ngIf="
+          !isLoading &&
+          projectList.length === 0
+        "
+      >
+  
+        <div class="empty-icon">
+          💼
+        </div>
+  
+        <h3>
+          No projects
+        </h3>
+  
+        <p>
+          Add your first project to get started.
+        </p>
+  
+        <button
+          type="button"
+          class="btn-primary"
+          (click)="openAddForm()"
+        >
+          + Add Project
+        </button>
+  
+      </div>
+  
+  
+      <!-- TABLE -->
+  
+      <div
+        class="table-wrapper"
+        *ngIf="
+          !isLoading &&
+          projectList.length > 0
+        "
+      >
+  
+        <table>
+  
+          <thead>
+  
+            <tr>
+  
+              <th>
+                Project
+              </th>
+  
+              <th>
+                Category
+              </th>
+  
+              <th>
+                Technologies
+              </th>
+  
+              <th>
+                Order
+              </th>
+  
+              <th>
+                Featured
+              </th>
+  
+              <th>
+                Status
+              </th>
+  
+              <th class="actions-column">
+                Actions
+              </th>
+  
+            </tr>
+  
+          </thead>
+  
+  
+          <tbody>
+  
+            <tr
+              *ngFor="
+                let project of projectList;
+                trackBy: trackById
+              "
+            >
+  
+              <!-- ==================================================
+                   PROJECT
+                   ================================================== -->
+  
+              <td>
+  
+                <div class="project-info">
+  
+                  <div class="project-image">
+  
+                    <img
+                      *ngIf="
+                        project.thumbnail_url ||
+                        project.image_url
+                      "
+                      [src]="
+                        project.thumbnail_url ||
+                        project.image_url
+                      "
+                      [alt]="project.title"
+                      (error)="handleImageError($event)"
+                    />
+  
+                    <span
+                      *ngIf="
+                        !project.thumbnail_url &&
+                        !project.image_url
+                      "
+                      class="project-placeholder"
+                    >
+  
+                      {{
+                        project.icon ||
+                        project.title.charAt(0).toUpperCase()
+                      }}
+  
+                    </span>
+  
+                  </div>
+  
+  
+                  <div class="project-details">
+  
+                    <strong>
+                      {{ project.title }}
+                    </strong>
+  
+                    <span>
+                      /{{ project.slug }}
+                    </span>
+  
+                    <small
+                      *ngIf="project.short_description"
+                    >
+                      {{ project.short_description }}
+                    </small>
+  
+                  </div>
+  
+                </div>
+  
+              </td>
+  
+  
+              <!-- ==================================================
+                   CATEGORY
+                   ================================================== -->
+  
+              <td>
+  
+                <span
+                  class="category-badge"
+                  *ngIf="project.category"
+                >
+                  {{ project.category }}
+                </span>
+  
+                <span
+                  class="empty-value"
+                  *ngIf="!project.category"
+                >
+                  —
+                </span>
+  
+              </td>
+  
+  
+              <!-- ==================================================
+                   TECHNOLOGIES
+                   ================================================== -->
+  
+              <td>
+  
+                <div
+                  class="technology-list"
+                  *ngIf="
+                    project.technologies &&
+                    project.technologies.length > 0
+                  "
+                >
+  
+                  <span
+                    class="technology-tag"
+                    *ngFor="
+                      let technology of project.technologies.slice(0, 3)
+                    "
+                  >
+                    {{ technology }}
+                  </span>
+  
+                  <span
+                    class="more-technologies"
+                    *ngIf="project.technologies.length > 3"
+                  >
+                    +{{ project.technologies.length - 3 }}
+                  </span>
+  
+                </div>
+  
+                <span
+                  class="empty-value"
+                  *ngIf="
+                    !project.technologies ||
+                    project.technologies.length === 0
+                  "
+                >
+                  —
+                </span>
+  
+              </td>
+  
+  
+              <!-- ==================================================
+                   ORDER
+                   ================================================== -->
+  
+              <td>
+  
+                <span class="order-badge">
+                  {{ project.display_order }}
+                </span>
+  
+              </td>
+  
+  
+              <!-- ==================================================
+                   FEATURED
+                   ================================================== -->
+  
+              <td>
+  
+                <button
+                  type="button"
+                  class="featured-toggle"
+                  [class.featured]="project.featured"
+                  [class.not-featured]="!project.featured"
+                  (click)="toggleFeatured(project)"
+                >
+  
+                  <span class="star">
+                    ★
+                  </span>
+  
+                  {{
+                    project.featured
+                      ? 'Featured'
+                      : 'No'
+                  }}
+  
+                </button>
+  
+              </td>
+  
+  
+              <!-- ==================================================
+                   ACTIVE
+                   ================================================== -->
+  
+              <td>
+  
+                <button
+                  type="button"
+                  class="status-toggle"
+                  [class.active]="project.is_active"
+                  [class.inactive]="!project.is_active"
+                  (click)="toggleActive(project)"
+                >
+  
+                  <span class="status-dot"></span>
+  
+                  {{
+                    project.is_active
+                      ? 'Active'
+                      : 'Inactive'
+                  }}
+  
+                </button>
+  
+              </td>
+  
+  
+              <!-- ==================================================
+                   ACTIONS
+                   ================================================== -->
+  
+              <td>
+  
+                <div class="row-actions">
+  
+                  <button
+                    type="button"
+                    class="action-btn edit"
+                    (click)="editProject(project)"
+                    title="Edit"
+                  >
+                    ✎
+                  </button>
+  
+                  <button
+                    type="button"
+                    class="action-btn delete"
+                    (click)="deleteProject(project)"
+                    title="Delete"
+                  >
+                    🗑
+                  </button>
+  
+                </div>
+  
+              </td>
+  
+            </tr>
+  
+          </tbody>
+  
+        </table>
+  
+      </div>
+  
+    </div>
+  
+  </div>

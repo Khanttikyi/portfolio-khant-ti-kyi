@@ -1,1 +1,980 @@
-<p>experience works!</p>
+<div class="experience-page">
+
+    <!-- =========================================================
+         HEADER
+         ========================================================= -->
+  
+    <div class="page-header">
+  
+      <div class="page-header-content">
+  
+        <div>
+  
+          <span class="page-eyebrow">
+            Portfolio Management
+          </span>
+  
+          <h1>Experience</h1>
+  
+          <p>
+            Manage your professional experience and career history.
+          </p>
+  
+        </div>
+  
+  
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="openCreateForm()"
+        >
+  
+          <i class="pi pi-plus"></i>
+  
+          <span>
+            Add Experience
+          </span>
+  
+        </button>
+  
+      </div>
+  
+    </div>
+  
+  
+    <!-- =========================================================
+         ALERTS
+         ========================================================= -->
+  
+    @if (successMessage) {
+  
+      <div class="alert alert-success">
+  
+        <i class="pi pi-check-circle"></i>
+  
+        <span>
+          {{ successMessage }}
+        </span>
+  
+        <button
+          type="button"
+          class="alert-close"
+          (click)="successMessage = ''"
+        >
+  
+          <i class="pi pi-times"></i>
+  
+        </button>
+  
+      </div>
+  
+    }
+  
+  
+    @if (errorMessage) {
+  
+      <div class="alert alert-error">
+  
+        <i class="pi pi-exclamation-circle"></i>
+  
+        <span>
+          {{ errorMessage }}
+        </span>
+  
+        <button
+          type="button"
+          class="alert-close"
+          (click)="errorMessage = ''"
+        >
+  
+          <i class="pi pi-times"></i>
+  
+        </button>
+  
+      </div>
+  
+    }
+  
+  
+    <!-- =========================================================
+         STATS
+         ========================================================= -->
+  
+    <div class="stats-grid">
+  
+  
+      <div class="stat-card">
+  
+        <div class="stat-icon total">
+          <i class="pi pi-briefcase"></i>
+        </div>
+  
+        <div>
+  
+          <span class="stat-label">
+            Total
+          </span>
+  
+          <strong>
+            {{ experiences.length }}
+          </strong>
+  
+        </div>
+  
+      </div>
+  
+  
+      <div class="stat-card">
+  
+        <div class="stat-icon current">
+          <i class="pi pi-star"></i>
+        </div>
+  
+        <div>
+  
+          <span class="stat-label">
+            Current
+          </span>
+  
+          <strong>
+            {{ currentExperienceCount }}
+          </strong>
+  
+        </div>
+  
+      </div>
+  
+  
+      <div class="stat-card">
+  
+        <div class="stat-icon active">
+          <i class="pi pi-check-circle"></i>
+        </div>
+  
+        <div>
+  
+          <span class="stat-label">
+            Active
+          </span>
+  
+          <strong>
+            {{ activeExperiencesCount }}
+          </strong>
+  
+        </div>
+  
+      </div>
+  
+  
+      <div class="stat-card">
+  
+        <div class="stat-icon inactive">
+          <i class="pi pi-eye-slash"></i>
+        </div>
+  
+        <div>
+  
+          <span class="stat-label">
+            Inactive
+          </span>
+  
+          <strong>
+            {{ inactiveExperiencesCount }}
+          </strong>
+  
+        </div>
+  
+      </div>
+  
+    </div>
+  
+  
+    <!-- =========================================================
+         EXPERIENCE CARD
+         ========================================================= -->
+  
+    <section class="content-card">
+  
+      <div class="content-card-header">
+  
+        <div>
+  
+          <h2>
+            Professional Experience
+          </h2>
+  
+          <p>
+            Your work history displayed on the portfolio.
+          </p>
+  
+        </div>
+  
+  
+        <button
+          type="button"
+          class="refresh-button"
+          (click)="loadExperiences()"
+          [disabled]="loading"
+          title="Refresh"
+        >
+  
+          <i
+            class="pi"
+            [class.pi-spin]="loading"
+            [class.pi-spinner]="loading"
+            [class.pi-refresh]="!loading"
+          ></i>
+  
+        </button>
+  
+      </div>
+  
+  
+      <!-- =======================================================
+           LOADING
+           ======================================================= -->
+  
+      @if (loading) {
+  
+        <div class="loading-state">
+  
+          <div class="loading-icon">
+  
+            <i class="pi pi-spin pi-spinner"></i>
+  
+          </div>
+  
+          <h3>
+            Loading experience...
+          </h3>
+  
+          <p>
+            Please wait while your experience is being loaded.
+          </p>
+  
+        </div>
+  
+      }
+  
+  
+      <!-- =======================================================
+           EMPTY
+           ======================================================= -->
+  
+      @else if (experiences.length === 0) {
+  
+        <div class="empty-state">
+  
+          <div class="empty-icon">
+            <i class="pi pi-briefcase"></i>
+          </div>
+  
+          <h3>
+            No experience found
+          </h3>
+  
+          <p>
+            Add your professional experience to your portfolio.
+          </p>
+  
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="openCreateForm()"
+          >
+  
+            <i class="pi pi-plus"></i>
+  
+            Add Experience
+  
+          </button>
+  
+        </div>
+  
+      }
+  
+  
+      <!-- =======================================================
+           EXPERIENCE LIST
+           ======================================================= -->
+  
+      @else {
+  
+        <div class="experience-list">
+  
+          @for (
+            experience of experiences;
+            track trackByExperience($index, experience)
+          ) {
+  
+            <article
+              class="experience-row"
+              [class.inactive]="!experience.is_active"
+            >
+  
+  
+              <!-- Logo -->
+  
+              <div class="company-logo">
+  
+                @if (experience.company_logo_url) {
+  
+                  <img
+                    [src]="experience.company_logo_url"
+                    [alt]="experience.company + ' logo'"
+                  />
+  
+                } @else {
+  
+                  <span>
+                    {{
+                      experience.company
+                        .charAt(0)
+                        .toUpperCase()
+                    }}
+                  </span>
+  
+                }
+  
+              </div>
+  
+  
+              <!-- Main -->
+  
+              <div class="experience-main">
+  
+  
+                <!-- Top -->
+  
+                <div class="experience-top">
+  
+                  <div class="experience-title">
+  
+                    <h3>
+                      {{ experience.role }}
+                    </h3>
+  
+                    <span>
+                      {{ experience.company }}
+                    </span>
+  
+                  </div>
+  
+  
+                  <div class="experience-actions">
+  
+                    <button
+                      type="button"
+                      class="status-toggle"
+                      [class.active]="experience.is_active"
+                      [class.inactive]="!experience.is_active"
+                      (click)="toggleActive(experience)"
+                      [title]="
+                        experience.is_active
+                          ? 'Deactivate'
+                          : 'Activate'
+                      "
+                    >
+  
+                      @if (experience.is_active) {
+  
+                        <i class="pi pi-eye"></i>
+  
+                        Active
+  
+                      } @else {
+  
+                        <i class="pi pi-eye-slash"></i>
+  
+                        Inactive
+  
+                      }
+  
+                    </button>
+  
+  
+                    <button
+                      type="button"
+                      class="icon-button edit-button"
+                      (click)="openEditForm(experience)"
+                      title="Edit"
+                    >
+  
+                      <i class="pi pi-pencil"></i>
+  
+                    </button>
+  
+  
+                    <button
+                      type="button"
+                      class="icon-button delete-button"
+                      (click)="deleteExperience(experience)"
+                      title="Delete"
+                    >
+  
+                      <i class="pi pi-trash"></i>
+  
+                    </button>
+  
+                  </div>
+  
+                </div>
+  
+  
+                <!-- Meta -->
+  
+                <div class="experience-meta">
+  
+                  <span>
+  
+                    <i class="pi pi-calendar"></i>
+  
+                    {{ formatDate(experience.start_date) }}
+  
+                    –
+  
+                    @if (experience.is_current) {
+  
+                      Present
+  
+                    } @else {
+  
+                      {{ formatDate(experience.end_date) }}
+  
+                    }
+  
+                  </span>
+  
+  
+                  @if (experience.employment_type) {
+  
+                    <span>
+  
+                      <i class="pi pi-clock"></i>
+  
+                      {{ experience.employment_type }}
+  
+                    </span>
+  
+                  }
+  
+  
+                  @if (experience.location) {
+  
+                    <span>
+  
+                      <i class="pi pi-map-marker"></i>
+  
+                      {{ experience.location }}
+  
+                    </span>
+  
+                  }
+  
+                </div>
+  
+  
+                <!-- Description -->
+  
+                @if (experience.description) {
+  
+                  <p class="experience-description">
+  
+                    {{ experience.description }}
+  
+                  </p>
+  
+                }
+  
+  
+                <!-- Technologies -->
+  
+                @if (
+                  experience.technologies &&
+                  experience.technologies.length
+                ) {
+  
+                  <div class="technology-list">
+  
+                    @for (
+                      technology of getTechnologies(experience);
+                      track technology
+                    ) {
+  
+                      <span class="technology-tag">
+                        {{ technology }}
+                      </span>
+  
+                    }
+  
+                  </div>
+  
+                }
+  
+              </div>
+  
+            </article>
+  
+          }
+  
+        </div>
+  
+      }
+  
+    </section>
+  
+  
+    <!-- =========================================================
+         CREATE / EDIT MODAL
+         ========================================================= -->
+  
+    @if (showForm) {
+  
+      <div
+        class="modal-backdrop"
+        (click)="closeForm()"
+      >
+  
+        <div
+          class="modal"
+          (click)="$event.stopPropagation()"
+        >
+  
+  
+          <!-- Modal Header -->
+  
+          <div class="modal-header">
+  
+            <div>
+  
+              <span class="modal-eyebrow">
+                {{
+                  editingExperience
+                    ? 'Edit Experience'
+                    : 'New Experience'
+                }}
+              </span>
+  
+              <h2>
+  
+                {{
+                  editingExperience
+                    ? 'Update experience'
+                    : 'Add experience'
+                }}
+  
+              </h2>
+  
+            </div>
+  
+  
+            <button
+              type="button"
+              class="modal-close"
+              (click)="closeForm()"
+              [disabled]="saving"
+            >
+  
+              <i class="pi pi-times"></i>
+  
+            </button>
+  
+          </div>
+  
+  
+          <!-- Modal Body -->
+  
+          <div class="modal-body">
+  
+  
+            @if (errorMessage) {
+  
+              <div class="form-error">
+  
+                <i class="pi pi-exclamation-circle"></i>
+  
+                <span>
+                  {{ errorMessage }}
+                </span>
+  
+              </div>
+  
+            }
+  
+  
+            <!-- Company -->
+  
+            <div class="form-group">
+  
+              <label for="experience-company">
+                Company
+                <span>*</span>
+              </label>
+  
+              <input
+                id="experience-company"
+                type="text"
+                [(ngModel)]="form.company"
+                placeholder="e.g. Blue Stone Solution Co., Ltd"
+                autocomplete="off"
+              />
+  
+            </div>
+  
+  
+            <!-- Role -->
+  
+            <div class="form-group">
+  
+              <label for="experience-role">
+                Role
+                <span>*</span>
+              </label>
+  
+              <input
+                id="experience-role"
+                type="text"
+                [(ngModel)]="form.role"
+                placeholder="e.g. Senior Frontend Developer"
+                autocomplete="off"
+              />
+  
+            </div>
+  
+  
+            <!-- Employment Type -->
+  
+            <div class="form-group">
+  
+              <label for="experience-type">
+                Employment Type
+              </label>
+  
+              <select
+                id="experience-type"
+                [(ngModel)]="form.employment_type"
+              >
+  
+                <option value="">
+                  Select employment type
+                </option>
+  
+                <option value="Full-time">
+                  Full-time
+                </option>
+  
+                <option value="Part-time">
+                  Part-time
+                </option>
+  
+                <option value="Contract">
+                  Contract
+                </option>
+  
+                <option value="Freelance">
+                  Freelance
+                </option>
+  
+                <option value="Internship">
+                  Internship
+                </option>
+  
+              </select>
+  
+            </div>
+  
+  
+            <!-- Dates -->
+  
+            <div class="form-grid">
+  
+              <div class="form-group">
+  
+                <label for="experience-start">
+                  Start Date
+                  <span>*</span>
+                </label>
+  
+                <input
+                  id="experience-start"
+                  type="date"
+                  [(ngModel)]="form.start_date"
+                />
+  
+              </div>
+  
+  
+              <div class="form-group">
+  
+                <label for="experience-end">
+                  End Date
+                </label>
+  
+                <input
+                  id="experience-end"
+                  type="date"
+                  [(ngModel)]="form.end_date"
+                  [disabled]="form.is_current"
+                />
+  
+              </div>
+  
+            </div>
+  
+  
+            <!-- Current -->
+  
+            <div class="current-field">
+  
+              <div>
+  
+                <strong>
+                  Current Position
+                </strong>
+  
+                <span>
+                  {{
+                    form.is_current
+                      ? 'This is your current position.'
+                      : 'This is a previous position.'
+                  }}
+                </span>
+  
+              </div>
+  
+  
+              <button
+                type="button"
+                class="switch"
+                [class.checked]="form.is_current"
+                (click)="
+                  form.is_current = !form.is_current;
+                  form.end_date = form.is_current
+                    ? ''
+                    : form.end_date
+                "
+                [attr.aria-pressed]="form.is_current"
+              >
+  
+                <span></span>
+  
+              </button>
+  
+            </div>
+  
+  
+            <!-- Location -->
+  
+            <div class="form-group">
+  
+              <label for="experience-location">
+                Location
+              </label>
+  
+              <input
+                id="experience-location"
+                type="text"
+                [(ngModel)]="form.location"
+                placeholder="e.g. Bangkok, Thailand"
+                autocomplete="off"
+              />
+  
+            </div>
+  
+  
+            <!-- Description -->
+  
+            <div class="form-group">
+  
+              <label for="experience-description">
+                Description
+              </label>
+  
+              <textarea
+                id="experience-description"
+                [(ngModel)]="form.description"
+                rows="5"
+                placeholder="Describe your responsibilities, achievements and work..."
+              ></textarea>
+  
+            </div>
+  
+  
+            <!-- Technologies -->
+  
+            <div class="form-group">
+  
+              <label for="experience-technologies">
+                Technologies
+              </label>
+  
+              <input
+                id="experience-technologies"
+                type="text"
+                [(ngModel)]="form.technologies"
+                placeholder="Angular, Ionic, TypeScript, Supabase"
+                autocomplete="off"
+              />
+  
+              <small>
+                Separate technologies with commas.
+              </small>
+  
+            </div>
+  
+  
+            <!-- Company URL -->
+  
+            <div class="form-group">
+  
+              <label for="experience-company-url">
+                Company Website
+              </label>
+  
+              <input
+                id="experience-company-url"
+                type="url"
+                [(ngModel)]="form.company_url"
+                placeholder="https://example.com"
+                autocomplete="url"
+              />
+  
+            </div>
+  
+  
+            <!-- Company Logo -->
+  
+            <div class="form-group">
+  
+              <label for="experience-logo">
+                Company Logo URL
+              </label>
+  
+              <input
+                id="experience-logo"
+                type="url"
+                [(ngModel)]="form.company_logo_url"
+                placeholder="https://example.com/logo.png"
+                autocomplete="url"
+              />
+  
+            </div>
+  
+  
+            <!-- Order -->
+  
+            <div class="form-group">
+  
+              <label for="experience-order">
+                Display Order
+              </label>
+  
+              <input
+                id="experience-order"
+                type="number"
+                min="0"
+                [(ngModel)]="form.display_order"
+                placeholder="0"
+              />
+  
+              <small>
+                Lower numbers appear first.
+              </small>
+  
+            </div>
+  
+  
+            <!-- Active -->
+  
+            <div class="current-field">
+  
+              <div>
+  
+                <strong>
+                  Visibility
+                </strong>
+  
+                <span>
+                  {{
+                    form.is_active
+                      ? 'This experience is visible on your portfolio.'
+                      : 'This experience is hidden from your portfolio.'
+                  }}
+                </span>
+  
+              </div>
+  
+  
+              <button
+                type="button"
+                class="switch"
+                [class.checked]="form.is_active"
+                (click)="form.is_active = !form.is_active"
+                [attr.aria-pressed]="form.is_active"
+              >
+  
+                <span></span>
+  
+              </button>
+  
+            </div>
+  
+          </div>
+  
+  
+          <!-- Modal Footer -->
+  
+          <div class="modal-footer">
+  
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="closeForm()"
+              [disabled]="saving"
+            >
+  
+              Cancel
+  
+            </button>
+  
+  
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="saveExperience()"
+              [disabled]="saving"
+            >
+  
+              @if (saving) {
+  
+                <i class="pi pi-spin pi-spinner"></i>
+  
+                Saving...
+  
+              } @else {
+  
+                <i
+                  class="pi"
+                  [class.pi-save]="editingExperience"
+                  [class.pi-plus]="!editingExperience"
+                ></i>
+  
+                {{
+                  editingExperience
+                    ? 'Update Experience'
+                    : 'Create Experience'
+                }}
+  
+              }
+  
+            </button>
+  
+          </div>
+  
+        </div>
+  
+      </div>
+  
+    }
+  
+  </div>

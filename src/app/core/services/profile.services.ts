@@ -37,7 +37,6 @@ export class ProfileService {
     id: string,
     profile: Partial<Profile>
   ): Promise<Profile> {
-
     const { data, error } = await this.supabase.client
       .from('profile')
       .update({
@@ -47,12 +46,12 @@ export class ProfileService {
       .eq('id', id)
       .select()
       .single();
-
+  
     if (error) {
       console.error('Error updating profile:', error);
       throw error;
     }
-
+  
     return data;
   }
 }

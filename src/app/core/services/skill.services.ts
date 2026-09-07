@@ -1,5 +1,4 @@
 import { Injectable, inject } from '@angular/core';
-
 import { SupabaseService } from './supabase.services';
 import { Skill } from '../models/skill';
 
@@ -7,7 +6,6 @@ import { Skill } from '../models/skill';
   providedIn: 'root'
 })
 export class SkillService {
-
   private readonly supabase = inject(SupabaseService);
 
   // ============================================================
@@ -52,10 +50,17 @@ export class SkillService {
   async createSkill(
     skill: Omit<Skill, 'id' | 'created_at' | 'updated_at'>
   ): Promise<Skill> {
-
     const { data, error } = await this.supabase.client
       .from('skills')
-      .insert(skill)
+      .insert({
+        category: skill.category,
+        name: skill.name,
+        icon: skill.icon,
+        proficiency: skill.proficiency,
+        years_experience: skill.years_experience,
+        display_order: skill.display_order,
+        is_active: skill.is_active
+      })
       .select()
       .single();
 
@@ -71,11 +76,16 @@ export class SkillService {
     id: string,
     skill: Partial<Skill>
   ): Promise<Skill> {
-
     const { data, error } = await this.supabase.client
       .from('skills')
       .update({
-        ...skill,
+        category: skill.category,
+        name: skill.name,
+        icon: skill.icon,
+        proficiency: skill.proficiency,
+        years_experience: skill.years_experience,
+        display_order: skill.display_order,
+        is_active: skill.is_active,
         updated_at: new Date().toISOString()
       })
       .eq('id', id)
