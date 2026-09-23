@@ -87,6 +87,8 @@ export class ProjectsComponent implements OnInit {
 
       technologies: [],
 
+      mobile_screenshots: [],
+
       featured: false,
       display_order: 0,
       is_active: true
@@ -214,6 +216,9 @@ export class ProjectsComponent implements OnInit {
           this.form.github_url?.trim() || null,
 
         technologies,
+
+        mobile_screenshots:
+          this.form.mobile_screenshots || null,
 
         featured:
           this.form.featured,

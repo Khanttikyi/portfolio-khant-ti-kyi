@@ -1,34 +1,50 @@
-<section
-  class="projects-section section"
-  id="projects"
->
+
+<section class="projects-section section" id="projects">
   <div class="container">
 
     <!-- =====================================================
          SECTION HEADER
          ===================================================== -->
-
     <div class="section-heading">
-      <span class="eyebrow">Projects</span>
+      <div class="heading-content">
+        <span class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          Projects
+        </span>
 
-      <h2>
-        Things I've
-        <span class="gradient-text">built.</span>
-      </h2>
+        <h2>
+          Things I've
+          <span class="gradient-text">built.</span>
+        </h2>
+
+        <p class="section-description">
+          A selection of projects I've designed, developed, and shipped
+          across web and mobile platforms.
+        </p>
+      </div>
+
+      <div class="heading-decoration">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
 
 
     <!-- =====================================================
          LOADING STATE
          ===================================================== -->
-
     @if (loading) {
 
       <div class="empty-state">
-        <i class="pi pi-spin pi-spinner"></i>
+        <div class="state-icon loading-icon">
+          <i class="pi pi-spin pi-spinner"></i>
+        </div>
+
+        <h3>Loading projects</h3>
 
         <p>
-          Loading projects...
+          Fetching my latest work...
         </p>
       </div>
 
@@ -36,14 +52,17 @@
     <!-- =====================================================
          ERROR STATE
          ===================================================== -->
-
     } @else if (error) {
 
-      <div class="empty-state">
-        <i class="pi pi-exclamation-circle"></i>
+      <div class="empty-state error-state">
+        <div class="state-icon">
+          <i class="pi pi-exclamation-circle"></i>
+        </div>
+
+        <h3>Something went wrong</h3>
 
         <p>
-          Unable to load projects.
+          Unable to load projects right now.
         </p>
       </div>
 
@@ -51,7 +70,6 @@
     <!-- =====================================================
          PROJECTS
          ===================================================== -->
-
     } @else if (projects.length > 0) {
 
       <div class="projects-grid">
@@ -65,33 +83,101 @@
           <article class="project-card">
 
             <!-- =================================================
-                 PROJECT IMAGE
+                 PROJECT VISUAL
                  ================================================= -->
+            <div
+              class="project-visual"
+              [class.has-screenshots]="(project.mobile_screenshots?.length ?? 0) > 0"
+              [class.single]="(project.mobile_screenshots?.length ?? 0) === 1"
+              [class.double]="(project.mobile_screenshots?.length ?? 0) === 2"
+              [class.triple]="(project.mobile_screenshots?.length ?? 0) === 3"
+              [class.quad]="(project.mobile_screenshots?.length ?? 0) >= 4"
+            >
 
-            <div class="project-image">
+              <!-- Background decoration -->
+              <div class="visual-grid"></div>
+              <div class="visual-glow"></div>
 
-              @if (project.image_url) {
+              <!-- PROJECT META -->
+              <div class="project-visual-header">
+                <span class="project-number">
+                  {{ formatProjectNumber(i) }}
+                </span>
 
-                <img
-                  class="project-image-photo"
-                  [src]="project.image_url"
-                  [alt]="project.title"
-                  loading="lazy"
-                />
+                @if (project.mobile_screenshots?.length) {
+                  <span class="screenshot-count">
+                    <i class="pi pi-images"></i>
+                    {{ project.mobile_screenshots?.length ?? 0 }}
+                  </span>
+                }
+              </div>
 
-                <div class="project-image-overlay"></div>
 
+              <!-- =================================================
+                   MOBILE SCREENSHOTS
+                   ================================================= -->
+              @if (project.mobile_screenshots?.length) {
+
+                <div class="mobile-screenshots">
+
+                  @for (
+                    screenshot of project.mobile_screenshots;
+                    track screenshot;
+                    let screenshotIndex = $index
+                  ) {
+
+                    <div
+                      class="phone-mockup"
+                      [class.phone-main]="screenshotIndex === 0"
+                    >
+
+                      <div class="phone-frame">
+
+                        <!-- SIDE BUTTONS -->
+                        <div class="phone-button phone-button-top"></div>
+                        <div class="phone-button phone-button-middle"></div>
+
+                        <!-- PHONE SCREEN -->
+                        <div class="phone-screen">
+
+                          <img
+                            [src]="screenshot"
+                            [alt]="
+                              project.title +
+                              ' mobile screenshot ' +
+                              (screenshotIndex + 1)
+                            "
+                            loading="lazy"
+                          />
+
+                        </div>
+
+                      </div>
+
+                    </div>
+                  }
+
+                </div>
+
+
+              <!-- =================================================
+                   FALLBACK
+                   ================================================= -->
               } @else {
 
-                <div class="project-icon">
-                  <i [class]="getProjectIcon(project)"></i>
+                <div class="project-placeholder">
+
+                  <div class="project-placeholder-icon">
+                    <i [class]="getProjectIcon(project)"></i>
+                  </div>
+
+                  <span>
+                    Project Preview
+                  </span>
+
                 </div>
 
               }
-
-              <span class="project-number">
-                {{ formatProjectNumber(i) }}
-              </span>
 
             </div>
 
@@ -99,29 +185,31 @@
             <!-- =================================================
                  PROJECT CONTENT
                  ================================================= -->
-
             <div class="project-content">
 
-              <!-- Category -->
+              <!-- PROJECT TOP -->
+              <div class="project-content-top">
 
-              @if (project.category) {
+                @if (project.category) {
+                  <span class="project-category">
+                    {{ project.category }}
+                  </span>
+                }
 
-                <span class="project-category">
-                  {{ project.category }}
+                <span class="project-index">
+                  {{ formatProjectNumber(i) }}
                 </span>
 
-              }
+              </div>
 
 
-              <!-- Title -->
-
+              <!-- TITLE -->
               <h3>
                 {{ project.title }}
               </h3>
 
 
-              <!-- Description -->
-
+              <!-- DESCRIPTION -->
               @if (
                 project.description ||
                 project.short_description
@@ -145,8 +233,7 @@
               }
 
 
-              <!-- Technologies -->
-
+              <!-- TECHNOLOGIES -->
               @if (project.technologies?.length) {
 
                 <div class="technology-tags">
@@ -156,7 +243,7 @@
                     track technology
                   ) {
 
-                    <span>
+                    <span class="technology-tag">
                       {{ technology }}
                     </span>
 
@@ -167,8 +254,7 @@
               }
 
 
-              <!-- Project Links -->
-
+              <!-- PROJECT LINKS -->
               @if (
                 project.github_url ||
                 project.project_url
@@ -183,9 +269,11 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="View GitHub repository"
+                      class="project-link github-link"
                     >
                       <i class="pi pi-github"></i>
                       <span>GitHub</span>
+                      <i class="pi pi-arrow-up-right"></i>
                     </a>
 
                   }
@@ -198,9 +286,11 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="View live project"
+                      class="project-link live-link"
                     >
                       <i class="pi pi-external-link"></i>
                       <span>Live Demo</span>
+                      <i class="pi pi-arrow-up-right"></i>
                     </a>
 
                   }
@@ -221,15 +311,20 @@
     <!-- =====================================================
          EMPTY STATE
          ===================================================== -->
-
     } @else {
 
       <div class="empty-state">
-        <i class="pi pi-info-circle"></i>
+
+        <div class="state-icon">
+          <i class="pi pi-folder-open"></i>
+        </div>
+
+        <h3>No projects yet</h3>
 
         <p>
-          No projects available.
+          Projects will appear here once they are published.
         </p>
+
       </div>
 
     }
@@ -238,21 +333,32 @@
     <!-- =====================================================
          FOOTER CTA
          ===================================================== -->
-
     <div class="projects-footer">
 
-      <p>
-        Want to know more about my work?
-      </p>
+      <div class="footer-line"></div>
 
-      <button
-        type="button"
-        class="outline-button"
-        (click)="onNavigate('contact')"
-      >
-        <span>Get in touch</span>
-        <i class="pi pi-arrow-right"></i>
-      </button>
+      <div class="footer-content">
+
+        <div class="footer-text">
+          <span class="footer-label">
+            Have a project in mind?
+          </span>
+
+          <p>
+            Let's build something useful together.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          class="outline-button"
+          (click)="onNavigate('contact')"
+        >
+          <span>Get in touch</span>
+          <i class="pi pi-arrow-right"></i>
+        </button>
+
+      </div>
 
     </div>
 

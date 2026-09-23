@@ -11,6 +11,7 @@ export interface Project {
   project_url: string | null;
   github_url: string | null;
   technologies: string[];
+  mobile_screenshots: string[];
   featured: boolean;
   display_order: number;
   is_active: boolean;
