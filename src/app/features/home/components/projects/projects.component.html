@@ -1,4 +1,3 @@
-
 <section class="projects-section section" id="projects">
   <div class="container">
 
@@ -36,17 +35,17 @@
          ===================================================== -->
     @if (loading) {
 
-      <div class="empty-state">
-        <div class="state-icon loading-icon">
-          <i class="pi pi-spin pi-spinner"></i>
-        </div>
-
-        <h3>Loading projects</h3>
-
-        <p>
-          Fetching my latest work...
-        </p>
+    <div class="empty-state">
+      <div class="state-icon loading-icon">
+        <i class="pi pi-spin pi-spinner"></i>
       </div>
+
+      <h3>Loading projects</h3>
+
+      <p>
+        Fetching my latest work...
+      </p>
+    </div>
 
 
     <!-- =====================================================
@@ -54,17 +53,17 @@
          ===================================================== -->
     } @else if (error) {
 
-      <div class="empty-state error-state">
-        <div class="state-icon">
-          <i class="pi pi-exclamation-circle"></i>
-        </div>
-
-        <h3>Something went wrong</h3>
-
-        <p>
-          Unable to load projects right now.
-        </p>
+    <div class="empty-state error-state">
+      <div class="state-icon">
+        <i class="pi pi-exclamation-circle"></i>
       </div>
+
+      <h3>Something went wrong</h3>
+
+      <p>
+        Unable to load projects right now.
+      </p>
+    </div>
 
 
     <!-- =====================================================
@@ -72,240 +71,228 @@
          ===================================================== -->
     } @else if (projects.length > 0) {
 
-      <div class="projects-grid">
+    <div class="projects-grid">
 
-        @for (
-          project of projects;
-          track project.id;
-          let i = $index
-        ) {
+      @for (
+      project of projects;
+      track project.id;
+      let i = $index
+      ) {
 
-          <article class="project-card">
+      <article class="project-card">
 
-            <!-- =================================================
+        <!-- =================================================
                  PROJECT VISUAL
                  ================================================= -->
-            <div
-              class="project-visual"
-              [class.has-screenshots]="(project.mobile_screenshots?.length ?? 0) > 0"
-              [class.single]="(project.mobile_screenshots?.length ?? 0) === 1"
-              [class.double]="(project.mobile_screenshots?.length ?? 0) === 2"
-              [class.triple]="(project.mobile_screenshots?.length ?? 0) === 3"
-              [class.quad]="(project.mobile_screenshots?.length ?? 0) >= 4"
-            >
+        <div class="project-visual" [class.has-screenshots]="(project.mobile_screenshots?.length ?? 0) > 0"
+          [class.single]="(project.mobile_screenshots?.length ?? 0) === 1"
+          [class.double]="(project.mobile_screenshots?.length ?? 0) === 2"
+          [class.triple]="(project.mobile_screenshots?.length ?? 0) === 3"
+          [class.quad]="(project.mobile_screenshots?.length ?? 0) >= 4">
 
-              <!-- Background decoration -->
-              <div class="visual-grid"></div>
-              <div class="visual-glow"></div>
+          <!-- Background decoration -->
+          <div class="visual-grid"></div>
+          <div class="visual-glow"></div>
 
-              <!-- PROJECT META -->
-              <div class="project-visual-header">
-                <span class="project-number">
-                  {{ formatProjectNumber(i) }}
-                </span>
+          <!-- PROJECT META -->
+          <div class="project-visual-header">
+            <span class="project-number">
+              {{ formatProjectNumber(i) }}
+            </span>
 
-                @if (project.mobile_screenshots?.length) {
-                  <span class="screenshot-count">
-                    <i class="pi pi-images"></i>
-                    {{ project.mobile_screenshots?.length ?? 0 }}
-                  </span>
-                }
-              </div>
+            @if (project.mobile_screenshots?.length) {
+            <span class="screenshot-count">
+              <i class="pi pi-images"></i>
+              {{ project.mobile_screenshots?.length ?? 0 }}
+            </span>
+            }
+          </div>
 
 
-              <!-- =================================================
+          <!-- =================================================
                    MOBILE SCREENSHOTS
                    ================================================= -->
-              @if (project.mobile_screenshots?.length) {
+          @if (project.mobile_screenshots?.length) {
 
-                <div class="mobile-screenshots">
+          <div class="mobile-screenshots">
 
-                  @for (
-                    screenshot of project.mobile_screenshots;
-                    track screenshot;
-                    let screenshotIndex = $index
-                  ) {
+            @for (
+            screenshot of project.mobile_screenshots;
+            track screenshot;
+            let screenshotIndex = $index
+            ) {
 
-                    <div
-                      class="phone-mockup"
-                      [class.phone-main]="screenshotIndex === 0"
-                    >
+            <div class="phone-mockup" [class.phone-main]="screenshotIndex === 0">
 
-                      <div class="phone-frame">
+              <div class="phone-frame">
 
-                        <!-- SIDE BUTTONS -->
-                        <div class="phone-button phone-button-top"></div>
-                        <div class="phone-button phone-button-middle"></div>
+                <!-- SIDE BUTTONS -->
+                <div class="phone-button phone-button-top"></div>
+                <div class="phone-button phone-button-middle"></div>
 
-                        <!-- PHONE SCREEN -->
-                        <div class="phone-screen">
+                <!-- PHONE SCREEN -->
+                <div class="phone-screen">
 
-                          <img
-                            [src]="screenshot"
-                            [alt]="
+                  <img [src]="screenshot" [alt]="
                               project.title +
                               ' mobile screenshot ' +
                               (screenshotIndex + 1)
-                            "
-                            loading="lazy"
-                          />
-
-                        </div>
-
-                      </div>
-
-                    </div>
-                  }
+                            " loading="lazy" />
 
                 </div>
-
-
-              <!-- =================================================
-                   FALLBACK
-                   ================================================= -->
-              } @else {
-
-                <div class="project-placeholder">
-
-                  <div class="project-placeholder-icon">
-                    <i [class]="getProjectIcon(project)"></i>
-                  </div>
-
-                  <span>
-                    Project Preview
-                  </span>
-
-                </div>
-
-              }
-
-            </div>
-
-
-            <!-- =================================================
-                 PROJECT CONTENT
-                 ================================================= -->
-            <div class="project-content">
-
-              <!-- PROJECT TOP -->
-              <div class="project-content-top">
-
-                @if (project.category) {
-                  <span class="project-category">
-                    {{ project.category }}
-                  </span>
-                }
-
-                <span class="project-index">
-                  {{ formatProjectNumber(i) }}
-                </span>
 
               </div>
 
+            </div>
+            }
 
-              <!-- TITLE -->
-              <h3>
-                {{ project.title }}
-              </h3>
-
-
-              <!-- DESCRIPTION -->
-              @if (
-                project.description ||
-                project.short_description
-              ) {
-
-                <div class="project-description">
-
-                  @for (
-                    sentence of getDescriptionLines(project);
-                    track $index
-                  ) {
-
-                    <p>
-                      {{ sentence }}
-                    </p>
-
-                  }
-
-                </div>
-
-              }
+          </div>
 
 
-              <!-- TECHNOLOGIES -->
-              @if (project.technologies?.length) {
+          <!-- =================================================
+                   FALLBACK
+                   ================================================= -->
+          } @else {
 
-                <div class="technology-tags">
+          <div class="project-placeholder">
 
-                  @for (
-                    technology of project.technologies;
-                    track technology
-                  ) {
+            <div class="project-placeholder-icon">
+              <i [class]="getProjectIcon(project)"></i>
+            </div>
 
-                    <span class="technology-tag">
-                      {{ technology }}
-                    </span>
+            <span>
+              Project Preview
+            </span>
 
-                  }
+          </div>
 
-                </div>
+          }
 
-              }
-
-
-              <!-- PROJECT LINKS -->
-              @if (
-                project.github_url ||
-                project.project_url
-              ) {
-
-                <div class="project-links">
-
-                  @if (project.github_url) {
-
-                    <a
-                      [href]="project.github_url"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="View GitHub repository"
-                      class="project-link github-link"
-                    >
-                      <i class="pi pi-github"></i>
-                      <span>GitHub</span>
-                      <i class="pi pi-arrow-up-right"></i>
-                    </a>
-
-                  }
+        </div>
 
 
-                  @if (project.project_url) {
+        <!-- =================================================
+                 PROJECT CONTENT
+                 ================================================= -->
+        <div class="project-content">
 
-                    <a
-                      [href]="project.project_url"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="View live project"
-                      class="project-link live-link"
-                    >
-                      <i class="pi pi-external-link"></i>
-                      <span>Live Demo</span>
-                      <i class="pi pi-arrow-up-right"></i>
-                    </a>
+          <!-- PROJECT TOP -->
+          <div class="project-content-top">
 
-                  }
+            @if (project.category) {
+            <span class="project-category">
+              {{ project.category }}
+            </span>
+            }
 
-                </div>
+            <span class="project-index">
+              {{ formatProjectNumber(i) }}
+            </span>
 
-              }
+          </div>
+
+
+          <!-- TITLE -->
+          <h3>
+            {{ project.title }}
+          </h3>
+
+
+          <!-- DESCRIPTION -->
+          @if (
+          project.description ||
+          project.short_description
+          ) {
+
+          <div class="project-description">
+
+            @for (
+            sentence of getDescriptionLines(project);
+            track $index
+            ) {
+
+            <div class="description-item">
+
+              <div class="description-icon">
+                <i class="pi pi-check"></i>
+              </div>
+
+              <p>{{ sentence }}</p>
 
             </div>
 
-          </article>
+            }
 
-        }
+          </div>
 
-      </div>
+
+
+          }
+
+
+          <!-- TECHNOLOGIES -->
+          @if (project.technologies?.length) {
+
+          <div class="technology-tags">
+
+            @for (
+            technology of project.technologies;
+            track technology
+            ) {
+
+            <span class="technology-tag">
+              {{ technology }}
+            </span>
+
+            }
+
+          </div>
+
+          }
+
+
+          <!-- PROJECT LINKS -->
+          @if (
+          project.github_url ||
+          project.project_url
+          ) {
+
+          <div class="project-links">
+
+            @if (project.github_url) {
+
+            <a [href]="project.github_url" target="_blank" rel="noopener noreferrer" aria-label="View GitHub repository"
+              class="project-link github-link">
+              <i class="pi pi-github"></i>
+              <span>GitHub</span>
+              <i class="pi pi-arrow-up-right"></i>
+            </a>
+
+            }
+
+
+            @if (project.project_url) {
+
+            <a [href]="project.project_url" target="_blank" rel="noopener noreferrer" aria-label="View live project"
+              class="project-link live-link">
+              <i class="pi pi-external-link"></i>
+              <span>Live Demo</span>
+              <i class="pi pi-arrow-up-right"></i>
+            </a>
+
+            }
+
+          </div>
+
+          }
+
+        </div>
+
+      </article>
+
+      }
+
+    </div>
 
 
     <!-- =====================================================
@@ -313,19 +300,19 @@
          ===================================================== -->
     } @else {
 
-      <div class="empty-state">
+    <div class="empty-state">
 
-        <div class="state-icon">
-          <i class="pi pi-folder-open"></i>
-        </div>
-
-        <h3>No projects yet</h3>
-
-        <p>
-          Projects will appear here once they are published.
-        </p>
-
+      <div class="state-icon">
+        <i class="pi pi-folder-open"></i>
       </div>
+
+      <h3>No projects yet</h3>
+
+      <p>
+        Projects will appear here once they are published.
+      </p>
+
+    </div>
 
     }
 
@@ -333,7 +320,7 @@
     <!-- =====================================================
          FOOTER CTA
          ===================================================== -->
-    <div class="projects-footer">
+    <!-- <div class="projects-footer">
 
       <div class="footer-line"></div>
 
@@ -349,18 +336,14 @@
           </p>
         </div>
 
-        <button
-          type="button"
-          class="outline-button"
-          (click)="onNavigate('contact')"
-        >
+        <button type="button" class="outline-button" (click)="onNavigate('contact')">
           <span>Get in touch</span>
           <i class="pi pi-arrow-right"></i>
         </button>
 
       </div>
 
-    </div>
+    </div> -->
 
   </div>
 </section>
